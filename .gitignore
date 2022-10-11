@@ -1,6 +1,5 @@
 target/
 .idea/
-src/test/*
 *.iml
 database.properties
 pom.xml.tag
