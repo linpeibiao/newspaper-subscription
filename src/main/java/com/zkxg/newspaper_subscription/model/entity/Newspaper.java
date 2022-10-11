@@ -1,4 +1,4 @@
-package com.zkxg.newspaper_subscription.entity;
+package com.zkxg.newspaper_subscription.model.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -29,7 +29,7 @@ public class Newspaper {
     // 出版社
     private String publisher;
     // 出版时间
-    private String publish_time;
+    private String publishTime;
     // 订阅单价
     private BigDecimal price;
     // 备用字段1
@@ -39,9 +39,9 @@ public class Newspaper {
     // 备注
     private String remark;
     // 创建时间
-    private Date create_time;
+    private Date createTime;
     // 更新时间
-    private Date update_time;
+    private Date updateTime;
     // 逻辑删除
     private Boolean deleted;
 }

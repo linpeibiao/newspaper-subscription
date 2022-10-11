@@ -1,4 +1,4 @@
-package com.zkxg.newspaper_subscription.entity;
+package com.zkxg.newspaper_subscription.model.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -50,10 +50,10 @@ public class User {
     // 备注
     private String remark;
     // 创建时间
-    private Date create_time;
+    private Date createTime;
     // 更新时间
-    private Date update_time;
+    private Date updateTime;
     // 逻辑删除
-    private Boolean deleted;
+    private Integer deleted;
 
 }

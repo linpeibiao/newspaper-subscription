@@ -1,4 +1,8 @@
 target/
+.idea/
+src/test/*
+*.iml
+database.properties
 pom.xml.tag
 pom.xml.releaseBackup
 pom.xml.versionsBackup
