@@ -32,6 +32,7 @@ public class UserDaoImpl implements UserDao {
             while(rs.next()){
                 user.setId(rs.getLong("id"));
                 user.setAccount(rs.getString("account"));
+                user.setPassword(rs.getString("password"));
                 user.setNackname(rs.getString("nackname"));
                 user.setAvatar(rs.getString("avatar"));
                 user.setGender(rs.getInt("gender"));

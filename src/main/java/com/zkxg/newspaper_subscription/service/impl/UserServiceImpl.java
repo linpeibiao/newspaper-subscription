@@ -13,6 +13,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -29,8 +30,54 @@ public class UserServiceImpl implements UserService {
 
     // 密码加密盐值
     private final String SALT = "love";
+
     @Override
-    public Map<String, String> login(LoginInfo loginInfo) {
+    public Map<String, User> login(LoginInfo loginInfo) {
+        // 判空
+        // TODO 添加手机号登陆逻辑判断
+        String account = loginInfo.getAccount();
+        String phone = loginInfo.getPhone();
+        String loginPassword = loginInfo.getPassword();
+        if (StringUtils.isAnyEmpty(account, loginPassword)){
+            throw new BusinessException(ErrorCode.NULL_ERROR);
+        }
+
+        // 长度限制判断
+        if (account.length() > 16 || account.length() < 4){
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "账号应为4-16个字符");
+        }
+        if (loginPassword.length() > 16 || loginPassword.length() < 8){
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "密码应为8-16个字符");
+        }
+
+        Connection conn = null;
+        try {
+            conn = BaseDao.getConnection();
+            // 通过账号获取User
+            User user = userDao.getUserByAccount(conn, account);
+            if (user == null){
+                return null;
+            }
+            // 账号不为空，匹配密码
+            // 首先加密, 不要忘记加SALT
+            String encryptPassword = MD5EncryptUtil.string2MD5(SALT + loginPassword);
+            // 不能使用 == 判断
+            if (!encryptPassword.equals(user.getPassword())){
+                throw new BusinessException(ErrorCode.PARAMS_ERROR, "密码不正确");
+            }
+            // 密码脱敏
+            user.setPassword("");
+            // 创建map, 将密码作为key,user 对象作为 value 返回
+            Map<String, User> map = new HashMap<>();
+            map.put(loginPassword, user);
+            return map;
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            BaseDao.closeResource(conn, null, null);
+        }
+
         return null;
     }
 
@@ -46,6 +93,8 @@ public class UserServiceImpl implements UserService {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
             return false;
+        }finally {
+            BaseDao.closeResource(conn, null, null);
         }
     }
 

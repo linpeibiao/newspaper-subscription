@@ -12,7 +12,7 @@ import java.util.Map;
  */
 public interface UserService {
     // 用户登录
-    Map<String, String> login(LoginInfo loginInfo);
+    Map<String, User> login(LoginInfo loginInfo);
     // 判断用户账号是否存在
     boolean checkAccountExist(String account);
     // 增
