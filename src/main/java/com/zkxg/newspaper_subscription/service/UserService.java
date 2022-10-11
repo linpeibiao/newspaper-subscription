@@ -6,4 +6,5 @@ package com.zkxg.newspaper_subscription.service;
  * @description
  */
 public interface UserService {
+
 }
