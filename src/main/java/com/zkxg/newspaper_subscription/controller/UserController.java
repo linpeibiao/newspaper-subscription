@@ -27,6 +27,20 @@ public class UserController {
     }
 
     /**
+     * 通过id删除用户
+     * @param id
+     * @return
+     */
+    public BaseResponse<String> userDelete(Long id){
+        if (id == null || id <= 0){
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        final int delete = userService.delete(id);
+        String res = delete > 0 ? "注销成功" : "注销失败";
+        return ResultUtils.success(res);
+    }
+
+    /**
      * 用户修改个人信息
      * @param user
      * @return

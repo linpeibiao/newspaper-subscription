@@ -170,6 +170,29 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public int delete(Long id) {
+        if (id == null || id <= 0){
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        Connection conn = null;
+        try{
+            conn = BaseDao.getConnection();
+            conn.setAutoCommit(false);
+            final int delete = userDao.delete(conn, id);
+            conn.commit();
+            if (delete > 0){
+                return delete;
+            }
+        }catch (SQLException e){
+            // 出现异常，事务回滚
+            try {
+                conn.rollback();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+            e.printStackTrace();
+        }finally {
+            BaseDao.closeResource(conn, null, null);
+        }
         return 0;
     }
 

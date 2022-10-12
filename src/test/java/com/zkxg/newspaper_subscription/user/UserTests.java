@@ -24,6 +24,12 @@ public class UserTests {
     }
 
     @Test
+    public void deleteTest(){
+        final BaseResponse<String> stringBaseResponse = userController.userDelete(1L);
+        System.out.println(stringBaseResponse.getData());
+    }
+
+    @Test
     public void updateTest(){
         LoginInfo loginInfo = new LoginInfo();
         loginInfo.setAccount("linxiaohu");
