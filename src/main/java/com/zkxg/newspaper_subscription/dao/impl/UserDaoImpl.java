@@ -23,13 +23,13 @@ public class UserDaoImpl implements UserDao {
         ResultSet rs = null;
         User user = null;
         if (conn != null){
-            user = new User();
             // TODO 给 account 字段加上唯一性索引
             String sql = "select * from t_user where account = ? and is_deleted=0";
             Object[] params = new Object[]{account};
             rs = BaseDao.execute(conn,pstm,rs,sql,params);
             // 返回的信息一定要脱敏
             while(rs.next()){
+                user = new User();
                 user.setId(rs.getLong("id"));
                 user.setAccount(rs.getString("account"));
                 user.setPassword(rs.getString("password"));

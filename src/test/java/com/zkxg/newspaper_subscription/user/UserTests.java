@@ -30,7 +30,6 @@ public class UserTests {
         user.setRealName("林小虎");
         final int add = userService.add(user);
         System.out.println(add);
-
     }
 
     @Test
