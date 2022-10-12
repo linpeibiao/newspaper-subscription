@@ -53,15 +53,8 @@ public class UserController {
         if (account == null){
             throw new BusinessException(ErrorCode.NULL_ERROR);
         }
-        // 判断登录状态
-        Map<String, User> loginUserMap = this.tl.get();
-        // 没有用户登录，直接返回未登录
-        if (loginUserMap == null || loginUserMap.size() <= 0){
-            throw new BusinessException(ErrorCode.NOT_LOGIN);
-        }
-        User loginUser = loginUserMap.get(account);
-        // 未登录不能修改
-        if (loginUser == null){
+        // 登录态判断
+        if (!authUserCheck(account)){
             throw new BusinessException(ErrorCode.NOT_LOGIN);
         }
         int update = userService.update(user);
@@ -97,5 +90,25 @@ public class UserController {
         tl.set(login);
         //
         return ResultUtils.success(login.get(loginInfo.getAccount()));
+    }
+
+    /**
+     * 通过账号认证登录态
+     * @param account
+     * @return
+     */
+    public boolean authUserCheck(String account){
+        // 判断登录状态
+        Map<String, User> loginUserMap = this.tl.get();
+        // 没有用户登录，直接返回未登录
+        if (loginUserMap == null || loginUserMap.size() <= 0){
+            throw new BusinessException(ErrorCode.NOT_LOGIN);
+        }
+        User loginUser = loginUserMap.get(account);
+        // 未登录不能修改
+        if (loginUser == null){
+            throw new BusinessException(ErrorCode.NOT_LOGIN);
+        }
+        return true;
     }
 }
