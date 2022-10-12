@@ -1,5 +1,6 @@
 package com.zkxg.newspaper_subscription.user;
 
+import java.util.List;
 import java.util.Map;
 
 import com.zkxg.newspaper_subscription.common.BaseResponse;
@@ -21,6 +22,20 @@ public class UserTests {
     public UserTests(){
         userService = new UserServiceImpl();
         userController = new UserController();
+    }
+
+    @Test
+    public void getUserPageTest(){
+        // 先登录
+        LoginInfo loginInfo = new LoginInfo();
+        loginInfo.setAccount("xiaohugege");
+        loginInfo.setPhone("");
+        loginInfo.setPassword("linxiaohu");
+        // 首先要登陆
+        userController.userLogin(loginInfo);
+        List list = userController.getUserPage(1, 10).getData();
+        System.out.println(list.size());
+        System.out.println(list);
     }
 
     @Test

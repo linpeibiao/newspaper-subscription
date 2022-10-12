@@ -14,6 +14,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -30,6 +31,22 @@ public class UserServiceImpl implements UserService {
 
     // 密码加密盐值
     private final String SALT = "love";
+
+    @Override
+    public List<User> getUserPage(int pageNum, int pageSize) {
+        Connection conn = null;
+        List<User> userList = null;
+        try {
+            conn = BaseDao.getConnection();
+            userList = userDao.getUserPage(conn, pageNum, pageSize);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }finally{
+            BaseDao.closeResource(conn,null,null);
+        }
+        System.out.println("Service获取用户列表成功!");
+        return userList;
+    }
 
     @Override
     public Map<String, User> login(LoginInfo loginInfo) {

@@ -4,6 +4,7 @@ import com.zkxg.newspaper_subscription.model.entity.User;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  * @author xiaohu
@@ -11,6 +12,8 @@ import java.sql.SQLException;
  * @description 用户dao层接口
  */
 public interface UserDao {
+    // 获取用户列表
+    List<User> getUserPage(Connection conn, int pageNum, int pageSize) throws SQLException;
     // 根据用户账号获取
     User getUserByAccount(Connection conn, String account) throws SQLException;
     // 增
