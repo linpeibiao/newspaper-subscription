@@ -14,6 +14,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -30,6 +31,22 @@ public class UserServiceImpl implements UserService {
 
     // 密码加密盐值
     private final String SALT = "love";
+
+    @Override
+    public List<User> getUserPage(int pageNum, int pageSize) {
+        Connection conn = null;
+        List<User> userList = null;
+        try {
+            conn = BaseDao.getConnection();
+            userList = userDao.getUserPage(conn, pageNum, pageSize);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }finally{
+            BaseDao.closeResource(conn,null,null);
+        }
+        System.out.println("Service获取用户列表成功!");
+        return userList;
+    }
 
     @Override
     public Map<String, User> login(LoginInfo loginInfo) {
@@ -170,6 +187,29 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public int delete(Long id) {
+        if (id == null || id <= 0){
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        Connection conn = null;
+        try{
+            conn = BaseDao.getConnection();
+            conn.setAutoCommit(false);
+            final int delete = userDao.delete(conn, id);
+            conn.commit();
+            if (delete > 0){
+                return delete;
+            }
+        }catch (SQLException e){
+            // 出现异常，事务回滚
+            try {
+                conn.rollback();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+            e.printStackTrace();
+        }finally {
+            BaseDao.closeResource(conn, null, null);
+        }
         return 0;
     }
 
@@ -226,6 +266,19 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUser(Long id) {
-        return null;
+        if (id == null || id <= 0){
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        Connection conn = null;
+        User user = null;
+        try {
+            conn = BaseDao.getConnection();
+            user = userDao.getUser(conn, id);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }finally {
+            BaseDao.closeResource(conn, null, null);
+        }
+        return user;
     }
 }

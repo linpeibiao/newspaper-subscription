@@ -3,6 +3,7 @@ package com.zkxg.newspaper_subscription.service;
 import com.zkxg.newspaper_subscription.model.vo.LoginInfo;
 import com.zkxg.newspaper_subscription.model.entity.User;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -11,6 +12,8 @@ import java.util.Map;
  * @description
  */
 public interface UserService {
+    // 获取用户列表
+    List<User> getUserPage(int pageNum, int pageSize);
     // 用户登录
     Map<String, User> login(LoginInfo loginInfo);
     // 判断用户账号是否存在

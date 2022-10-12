@@ -8,7 +8,10 @@ import com.zkxg.newspaper_subscription.model.entity.User;
 import com.zkxg.newspaper_subscription.model.vo.LoginInfo;
 import com.zkxg.newspaper_subscription.service.UserService;
 import com.zkxg.newspaper_subscription.service.impl.UserServiceImpl;
+
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * @author xiaohu
@@ -19,10 +22,71 @@ public class UserController {
     //
     private UserService userService;
     // 用于保存用户登录态
-    public  ThreadLocal<Map<String, User>> tl;
+    public ThreadLocal<Map<String, User>> tl;
     public UserController(){
         userService = new UserServiceImpl();
         tl = new ThreadLocal<>();
+    }
+
+
+    /**
+     * 获取用户列表。只能是管理员才可以获取
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    public BaseResponse<List> getUserPage(Integer pageNum, Integer pageSize){
+        // 从第1页开始获取
+        if (pageNum <= 0 || pageSize <= 0){
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        // 未登录且不是管理员不能获取用户列表
+        User user = null;
+        Map<String, User> userMap = this.tl.get();
+        if (userMap == null){
+            throw new BusinessException(ErrorCode.NOT_LOGIN);
+        }
+        Set<Map.Entry<String, User>> userEntrySet = userMap.entrySet();
+        for (Map.Entry<String, User> userEntry : userEntrySet) {
+            // 只获取当前用户
+            user = userEntry.getValue();
+            break;
+        }
+        if (userEntrySet.isEmpty() || user == null || !user.getState().equals(1)){
+            throw new BusinessException(ErrorCode.NO_AUTH);
+        }
+
+        // 数据库是从0开始获取数据的，所以pageNum 要减1
+        pageNum -= 1;
+        final List<User> userPage = userService.getUserPage(pageNum, pageSize);
+        return ResultUtils.success(userPage);
+    }
+
+    /**
+     * 通过id获取用户信息
+     * @param id
+     * @return
+     */
+    public BaseResponse<User> getUserById(Long id){
+        if (id <= 0){
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        final User user = userService.getUser(id);
+        return ResultUtils.success(user);
+    }
+
+    /**
+     * 通过id删除用户
+     * @param id
+     * @return
+     */
+    public BaseResponse<String> userDelete(Long id){
+        if (id == null || id <= 0){
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        final int delete = userService.delete(id);
+        String res = delete > 0 ? "注销成功" : "注销失败";
+        return ResultUtils.success(res);
     }
 
     /**
@@ -39,15 +103,8 @@ public class UserController {
         if (account == null){
             throw new BusinessException(ErrorCode.NULL_ERROR);
         }
-        // 判断登录状态
-        Map<String, User> loginUserMap = this.tl.get();
-        // 没有用户登录，直接返回未登录
-        if (loginUserMap == null || loginUserMap.size() <= 0){
-            throw new BusinessException(ErrorCode.NOT_LOGIN);
-        }
-        User loginUser = loginUserMap.get(account);
-        // 未登录不能修改
-        if (loginUser == null){
+        // 登录态判断
+        if (!authUserCheck(account)){
             throw new BusinessException(ErrorCode.NOT_LOGIN);
         }
         int update = userService.update(user);
@@ -78,10 +135,30 @@ public class UserController {
         }
         Map<String, User> login = userService.login(loginInfo);
         if (login == null){
-            return ResultUtils.error(ErrorCode.PARAMS_ERROR);
+            return ResultUtils.error(ErrorCode.PARAMS_ERROR,"没有该账户");
         }
         tl.set(login);
         //
         return ResultUtils.success(login.get(loginInfo.getAccount()));
+    }
+
+    /**
+     * 通过账号认证登录态
+     * @param account
+     * @return
+     */
+    public boolean authUserCheck(String account){
+        // 判断登录状态
+        Map<String, User> loginUserMap = this.tl.get();
+        // 没有用户登录，直接返回未登录
+        if (loginUserMap == null || loginUserMap.size() <= 0){
+            throw new BusinessException(ErrorCode.NOT_LOGIN);
+        }
+        User loginUser = loginUserMap.get(account);
+        // 未登录
+        if (loginUser == null){
+            throw new BusinessException(ErrorCode.NOT_LOGIN);
+        }
+        return true;
     }
 }
