@@ -22,7 +22,7 @@ public interface UserService {
     int delete(Long id);
     // 改
     // 根据id
-    int update(Long id);
+    int update(User user);
     // 查
     // 根据id
     User getUser(Long id);

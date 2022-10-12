@@ -21,7 +21,7 @@ public interface UserDao {
 
     // 改
     // 根据id
-    int update(Connection conn, Long id) throws SQLException;
+    int update(Connection conn, User user) throws SQLException;
     // 查
     // 根据id
     User getUser(Connection conn, Long id) throws SQLException;
