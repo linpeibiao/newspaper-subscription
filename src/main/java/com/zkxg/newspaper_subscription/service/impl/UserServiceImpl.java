@@ -266,6 +266,19 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUser(Long id) {
-        return null;
+        if (id == null || id <= 0){
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        Connection conn = null;
+        User user = null;
+        try {
+            conn = BaseDao.getConnection();
+            user = userDao.getUser(conn, id);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }finally {
+            BaseDao.closeResource(conn, null, null);
+        }
+        return user;
     }
 }

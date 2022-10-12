@@ -25,6 +25,11 @@ public class UserTests {
     }
 
     @Test
+    public void getUserByIdTest(){
+        System.out.println(userController.getUserById(1L).getData());
+    }
+
+    @Test
     public void getUserPageTest(){
         // 先登录
         LoginInfo loginInfo = new LoginInfo();

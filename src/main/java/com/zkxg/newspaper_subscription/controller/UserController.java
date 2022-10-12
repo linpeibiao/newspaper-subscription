@@ -28,6 +28,7 @@ public class UserController {
         tl = new ThreadLocal<>();
     }
 
+
     /**
      * 获取用户列表。只能是管理员才可以获取
      * @param pageNum
@@ -67,7 +68,11 @@ public class UserController {
      * @return
      */
     public BaseResponse<User> getUserById(Long id){
-        return null;
+        if (id <= 0){
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        final User user = userService.getUser(id);
+        return ResultUtils.success(user);
     }
 
     /**

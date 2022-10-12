@@ -198,7 +198,35 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public User getUser(Connection conn, Long id) {
-        return null;
+    public User getUser(Connection conn, Long id) throws SQLException{
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        User user = null;
+        if (conn != null){
+            String sql = "select * from t_user where id = ? and is_deleted=0";
+            Object[] params = new Object[]{id};
+            rs = BaseDao.execute(conn,pstm,rs,sql,params);
+            // 返回的信息一定要脱敏
+            while(rs.next()){
+                user = new User();
+                user.setId(rs.getLong("id"));
+                user.setAccount(rs.getString("account"));
+                user.setNackname(rs.getString("nackname"));
+                user.setAvatar(rs.getString("avatar"));
+                user.setGender(rs.getInt("gender"));
+                user.setPhone(rs.getString("phone"));
+                user.setEmail(rs.getString("email"));
+                user.setRealName(rs.getString("real_name"));
+                user.setDepartment(rs.getString("department"));
+                user.setAddress(rs.getString("address"));
+                user.setPostcode(rs.getString("postcode"));
+                user.setState(rs.getInt("state"));
+                user.setRole(rs.getInt("role"));
+                user.setRemark(rs.getString("remark"));
+            }
+            System.out.println("UserDao通过id获取用户信息成功");
+        }
+        BaseDao.closeResource(null,pstm,rs);
+        return user;
     }
 }
