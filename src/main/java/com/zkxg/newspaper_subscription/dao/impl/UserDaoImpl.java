@@ -102,8 +102,38 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public int update(Connection conn, Long id) {
-        return 0;
+    public int update(Connection conn, User user) {
+        PreparedStatement pstm = null;
+        int updateRows = 0;
+        if (conn != null) {
+            // 17个字段，id自增不用插入
+            String sql = "update t_user set nackname=?," +
+                    "avatar=?,gender=?,phone=?,email=?,real_name=?,department=?," +
+                    "address=?,postcode=?,remark=?,update_time=? " +
+                    "where id=?";
+            // 设置系统插入的值
+            user.setUpdateTime(new Date());
+            Object params[] = new Object[]{
+                    user.getNackname(),
+                    user.getAvatar(),
+                    user.getGender(),
+                    user.getPhone(),
+                    user.getEmail(),
+                    user.getRealName(),
+                    user.getDepartment(),
+                    user.getAddress(),
+                    user.getPostcode(),
+                    user.getRemark(),
+                    user.getUpdateTime(),
+                    user.getId()
+            };
+            //执行sql语句
+            updateRows = BaseDao.execute(conn, pstm, sql, params);
+            //关闭资源
+            BaseDao.closeResource(null, pstm, null);
+            System.out.println("UserDao修改用户信息成功");
+        }
+        return updateRows;
     }
 
     @Override

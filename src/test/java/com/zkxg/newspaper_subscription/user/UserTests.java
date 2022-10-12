@@ -1,5 +1,6 @@
 package com.zkxg.newspaper_subscription.user;
-import java.util.Date;
+
+import java.util.Map;
 
 import com.zkxg.newspaper_subscription.common.BaseResponse;
 import com.zkxg.newspaper_subscription.controller.UserController;
@@ -21,6 +22,26 @@ public class UserTests {
         userService = new UserServiceImpl();
         userController = new UserController();
     }
+
+    @Test
+    public void updateTest(){
+        LoginInfo loginInfo = new LoginInfo();
+        loginInfo.setAccount("linxiaohu");
+        loginInfo.setPhone("linxiaohu");
+        loginInfo.setPassword("linxiaohu");
+        // 首先要登陆，才可以修改
+        userController.userLogin(loginInfo);
+        User user = new User();
+        user.setId(2L);
+        user.setRealName("linxiaohu");
+        user.setNackname("linxiaohu");
+        user.setAccount("linxiaohu");
+        user.setRemark("linxiaohu is a handsome man!!!!!");
+        final BaseResponse<String> stringBaseResponse = userController.userInfoUpdate(user);
+        System.out.println(stringBaseResponse.getData());
+
+    }
+
     @Test
     public void addTest(){
         User user = new User();
@@ -33,12 +54,66 @@ public class UserTests {
     }
 
     @Test
+    public void addBitchTest(){
+        long start = System.currentTimeMillis();
+        for (int i = 4; i < 1000; i++) {
+            User user = new User();
+            user.setPassword("linxiaohu");
+            user.setNackname("林小虎哥哥");
+            user.setRealName("林小虎");
+            user.setAccount("linxiaohu" + i);
+            userController.userRegister(user);
+        }
+        long end = System.currentTimeMillis();
+        System.out.println("用时" + (end - start));
+    }
+
+    @Test
     public void loginTest(){
         LoginInfo loginInfo = new LoginInfo();
         loginInfo.setAccount("linxiaohu");
         loginInfo.setPhone("linxiaohu");
         loginInfo.setPassword("linxiaohu");
+        LoginInfo loginInfo1 = new LoginInfo();
+        loginInfo1.setAccount("linxioahu1");
+        loginInfo1.setPhone("13111111111");
+        loginInfo1.setPassword("linxiaohu");
         final BaseResponse<User> userBaseResponse = userController.userLogin(loginInfo);
+        final BaseResponse<User> userBaseResponse1 = userController.userLogin(loginInfo1);
+        final Map<String, User> stringUserMap = userController.tl.get();
+        System.out.println(stringUserMap.size());
         System.out.println(userBaseResponse);
+    }
+    @Test
+    public void loginTest2(){
+
+        Thread t1 = new Thread(() -> {
+            LoginInfo loginInfo = new LoginInfo();
+            loginInfo.setAccount("linxiaohu");
+            loginInfo.setPhone("linxiaohu");
+            loginInfo.setPassword("linxiaohu");
+            final BaseResponse<User> userBaseResponse = userController.userLogin(loginInfo);
+            final Map<String, User> stringUserMap = userController.tl.get();
+            System.out.println(Thread.currentThread().getName() + ": " + stringUserMap.get("linxiaohu"));
+        }, "linxiaohu");
+
+        Thread t2 = new Thread(() -> {
+            LoginInfo loginInfo = new LoginInfo();
+            loginInfo.setAccount("linxiaohu1");
+            loginInfo.setPhone("linxiaohu");
+            loginInfo.setPassword("linxiaohu");
+            final BaseResponse<User> userBaseResponse = userController.userLogin(loginInfo);
+            final Map<String, User> stringUserMap = userController.tl.get();
+            System.out.println(Thread.currentThread().getName() + ": " + stringUserMap.get("linxiaohu1"));
+        }, "linxiaohu1");
+
+        t1.start();
+        t2.start();
+
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }

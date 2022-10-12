@@ -69,7 +69,7 @@ public class UserServiceImpl implements UserService {
             user.setPassword("");
             // 创建map, 将密码作为key,user 对象作为 value 返回
             Map<String, User> map = new HashMap<>();
-            map.put(loginPassword, user);
+            map.put(account, user);
             return map;
 
         }catch (SQLException e){
@@ -174,7 +174,53 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public int update(Long id) {
+    public int update(User user) {
+        if (user == null){
+            throw new BusinessException(ErrorCode.NULL_ERROR);
+        }
+        // 不修改账号和密码
+        String nackname = user.getNackname();
+        String realName = user.getRealName();
+        if (StringUtils.isAnyEmpty(nackname, realName)){
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "有必要参数为空,请补全信息");
+        }
+        // 判断修改字段长度限制
+        // 长度限制判断
+        if (nackname.length() > 16 || nackname.length() < 4){
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "昵称应为4-16个字符");
+        }
+        if (realName.length() > 16 || realName.length() < 2){
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "请正确填写姓名");
+        }
+        Connection conn = null;
+        try {
+            conn = BaseDao.getConnection();
+            conn.setAutoCommit(false);
+            int rs = userDao.update(conn, user);
+            // 要作为事务进行数据库操作
+            conn.commit();
+            if (rs > 0){
+                System.out.println("user is updated successfully.....");
+                return rs;
+            }else{
+                //插入失败
+                System.out.println("user is updated failed");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            //出现异常，要对事务进行回滚
+            try {
+                System.out.println("rollback·····················");
+                conn.rollback();
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            }
+        }finally{
+            //关闭资源
+            BaseDao.closeResource(conn,null,null);
+        }
+
+
         return 0;
     }
 
