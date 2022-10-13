@@ -38,6 +38,56 @@ new FormModel {
 						"title": "订阅统计"
 					} )
 					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
+						name: "panel6"
+						add( new FormComponent( "javax.swing.JTextField" ) {
+							name: "queryField"
+							"font": new java.awt.Font( "Microsoft YaHei UI", 0, 20 )
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+							"x": 430
+							"y": 25
+							"width": 200
+							"height": 40
+						} )
+						add( new FormComponent( "javax.swing.JLabel" ) {
+							name: "queryTip"
+							"text": "请输入查询书名或人员："
+							"font": new java.awt.Font( "Microsoft YaHei UI", 0, 20 )
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+							"x": 210
+							"y": 30
+						} )
+						add( new FormComponent( "javax.swing.JButton" ) {
+							name: "queryButton"
+							"text": "查询"
+							"font": new java.awt.Font( "Microsoft YaHei UI", 0, 20 )
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+							"x": 645
+							"y": 25
+							"height": 40
+						} )
+						add( new FormComponent( "javax.swing.JComboBox" ) {
+							name: "queryList"
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+							"width": 160
+							"height": 40
+							"x": 20
+							"y": 25
+						} )
+						add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+							name: "scrollPane1"
+							add( new FormComponent( "javax.swing.JTable" ) {
+								name: "queryTable"
+							} )
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+							"x": 15
+							"y": 80
+							"height": 430
+							"width": 885
+						} )
+					}, new FormLayoutConstraints( null ) {
+						"title": "订单查询"
+					} )
+					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
 						name: "panel3"
 						add( new FormComponent( "javax.swing.JLabel" ) {
 							name: "changUser"
@@ -116,7 +166,7 @@ new FormModel {
 						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 							"x": 260
 							"y": 175
-							"width": 95
+							"width": 205
 							"height": 40
 						} )
 					}, new FormLayoutConstraints( null ) {

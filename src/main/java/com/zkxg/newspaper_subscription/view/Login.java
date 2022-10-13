@@ -56,12 +56,12 @@ public class Login extends JFrame {
         //======== panel1 ========
         {
             panel1.setBackground(new Color(0x45494a));
-            panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border. EmptyBorder
-            ( 0, 0, 0, 0) , "JFor\u006dDesi\u0067ner \u0045valu\u0061tion", javax. swing. border. TitledBorder. CENTER, javax. swing. border
-            . TitledBorder. BOTTOM, new java .awt .Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 ), java. awt
-            . Color. red) ,panel1. getBorder( )) ); panel1. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void
-            propertyChange (java .beans .PropertyChangeEvent e) {if ("bord\u0065r" .equals (e .getPropertyName () )) throw new RuntimeException( )
-            ; }} );
+            panel1.setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax . swing.
+            border .EmptyBorder ( 0, 0 ,0 , 0) ,  "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn" , javax. swing .border . TitledBorder. CENTER
+            ,javax . swing. border .TitledBorder . BOTTOM, new java. awt .Font ( "Dia\u006cog", java .awt . Font
+            . BOLD ,12 ) ,java . awt. Color .red ) ,panel1. getBorder () ) ); panel1. addPropertyChangeListener(
+            new java. beans .PropertyChangeListener ( ){ @Override public void propertyChange (java . beans. PropertyChangeEvent e) { if( "\u0062ord\u0065r"
+            .equals ( e. getPropertyName () ) )throw new RuntimeException( ) ;} } );
             panel1.setLayout(null);
 
             //---- systemTitle ----
@@ -77,6 +77,9 @@ public class Login extends JFrame {
             accountLabel.setForeground(new Color(0xfafafa));
             panel1.add(accountLabel);
             accountLabel.setBounds(new Rectangle(new Point(100, 135), accountLabel.getPreferredSize()));
+
+            //---- accountField ----
+            accountField.setText("linxiaohu");
             panel1.add(accountField);
             accountField.setBounds(165, 130, 270, 30);
 
@@ -98,6 +101,9 @@ public class Login extends JFrame {
             registerButton.setFont(registerButton.getFont().deriveFont(registerButton.getFont().getSize() + 3f));
             panel1.add(registerButton);
             registerButton.setBounds(340, 295, 90, 40);
+
+            //---- passwordField ----
+            passwordField.setText("linxiaohu");
             panel1.add(passwordField);
             passwordField.setBounds(165, 200, 270, 30);
 
@@ -154,7 +160,7 @@ public class Login extends JFrame {
                                 || password == null
                                 || account.trim().length() == 0
                                 || password.trim().length() == 0) {
-                            JOptionPane.showMessageDialog(null, "用户名或密码不能为空");
+                            JOptionPane.showMessageDialog(null, "用户名和密码不能为空");
                             return;
                         }
                         else if(account.length() < 4 || account.length() > 16) {
@@ -167,18 +173,22 @@ public class Login extends JFrame {
                         }
                         // 请求接口判断账号是否存在
                         BaseResponse<User> userBaseResponse = userController.userLogin(accountInfo);
-                        User use = userBaseResponse.getData();
-                        System.out.println(use);
-                        if (use != null) {
+                        User user = null;
+                        if(userBaseResponse.getData() instanceof User) {
+                            user = userBaseResponse.getData();
+                        }
+                        System.out.println(user);
+                        if (user != null) {
                             JOptionPane.showMessageDialog(null, "登录成功！");
-                            accountField.setText("");
-                            passwordField.setText("");
                             // 登录成功，关闭登录界面，进入主界面
                             dispose();
                             // 判断是管理员登录还是普通用户登录
                             new subMgt();
                         } else {
-                            JOptionPane.showMessageDialog(null,"登录失败，该账号不存在或密码错误！");
+                            JOptionPane.showMessageDialog(null,"该账号不存在或密码错误，请重新输入！");
+                            // 清空文本框内容
+                            accountField.setText("");
+                            passwordField.setText("");
                         }
                     }
                 }

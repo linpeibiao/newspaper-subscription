@@ -30,6 +30,7 @@ new FormModel {
 				} )
 				add( new FormComponent( "javax.swing.JTextField" ) {
 					name: "accountField"
+					"text": "linxiaohu"
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"x": 165
 					"y": 130
@@ -67,6 +68,7 @@ new FormModel {
 				} )
 				add( new FormComponent( "javax.swing.JPasswordField" ) {
 					name: "passwordField"
+					"text": "linxiaohu"
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"width": 270
 					"height": 30

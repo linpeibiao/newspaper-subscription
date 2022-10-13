@@ -11,9 +11,12 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.Vector;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+
 import com.jgoodies.forms.factories.*;
 import com.zkxg.newspaper_subscription.common.BaseResponse;
 import com.zkxg.newspaper_subscription.controller.UserController;
+import com.zkxg.newspaper_subscription.model.entity.User;
 
 /**
  * @author unknown
@@ -32,6 +35,8 @@ public class subMgt extends JFrame {
         listerner();
         // 初始化用户信息
         initUserInfo();
+        // 初始化查询界面
+        initQueryView();
         userController = new UserController();
     }
 
@@ -44,6 +49,13 @@ public class subMgt extends JFrame {
         panel2 = new JPanel();
         panel4 = new JPanel();
         panel5 = new JPanel();
+        panel6 = new JPanel();
+        queryField = new JTextField();
+        queryTip = new JLabel();
+        queryButton = new JButton();
+        queryList = new JComboBox();
+        scrollPane1 = new JScrollPane();
+        queryTable = new JTable();
         panel3 = new JPanel();
         changUser = new JLabel();
         changeSex = new JLabel();
@@ -65,12 +77,12 @@ public class subMgt extends JFrame {
         //======== panel1 ========
         {
             panel1.setBackground(new Color(0x4c5052));
-            panel1.setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax . swing. border .
-            EmptyBorder ( 0, 0 ,0 , 0) ,  "JF\u006frm\u0044es\u0069gn\u0065r \u0045va\u006cua\u0074io\u006e" , javax. swing .border . TitledBorder. CENTER ,javax . swing
-            . border .TitledBorder . BOTTOM, new java. awt .Font ( "D\u0069al\u006fg", java .awt . Font. BOLD ,12 ) ,
-            java . awt. Color .red ) ,panel1. getBorder () ) ); panel1. addPropertyChangeListener( new java. beans .PropertyChangeListener ( )
-            { @Override public void propertyChange (java . beans. PropertyChangeEvent e) { if( "\u0062or\u0064er" .equals ( e. getPropertyName () ) )
-            throw new RuntimeException( ) ;} } );
+            panel1.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.swing.
+            border.EmptyBorder(0,0,0,0), "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn",javax.swing.border.TitledBorder.CENTER
+            ,javax.swing.border.TitledBorder.BOTTOM,new java.awt.Font("Dia\u006cog",java.awt.Font
+            .BOLD,12),java.awt.Color.red),panel1. getBorder()));panel1. addPropertyChangeListener(
+            new java.beans.PropertyChangeListener(){@Override public void propertyChange(java.beans.PropertyChangeEvent e){if("\u0062ord\u0065r"
+            .equals(e.getPropertyName()))throw new RuntimeException();}});
             panel1.setLayout(null);
 
             //---- label1 ----
@@ -147,6 +159,53 @@ public class subMgt extends JFrame {
                 }
                 tabbedPane1.addTab("\u8ba2\u9605\u7edf\u8ba1", panel5);
 
+                //======== panel6 ========
+                {
+                    panel6.setLayout(null);
+
+                    //---- queryField ----
+                    queryField.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+                    panel6.add(queryField);
+                    queryField.setBounds(430, 25, 200, 40);
+
+                    //---- queryTip ----
+                    queryTip.setText("\u8bf7\u8f93\u5165\u67e5\u8be2\u4e66\u540d\u6216\u4eba\u5458\uff1a");
+                    queryTip.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+                    panel6.add(queryTip);
+                    queryTip.setBounds(new Rectangle(new Point(210, 30), queryTip.getPreferredSize()));
+
+                    //---- queryButton ----
+                    queryButton.setText("\u67e5\u8be2");
+                    queryButton.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+                    panel6.add(queryButton);
+                    queryButton.setBounds(645, 25, queryButton.getPreferredSize().width, 40);
+                    panel6.add(queryList);
+                    queryList.setBounds(20, 25, 160, 40);
+
+                    //======== scrollPane1 ========
+                    {
+                        scrollPane1.setViewportView(queryTable);
+                    }
+                    panel6.add(scrollPane1);
+                    scrollPane1.setBounds(15, 80, 885, 430);
+
+                    {
+                        // compute preferred size
+                        Dimension preferredSize = new Dimension();
+                        for(int i = 0; i < panel6.getComponentCount(); i++) {
+                            Rectangle bounds = panel6.getComponent(i).getBounds();
+                            preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
+                            preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
+                        }
+                        Insets insets = panel6.getInsets();
+                        preferredSize.width += insets.right;
+                        preferredSize.height += insets.bottom;
+                        panel6.setMinimumSize(preferredSize);
+                        panel6.setPreferredSize(preferredSize);
+                    }
+                }
+                tabbedPane1.addTab("\u8ba2\u5355\u67e5\u8be2", panel6);
+
                 //======== panel3 ========
                 {
                     panel3.setLayout(null);
@@ -187,7 +246,7 @@ public class subMgt extends JFrame {
                     panel3.add(changeButton);
                     changeButton.setBounds(175, 410, 295, 45);
                     panel3.add(changeSexList);
-                    changeSexList.setBounds(260, 175, 95, 40);
+                    changeSexList.setBounds(260, 175, 205, 40);
 
                     {
                         // compute preferred size
@@ -261,6 +320,13 @@ public class subMgt extends JFrame {
     private JPanel panel2;
     private JPanel panel4;
     private JPanel panel5;
+    private JPanel panel6;
+    private JTextField queryField;
+    private JLabel queryTip;
+    private JButton queryButton;
+    private JComboBox queryList;
+    private JScrollPane scrollPane1;
+    private JTable queryTable;
     private JPanel panel3;
     private JLabel changUser;
     private JLabel changeSex;
@@ -276,12 +342,27 @@ public class subMgt extends JFrame {
     // 初始化用户信息
     public void initUserInfo() {
         // 请求接口获取当前登录用户的信息
+//        BaseResponse<User> userBaseResponse = userController.getUserById();
+//        System.out.println(userBaseResponse);
         changeUserField.setText("渲染用户昵称的");
         changEmailField.setText("渲染用户邮箱的");
         changePhoneField.setText("渲染用户电话的");
         changeSexList.addItem("男");
         changeSexList.addItem("女");
         changeSexList.setSelectedIndex(0);
+    }
+    // 初始化查询界面
+    public void initQueryView() {
+        queryList.addItem("按书名查询");
+        queryList.addItem("按人员查询");
+        queryList.addItem("按部门查询");
+        // 查询表
+        DefaultTableModel queryT = (DefaultTableModel) queryTable.getModel();
+        // 设置表头名
+        String[] rowName = new String[]{"订单编号","报刊名称","部门","用户名称","订阅份数","订阅月数","订单总金额"};
+        // 设置行与列
+        queryT.setColumnCount(3);
+        queryT.setColumnCount(rowName.length);
     }
     // 监听事件
     public void listerner() {
@@ -297,7 +378,7 @@ public class subMgt extends JFrame {
                         // 获取用户输入的新手机
                         String modPhone = changePhoneField.getText();
                         // 获取用户输入的新性别
-
+                        Integer changeSex = changeSexList.getSelectedIndex();
                         // 将获取的数据存入即将提交给接口进行修改的对象中
 
                         // 表单预验证
@@ -323,7 +404,7 @@ public class subMgt extends JFrame {
                             changeUserField.setText(modUserName);
                             changEmailField.setText(modEmail);
                             changePhoneField.setText(modPhone);
-                            changeSexList.setSelectedIndex(1);
+                            changeSexList.setSelectedIndex(changeSex);
                     }
                 }
         );
@@ -332,10 +413,11 @@ public class subMgt extends JFrame {
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        System.out.println("点击注销账号按钮!");
-                        // 获取当前账号 Id
-
-                        // 请求接口注销该账号
+                        // 关闭主界面
+                        dispose();
+                        JOptionPane.showMessageDialog(null,"您已退出当前账号登录，即将返回登录界面！");
+                        // 创建登录界面
+                        new Login();
                     }
                 }
         );
