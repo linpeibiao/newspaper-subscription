@@ -25,6 +25,18 @@ public class UserTests {
     }
 
     @Test
+    public void getCurrentLoginUserTest(){
+        // 先登录
+        LoginInfo loginInfo = new LoginInfo();
+        loginInfo.setAccount("xiaohugege");
+        loginInfo.setPhone("");
+        loginInfo.setPassword("linxiaohu");
+        // 首先要登陆
+        userController.userLogin(loginInfo);
+        System.out.println(userController.getCurrentLoginUser().getData());
+    }
+
+    @Test
     public void getUserByIdTest(){
         System.out.println(userController.getUserById(1L).getData());
     }
@@ -45,7 +57,7 @@ public class UserTests {
 
     @Test
     public void deleteTest(){
-        final BaseResponse<String> stringBaseResponse = userController.userDelete(1L);
+        final BaseResponse<String> stringBaseResponse = userController.userDelete(-9L);
         System.out.println(stringBaseResponse.getData());
     }
 

@@ -28,6 +28,28 @@ public class UserController {
         tl = new ThreadLocal<>();
     }
 
+    /**
+     * 获取当前登录用户
+     * @return
+     */
+    public BaseResponse<User> getCurrentLoginUser(){
+        User user = null;
+        Map<String, User> userMap = this.tl.get();
+        if (userMap == null){
+            throw new BusinessException(ErrorCode.NOT_LOGIN);
+        }
+        Set<Map.Entry<String, User>> userEntrySet = userMap.entrySet();
+        for (Map.Entry<String, User> userEntry : userEntrySet) {
+            // 只获取当前用户
+            user = userEntry.getValue();
+            break;
+        }
+        if (userEntrySet.isEmpty() || user == null){
+            throw new BusinessException(ErrorCode.NO_AUTH);
+        }
+        return ResultUtils.success(user);
+    }
+
 
     /**
      * 获取用户列表。只能是管理员才可以获取
@@ -42,17 +64,8 @@ public class UserController {
         }
         // 未登录且不是管理员不能获取用户列表
         User user = null;
-        Map<String, User> userMap = this.tl.get();
-        if (userMap == null){
-            throw new BusinessException(ErrorCode.NOT_LOGIN);
-        }
-        Set<Map.Entry<String, User>> userEntrySet = userMap.entrySet();
-        for (Map.Entry<String, User> userEntry : userEntrySet) {
-            // 只获取当前用户
-            user = userEntry.getValue();
-            break;
-        }
-        if (userEntrySet.isEmpty() || user == null || !user.getState().equals(1)){
+        user = this.getCurrentLoginUser().getData();
+        if (user == null || user.getState() != 1){
             throw new BusinessException(ErrorCode.NO_AUTH);
         }
 
