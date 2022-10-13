@@ -119,7 +119,7 @@ public class UserTests {
         final BaseResponse<User> userBaseResponse = userController.userLogin(loginInfo);
         final BaseResponse<User> userBaseResponse1 = userController.userLogin(loginInfo1);
         final Map<String, User> stringUserMap = userController.tl.get();
-        System.out.println(stringUserMap.size());
+        System.out.println(stringUserMap.size());// 1才是正确的
         System.out.println(userBaseResponse);
     }
     @Test
