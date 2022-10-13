@@ -10,4 +10,7 @@ import com.zkxg.newspaper_subscription.model.entity.Newspaper;
 public interface NewspaperService {
     // 添加报刊
     int add(Newspaper newspaper);
+    // 删除报刊
+    int delete(Long id);
+
 }

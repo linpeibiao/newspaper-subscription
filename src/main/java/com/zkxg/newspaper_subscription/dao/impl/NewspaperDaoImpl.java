@@ -53,8 +53,22 @@ public class NewspaperDaoImpl implements NewspaperDao {
     }
 
     @Override
-    public int delete(Long id) {
-        return 0;
+    public int delete(Connection conn, Long id) throws SQLException {
+        PreparedStatement pstm = null;
+        int updateRows = 0;
+        if (conn != null) {
+            //
+            String sql = "update t_newspaper set is_deleted=1 where id=?";
+            Object params[] = new Object[]{
+                    id
+            };
+            //执行sql语句
+            updateRows = BaseDao.execute(conn, pstm, sql, params);
+            //关闭资源
+            BaseDao.closeResource(null, pstm, null);
+            System.out.println("newspaperDao 删除报刊信息成功");
+        }
+        return updateRows;
     }
 
     @Override

@@ -15,7 +15,7 @@ public interface NewspaperDao {
     int add(Connection conn, Newspaper newspaper) throws SQLException;
     // 删
     // 根据id
-    int delete(Long id);
+    int delete(Connection conn, Long id) throws SQLException;
     // 改
     // 根据id
     int update(Long id);

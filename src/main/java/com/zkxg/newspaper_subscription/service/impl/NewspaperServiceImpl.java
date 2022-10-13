@@ -63,4 +63,30 @@ public class NewspaperServiceImpl implements NewspaperService {
         }
         return res;
     }
+
+    @Override
+    public int delete(Long id) {
+        if (id == null || id <= 0){
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        Connection conn = null;
+        int delete = 0;
+        try{
+            conn = BaseDao.getConnection();
+            conn.setAutoCommit(false);
+            delete = newspaperDao.delete(conn, id);
+            conn.commit();
+        }catch (SQLException e){
+            // 出现异常，事务回滚
+            try {
+                conn.rollback();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+            e.printStackTrace();
+        }finally {
+            BaseDao.closeResource(conn, null, null);
+        }
+        return delete;
+    }
 }
