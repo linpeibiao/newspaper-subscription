@@ -16,6 +16,7 @@ import javax.swing.*;
 
 /**
  * @author unknown
+ * 注册界面
  */
 public class Register extends JFrame {
     private UserController userController;
@@ -44,6 +45,7 @@ public class Register extends JFrame {
         newPasswordField = new JPasswordField();
         newUser = new JLabel();
         newUserField = new JTextField();
+        panel2 = new JPanel();
 
         //======== this ========
         setMinimumSize(new Dimension(555, 470));
@@ -52,23 +54,28 @@ public class Register extends JFrame {
 
         //======== panel1 ========
         {
-            panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border
-            . EmptyBorder( 0, 0, 0, 0) , "", javax. swing. border. TitledBorder. CENTER, javax
-            . swing. border. TitledBorder. BOTTOM, new java .awt .Font ("Dialo\u0067" ,java .awt .Font .BOLD ,
-            12 ), java. awt. Color. red) ,panel1. getBorder( )) ); panel1. addPropertyChangeListener (new java. beans
-            . PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("borde\u0072" .equals (e .
-            getPropertyName () )) throw new RuntimeException( ); }} );
+            panel1.setBackground(new Color(0x4c5052));
+            panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (
+            new javax. swing. border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn"
+            , javax. swing. border. TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM
+            , new java .awt .Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 )
+            , java. awt. Color. red) ,panel1. getBorder( )) ); panel1. addPropertyChangeListener (
+            new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e
+            ) {if ("\u0062ord\u0065r" .equals (e .getPropertyName () )) throw new RuntimeException( )
+            ; }} );
             panel1.setLayout(null);
 
             //---- registerTitle ----
             registerTitle.setText("\u6ce8\u518c\u65b0\u8d26\u53f7");
             registerTitle.setFont(registerTitle.getFont().deriveFont(registerTitle.getFont().getSize() + 9f));
+            registerTitle.setForeground(new Color(0xf9f9f9));
             panel1.add(registerTitle);
-            registerTitle.setBounds(220, 5, registerTitle.getPreferredSize().width, 28);
+            registerTitle.setBounds(225, 15, registerTitle.getPreferredSize().width, 28);
 
             //---- newAccount ----
             newAccount.setText("\u65b0\u8d26\u53f7");
             newAccount.setFont(newAccount.getFont().deriveFont(newAccount.getFont().getSize() + 6f));
+            newAccount.setForeground(new Color(0xf9f9f9));
             panel1.add(newAccount);
             newAccount.setBounds(new Rectangle(new Point(85, 185), newAccount.getPreferredSize()));
             panel1.add(newAccountField);
@@ -77,6 +84,7 @@ public class Register extends JFrame {
             //---- newPassword ----
             newPassword.setText("\u65b0\u5bc6\u7801");
             newPassword.setFont(newPassword.getFont().deriveFont(newPassword.getFont().getSize() + 6f));
+            newPassword.setForeground(new Color(0xf9f9f9));
             panel1.add(newPassword);
             newPassword.setBounds(85, 250, newPassword.getPreferredSize().width, 24);
 
@@ -97,10 +105,34 @@ public class Register extends JFrame {
             //---- newUser ----
             newUser.setText("\u7528\u6237\u540d");
             newUser.setFont(newUser.getFont().deriveFont(newUser.getFont().getSize() + 6f));
+            newUser.setForeground(new Color(0xf9f9f9));
             panel1.add(newUser);
             newUser.setBounds(85, 125, newUser.getPreferredSize().width, 24);
             panel1.add(newUserField);
             newUserField.setBounds(150, 120, 270, 30);
+
+            //======== panel2 ========
+            {
+                panel2.setBackground(new Color(0x4c5052));
+                panel2.setLayout(null);
+
+                {
+                    // compute preferred size
+                    Dimension preferredSize = new Dimension();
+                    for(int i = 0; i < panel2.getComponentCount(); i++) {
+                        Rectangle bounds = panel2.getComponent(i).getBounds();
+                        preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
+                        preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
+                    }
+                    Insets insets = panel2.getInsets();
+                    preferredSize.width += insets.right;
+                    preferredSize.height += insets.bottom;
+                    panel2.setMinimumSize(preferredSize);
+                    panel2.setPreferredSize(preferredSize);
+                }
+            }
+            panel1.add(panel2);
+            panel2.setBounds(0, 0, 555, 435);
 
             {
                 // compute preferred size
@@ -118,7 +150,7 @@ public class Register extends JFrame {
             }
         }
         contentPane.add(panel1);
-        panel1.setBounds(0, 0, 555, 415);
+        panel1.setBounds(0, 0, 555, 430);
 
         {
             // compute preferred size
@@ -207,5 +239,6 @@ public class Register extends JFrame {
     private JPasswordField newPasswordField;
     private JLabel newUser;
     private JTextField newUserField;
+    private JPanel panel2;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }

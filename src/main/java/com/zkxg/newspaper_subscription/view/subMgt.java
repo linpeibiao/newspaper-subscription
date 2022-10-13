@@ -5,36 +5,233 @@
 package com.zkxg.newspaper_subscription.view;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.util.Vector;
 import javax.swing.*;
+import com.jgoodies.forms.factories.*;
+import com.zkxg.newspaper_subscription.common.BaseResponse;
+import com.zkxg.newspaper_subscription.controller.UserController;
 
 /**
  * @author unknown
+ * 管理员登陆成功主界面
  */
 public class subMgt extends JFrame {
+    private UserController userController;
     public subMgt() {
-        // 初始化
+        // 初始化界面
         initComponents();
         // 设置关闭按钮结束程序
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         // 窗口可见
         setVisible(true);
-        // 监听事件
+        // 绑定事件
+        listerner();
+        // 初始化用户信息
+        initUserInfo();
+        userController = new UserController();
     }
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
         // Generated using JFormDesigner Evaluation license - unknown
+        panel1 = new JPanel();
         label1 = new JLabel();
+        tabbedPane1 = new JTabbedPane();
+        panel2 = new JPanel();
+        panel4 = new JPanel();
+        panel5 = new JPanel();
+        panel3 = new JPanel();
+        changUser = new JLabel();
+        changeSex = new JLabel();
+        changeEmail = new JLabel();
+        changePhone = new JLabel();
+        changeUserField = new JTextField();
+        changEmailField = new JTextField();
+        changePhoneField = new JTextField();
+        changeButton = new JButton();
+        changeSexList = new JComboBox();
+        logoutButton = new JButton();
 
         //======== this ========
-        setMinimumSize(new Dimension(710, 535));
+        setMinimumSize(new Dimension(920, 650));
+        setForeground(new Color(0x3c3f41));
         Container contentPane = getContentPane();
         contentPane.setLayout(null);
 
-        //---- label1 ----
-        label1.setText("\u62a5\u520a\u8ba2\u9605\u7ba1\u7406\u754c\u9762");
-        contentPane.add(label1);
-        label1.setBounds(new Rectangle(new Point(190, 30), label1.getPreferredSize()));
+        //======== panel1 ========
+        {
+            panel1.setBackground(new Color(0x4c5052));
+            panel1.setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax . swing. border .
+            EmptyBorder ( 0, 0 ,0 , 0) ,  "JF\u006frm\u0044es\u0069gn\u0065r \u0045va\u006cua\u0074io\u006e" , javax. swing .border . TitledBorder. CENTER ,javax . swing
+            . border .TitledBorder . BOTTOM, new java. awt .Font ( "D\u0069al\u006fg", java .awt . Font. BOLD ,12 ) ,
+            java . awt. Color .red ) ,panel1. getBorder () ) ); panel1. addPropertyChangeListener( new java. beans .PropertyChangeListener ( )
+            { @Override public void propertyChange (java . beans. PropertyChangeEvent e) { if( "\u0062or\u0064er" .equals ( e. getPropertyName () ) )
+            throw new RuntimeException( ) ;} } );
+            panel1.setLayout(null);
+
+            //---- label1 ----
+            label1.setText("\u6b22\u8fce\u4f7f\u7528\u62a5\u520a\u8ba2\u9605\u7ba1\u7406\u7cfb\u7edf\uff01");
+            label1.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 30));
+            label1.setForeground(new Color(0xf2f2f2));
+            panel1.add(label1);
+            label1.setBounds(new Rectangle(new Point(15, 10), label1.getPreferredSize()));
+
+            //======== tabbedPane1 ========
+            {
+                tabbedPane1.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+
+                //======== panel2 ========
+                {
+                    panel2.setLayout(null);
+
+                    {
+                        // compute preferred size
+                        Dimension preferredSize = new Dimension();
+                        for(int i = 0; i < panel2.getComponentCount(); i++) {
+                            Rectangle bounds = panel2.getComponent(i).getBounds();
+                            preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
+                            preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
+                        }
+                        Insets insets = panel2.getInsets();
+                        preferredSize.width += insets.right;
+                        preferredSize.height += insets.bottom;
+                        panel2.setMinimumSize(preferredSize);
+                        panel2.setPreferredSize(preferredSize);
+                    }
+                }
+                tabbedPane1.addTab("\u8ba2\u9605\u62a5\u520a", panel2);
+
+                //======== panel4 ========
+                {
+                    panel4.setLayout(null);
+
+                    {
+                        // compute preferred size
+                        Dimension preferredSize = new Dimension();
+                        for(int i = 0; i < panel4.getComponentCount(); i++) {
+                            Rectangle bounds = panel4.getComponent(i).getBounds();
+                            preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
+                            preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
+                        }
+                        Insets insets = panel4.getInsets();
+                        preferredSize.width += insets.right;
+                        preferredSize.height += insets.bottom;
+                        panel4.setMinimumSize(preferredSize);
+                        panel4.setPreferredSize(preferredSize);
+                    }
+                }
+                tabbedPane1.addTab("\u6211\u7684\u8ba2\u9605", panel4);
+
+                //======== panel5 ========
+                {
+                    panel5.setLayout(null);
+
+                    {
+                        // compute preferred size
+                        Dimension preferredSize = new Dimension();
+                        for(int i = 0; i < panel5.getComponentCount(); i++) {
+                            Rectangle bounds = panel5.getComponent(i).getBounds();
+                            preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
+                            preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
+                        }
+                        Insets insets = panel5.getInsets();
+                        preferredSize.width += insets.right;
+                        preferredSize.height += insets.bottom;
+                        panel5.setMinimumSize(preferredSize);
+                        panel5.setPreferredSize(preferredSize);
+                    }
+                }
+                tabbedPane1.addTab("\u8ba2\u9605\u7edf\u8ba1", panel5);
+
+                //======== panel3 ========
+                {
+                    panel3.setLayout(null);
+
+                    //---- changUser ----
+                    changUser.setText("\u7528\u6237\u540d");
+                    changUser.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+                    panel3.add(changUser);
+                    changUser.setBounds(new Rectangle(new Point(170, 110), changUser.getPreferredSize()));
+
+                    //---- changeSex ----
+                    changeSex.setText("\u6027\u522b");
+                    changeSex.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+                    panel3.add(changeSex);
+                    changeSex.setBounds(175, 175, 60, 27);
+
+                    //---- changeEmail ----
+                    changeEmail.setText("\u90ae\u7bb1");
+                    changeEmail.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+                    panel3.add(changeEmail);
+                    changeEmail.setBounds(175, 245, 60, 27);
+
+                    //---- changePhone ----
+                    changePhone.setText("\u7535\u8bdd");
+                    changePhone.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+                    panel3.add(changePhone);
+                    changePhone.setBounds(175, 305, 60, 27);
+                    panel3.add(changeUserField);
+                    changeUserField.setBounds(260, 110, 205, 35);
+                    panel3.add(changEmailField);
+                    changEmailField.setBounds(260, 245, 205, 35);
+                    panel3.add(changePhoneField);
+                    changePhoneField.setBounds(260, 305, 205, 35);
+
+                    //---- changeButton ----
+                    changeButton.setText("\u786e\u8ba4\u4fee\u6539");
+                    changeButton.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+                    panel3.add(changeButton);
+                    changeButton.setBounds(175, 410, 295, 45);
+                    panel3.add(changeSexList);
+                    changeSexList.setBounds(260, 175, 95, 40);
+
+                    {
+                        // compute preferred size
+                        Dimension preferredSize = new Dimension();
+                        for(int i = 0; i < panel3.getComponentCount(); i++) {
+                            Rectangle bounds = panel3.getComponent(i).getBounds();
+                            preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
+                            preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
+                        }
+                        Insets insets = panel3.getInsets();
+                        preferredSize.width += insets.right;
+                        preferredSize.height += insets.bottom;
+                        panel3.setMinimumSize(preferredSize);
+                        panel3.setPreferredSize(preferredSize);
+                    }
+                }
+                tabbedPane1.addTab("\u4e2a\u4eba\u4fe1\u606f\u4fee\u6539", panel3);
+            }
+            panel1.add(tabbedPane1);
+            tabbedPane1.setBounds(0, 70, 935, 565);
+
+            //---- logoutButton ----
+            logoutButton.setText("\u6ce8\u9500\u8d26\u53f7");
+            logoutButton.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+            panel1.add(logoutButton);
+            logoutButton.setBounds(new Rectangle(new Point(785, 35), logoutButton.getPreferredSize()));
+
+            {
+                // compute preferred size
+                Dimension preferredSize = new Dimension();
+                for(int i = 0; i < panel1.getComponentCount(); i++) {
+                    Rectangle bounds = panel1.getComponent(i).getBounds();
+                    preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
+                    preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
+                }
+                Insets insets = panel1.getInsets();
+                preferredSize.width += insets.right;
+                preferredSize.height += insets.bottom;
+                panel1.setMinimumSize(preferredSize);
+                panel1.setPreferredSize(preferredSize);
+            }
+        }
+        contentPane.add(panel1);
+        panel1.setBounds(0, 0, 925, 635);
 
         {
             // compute preferred size
@@ -53,10 +250,94 @@ public class subMgt extends JFrame {
         pack();
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents  @formatter:on
+
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off
     // Generated using JFormDesigner Evaluation license - unknown
+    private JPanel panel1;
     private JLabel label1;
+    private JTabbedPane tabbedPane1;
+    private JPanel panel2;
+    private JPanel panel4;
+    private JPanel panel5;
+    private JPanel panel3;
+    private JLabel changUser;
+    private JLabel changeSex;
+    private JLabel changeEmail;
+    private JLabel changePhone;
+    private JTextField changeUserField;
+    private JTextField changEmailField;
+    private JTextField changePhoneField;
+    private JButton changeButton;
+    private JComboBox changeSexList;
+    private JButton logoutButton;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
+    // 初始化用户信息
+    public void initUserInfo() {
+        // 请求接口获取当前登录用户的信息
+        changeUserField.setText("渲染用户昵称的");
+        changEmailField.setText("渲染用户邮箱的");
+        changePhoneField.setText("渲染用户电话的");
+        changeSexList.addItem("男");
+        changeSexList.addItem("女");
+        changeSexList.setSelectedIndex(0);
+    }
+    // 监听事件
+    public void listerner() {
+        // 触发修改账号信息事件
+        changeButton.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        // 获取用户输入的新用户名
+                        String modUserName = changeUserField.getText();
+                        // 获取用户输入的新邮箱
+                        String modEmail = changEmailField.getText();
+                        // 获取用户输入的新手机
+                        String modPhone = changePhoneField.getText();
+                        // 获取用户输入的新性别
+
+                        // 将获取的数据存入即将提交给接口进行修改的对象中
+
+                        // 表单预验证
+                        if (modUserName.trim().length() == 0
+                                || modEmail.trim().length() == 0
+                                || modPhone.trim().length() == 0
+                                ) {
+                            JOptionPane.showMessageDialog(null, "请完善用户信息！");
+                            return;
+                        }
+                        else if(modUserName.length() < 3 || modUserName.length() > 16) {
+                            JOptionPane.showMessageDialog(null, "  用户昵称长度应为3-16位！");
+                            return;
+                        }
+
+                        // 请求接口修改用户信息
+//                        BaseResponse<String> StringBaseResponse = userController.userInfoUpdate();
+//                        String str = StringBaseResponse.getData();
+
+
+                            JOptionPane.showMessageDialog(null,"修改用户信息成功！");
+                            // 将修改成功后的信息重新渲染到文本框上
+                            changeUserField.setText(modUserName);
+                            changEmailField.setText(modEmail);
+                            changePhoneField.setText(modPhone);
+                            changeSexList.setSelectedIndex(1);
+                    }
+                }
+        );
+        // 触发注销账号事件
+        logoutButton.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        System.out.println("点击注销账号按钮!");
+                        // 获取当前账号 Id
+
+                        // 请求接口注销该账号
+                    }
+                }
+        );
+    }
 }
