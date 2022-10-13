@@ -8,19 +8,22 @@ new FormModel {
 			"minimumSize": new java.awt.Dimension( 555, 470 )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
 				name: "panel1"
+				"background": new java.awt.Color( 76, 80, 82, 255 )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "registerTitle"
 					"text": "注册新账号"
 					"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 9, false )
+					"foreground": new java.awt.Color( 249, 249, 249, 255 )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"height": 28
-					"x": 220
-					"y": 5
+					"x": 225
+					"y": 15
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "newAccount"
 					"text": "新账号"
 					"font": &SwingDerivedFont0 new com.jformdesigner.model.SwingDerivedFont( null, 0, 6, false )
+					"foreground": new java.awt.Color( 249, 249, 249, 255 )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"x": 85
 					"y": 185
@@ -37,6 +40,7 @@ new FormModel {
 					name: "newPassword"
 					"text": "新密码"
 					"font": #SwingDerivedFont0
+					"foreground": new java.awt.Color( 249, 249, 249, 255 )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"height": 24
 					"x": 85
@@ -72,6 +76,7 @@ new FormModel {
 					name: "newUser"
 					"text": "用户名"
 					"font": #SwingDerivedFont0
+					"foreground": new java.awt.Color( 249, 249, 249, 255 )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"height": 24
 					"x": 85
@@ -85,9 +90,18 @@ new FormModel {
 					"x": 150
 					"y": 120
 				} )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
+					name: "panel2"
+					"background": new java.awt.Color( 76, 80, 82, 255 )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 0
+					"y": 0
+					"height": 435
+					"width": 555
+				} )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"width": 555
-				"height": 415
+				"height": 430
 				"x": 0
 				"y": 0
 			} )

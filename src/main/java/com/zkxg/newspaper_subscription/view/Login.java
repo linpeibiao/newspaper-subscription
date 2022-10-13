@@ -6,7 +6,9 @@ package com.zkxg.newspaper_subscription.view;
 
 import com.zkxg.newspaper_subscription.common.BaseResponse;
 import com.zkxg.newspaper_subscription.common.ErrorCode;
+import com.zkxg.newspaper_subscription.common.ResultUtils;
 import com.zkxg.newspaper_subscription.controller.UserController;
+import com.zkxg.newspaper_subscription.dao.UserDao;
 import com.zkxg.newspaper_subscription.model.entity.User;
 import com.zkxg.newspaper_subscription.model.vo.LoginInfo;
 import com.zkxg.newspaper_subscription.service.UserService;
@@ -17,6 +19,7 @@ import javax.swing.*;
 
 /**
  * @author unknown
+ * 登录界面
  */
 public class Login extends JFrame {
     private UserController userController;
@@ -35,6 +38,7 @@ public class Login extends JFrame {
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
         // Generated using JFormDesigner Evaluation license - unknown
+        panel1 = new JPanel();
         systemTitle = new JLabel();
         accountLabel = new JLabel();
         accountField = new JTextField();
@@ -49,39 +53,77 @@ public class Login extends JFrame {
         Container contentPane = getContentPane();
         contentPane.setLayout(null);
 
-        //---- systemTitle ----
-        systemTitle.setText("\u62a5\u520a\u8ba2\u9605\u7cfb\u7edf");
-        systemTitle.setFont(systemTitle.getFont().deriveFont(systemTitle.getFont().getSize() + 9f));
-        contentPane.add(systemTitle);
-        systemTitle.setBounds(new Rectangle(new Point(205, 20), systemTitle.getPreferredSize()));
+        //======== panel1 ========
+        {
+            panel1.setBackground(new Color(0x45494a));
+            panel1.setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax . swing.
+            border .EmptyBorder ( 0, 0 ,0 , 0) ,  "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn" , javax. swing .border . TitledBorder. CENTER
+            ,javax . swing. border .TitledBorder . BOTTOM, new java. awt .Font ( "Dia\u006cog", java .awt . Font
+            . BOLD ,12 ) ,java . awt. Color .red ) ,panel1. getBorder () ) ); panel1. addPropertyChangeListener(
+            new java. beans .PropertyChangeListener ( ){ @Override public void propertyChange (java . beans. PropertyChangeEvent e) { if( "\u0062ord\u0065r"
+            .equals ( e. getPropertyName () ) )throw new RuntimeException( ) ;} } );
+            panel1.setLayout(null);
 
-        //---- accountLabel ----
-        accountLabel.setText("\u8d26\u53f7");
-        accountLabel.setFont(accountLabel.getFont().deriveFont(accountLabel.getFont().getSize() + 6f));
-        contentPane.add(accountLabel);
-        accountLabel.setBounds(new Rectangle(new Point(80, 155), accountLabel.getPreferredSize()));
-        contentPane.add(accountField);
-        accountField.setBounds(145, 150, 270, 30);
+            //---- systemTitle ----
+            systemTitle.setText("\u62a5\u520a\u8ba2\u9605\u7cfb\u7edf");
+            systemTitle.setFont(systemTitle.getFont().deriveFont(systemTitle.getFont().getSize() + 9f));
+            systemTitle.setForeground(new Color(0xfafafa));
+            panel1.add(systemTitle);
+            systemTitle.setBounds(new Rectangle(new Point(215, 25), systemTitle.getPreferredSize()));
 
-        //---- passLabel ----
-        passLabel.setText("\u5bc6\u7801");
-        passLabel.setFont(passLabel.getFont().deriveFont(passLabel.getFont().getSize() + 6f));
-        contentPane.add(passLabel);
-        passLabel.setBounds(new Rectangle(new Point(80, 215), passLabel.getPreferredSize()));
+            //---- accountLabel ----
+            accountLabel.setText("\u8d26\u53f7");
+            accountLabel.setFont(accountLabel.getFont().deriveFont(accountLabel.getFont().getSize() + 6f));
+            accountLabel.setForeground(new Color(0xfafafa));
+            panel1.add(accountLabel);
+            accountLabel.setBounds(new Rectangle(new Point(100, 135), accountLabel.getPreferredSize()));
 
-        //---- loginButton ----
-        loginButton.setText("\u767b\u5f55");
-        loginButton.setFont(loginButton.getFont().deriveFont(loginButton.getFont().getSize() + 3f));
-        contentPane.add(loginButton);
-        loginButton.setBounds(145, 315, 90, 40);
+            //---- accountField ----
+            accountField.setText("linxiaohu");
+            panel1.add(accountField);
+            accountField.setBounds(165, 130, 270, 30);
 
-        //---- registerButton ----
-        registerButton.setText("\u6ce8\u518c");
-        registerButton.setFont(registerButton.getFont().deriveFont(registerButton.getFont().getSize() + 3f));
-        contentPane.add(registerButton);
-        registerButton.setBounds(320, 315, 90, 40);
-        contentPane.add(passwordField);
-        passwordField.setBounds(145, 220, 270, 30);
+            //---- passLabel ----
+            passLabel.setText("\u5bc6\u7801");
+            passLabel.setFont(passLabel.getFont().deriveFont(passLabel.getFont().getSize() + 6f));
+            passLabel.setForeground(new Color(0xfafafa));
+            panel1.add(passLabel);
+            passLabel.setBounds(new Rectangle(new Point(100, 200), passLabel.getPreferredSize()));
+
+            //---- loginButton ----
+            loginButton.setText("\u767b\u5f55");
+            loginButton.setFont(loginButton.getFont().deriveFont(loginButton.getFont().getSize() + 3f));
+            panel1.add(loginButton);
+            loginButton.setBounds(165, 295, 90, 40);
+
+            //---- registerButton ----
+            registerButton.setText("\u6ce8\u518c");
+            registerButton.setFont(registerButton.getFont().deriveFont(registerButton.getFont().getSize() + 3f));
+            panel1.add(registerButton);
+            registerButton.setBounds(340, 295, 90, 40);
+
+            //---- passwordField ----
+            passwordField.setText("linxiaohu");
+            panel1.add(passwordField);
+            passwordField.setBounds(165, 200, 270, 30);
+
+            {
+                // compute preferred size
+                Dimension preferredSize = new Dimension();
+                for(int i = 0; i < panel1.getComponentCount(); i++) {
+                    Rectangle bounds = panel1.getComponent(i).getBounds();
+                    preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
+                    preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
+                }
+                Insets insets = panel1.getInsets();
+                preferredSize.width += insets.right;
+                preferredSize.height += insets.bottom;
+                panel1.setMinimumSize(preferredSize);
+                panel1.setPreferredSize(preferredSize);
+            }
+        }
+        contentPane.add(panel1);
+        panel1.setBounds(0, 0, 560, 440);
 
         {
             // compute preferred size
@@ -118,19 +160,35 @@ public class Login extends JFrame {
                                 || password == null
                                 || account.trim().length() == 0
                                 || password.trim().length() == 0) {
-                            JOptionPane.showMessageDialog(null, "用户名或密码不能为空");
+                            JOptionPane.showMessageDialog(null, "用户名和密码不能为空");
                             return;
                         }
+                        else if(account.length() < 4 || account.length() > 16) {
+                            JOptionPane.showMessageDialog(null, "  用户账号长度应为4-16位！");
+                            return;
+                        }
+                        else if (password.length() < 8 || password.length() > 16) {
+                            JOptionPane.showMessageDialog(null, "  用户密码长度应为8-16位！");
+                            return;
+                        }
+                        // 请求接口判断账号是否存在
                         BaseResponse<User> userBaseResponse = userController.userLogin(accountInfo);
-                        User use = userBaseResponse.getData();
-                        System.out.println(use);
-                        if (use != null) {
+                        User user = null;
+                        if(userBaseResponse.getData() instanceof User) {
+                            user = userBaseResponse.getData();
+                        }
+                        System.out.println(user);
+                        if (user != null) {
                             JOptionPane.showMessageDialog(null, "登录成功！");
-                            accountField.setText("");
-                            passwordField.setText("");
                             // 登录成功，关闭登录界面，进入主界面
                             dispose();
+                            // 判断是管理员登录还是普通用户登录
                             new subMgt();
+                        } else {
+                            JOptionPane.showMessageDialog(null,"该账号不存在或密码错误，请重新输入！");
+                            // 清空文本框内容
+                            accountField.setText("");
+                            passwordField.setText("");
                         }
                     }
                 }
@@ -150,6 +208,7 @@ public class Login extends JFrame {
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off
     // Generated using JFormDesigner Evaluation license - unknown
+    private JPanel panel1;
     private JLabel systemTitle;
     private JLabel accountLabel;
     private JTextField accountField;
