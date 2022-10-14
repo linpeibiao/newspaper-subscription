@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.List;
 import java.util.Vector;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -17,14 +18,16 @@ import javax.swing.table.DefaultTableModel;
 import com.zkxg.newspaper_subscription.common.BaseResponse;
 import com.zkxg.newspaper_subscription.controller.UserController;
 import com.zkxg.newspaper_subscription.model.entity.User;
+import com.zkxg.newspaper_subscription.model.vo.LoginInfo;
 
 /**
  * @author unknown
  * 管理员登陆成功主界面
  */
 public class subMgt extends JFrame {
-    private UserController userController;
+    private UserController userController ;
     public subMgt() {
+        userController = new UserController();
         // 初始化界面
         initComponents();
         // 设置关闭按钮结束程序
@@ -37,7 +40,6 @@ public class subMgt extends JFrame {
         initUserInfo();
         // 初始化查询界面
         initQueryView();
-        userController = new UserController();
     }
 
     private void initComponents() {
@@ -46,16 +48,19 @@ public class subMgt extends JFrame {
         panel1 = new JPanel();
         label1 = new JLabel();
         tabbedPane1 = new JTabbedPane();
-        panel2 = new JPanel();
-        panel4 = new JPanel();
+        index = new JPanel();
         panel5 = new JPanel();
         panel6 = new JPanel();
         queryField = new JTextField();
-        queryTip = new JLabel();
         queryButton = new JButton();
         queryList = new JComboBox();
         scrollPane1 = new JScrollPane();
         queryTable = new JTable();
+        panel7 = new JPanel();
+        scrollPane2 = new JScrollPane();
+        userList = new JTable();
+        queryUserField = new JTextField();
+        queryUserButton = new JButton();
         panel3 = new JPanel();
         changUser = new JLabel();
         changeSex = new JLabel();
@@ -66,6 +71,7 @@ public class subMgt extends JFrame {
         changePhoneField = new JTextField();
         changeButton = new JButton();
         changeSexList = new JComboBox();
+        panel2 = new JPanel();
         logoutButton = new JButton();
 
         //======== this ========
@@ -77,12 +83,12 @@ public class subMgt extends JFrame {
         //======== panel1 ========
         {
             panel1.setBackground(new Color(0x4c5052));
-            panel1.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.swing.
-            border.EmptyBorder(0,0,0,0), "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn",javax.swing.border.TitledBorder.CENTER
-            ,javax.swing.border.TitledBorder.BOTTOM,new java.awt.Font("Dia\u006cog",java.awt.Font
-            .BOLD,12),java.awt.Color.red),panel1. getBorder()));panel1. addPropertyChangeListener(
-            new java.beans.PropertyChangeListener(){@Override public void propertyChange(java.beans.PropertyChangeEvent e){if("\u0062ord\u0065r"
-            .equals(e.getPropertyName()))throw new RuntimeException();}});
+            panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border.
+            EmptyBorder( 0, 0, 0, 0) , "JF\u006frmDes\u0069gner \u0045valua\u0074ion", javax. swing. border. TitledBorder. CENTER, javax. swing
+            . border. TitledBorder. BOTTOM, new java .awt .Font ("D\u0069alog" ,java .awt .Font .BOLD ,12 ),
+            java. awt. Color. red) ,panel1. getBorder( )) ); panel1. addPropertyChangeListener (new java. beans. PropertyChangeListener( )
+            { @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062order" .equals (e .getPropertyName () ))
+            throw new RuntimeException( ); }} );
             panel1.setLayout(null);
 
             //---- label1 ----
@@ -96,47 +102,26 @@ public class subMgt extends JFrame {
             {
                 tabbedPane1.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
 
-                //======== panel2 ========
+                //======== index ========
                 {
-                    panel2.setLayout(null);
+                    index.setLayout(null);
 
                     {
                         // compute preferred size
                         Dimension preferredSize = new Dimension();
-                        for(int i = 0; i < panel2.getComponentCount(); i++) {
-                            Rectangle bounds = panel2.getComponent(i).getBounds();
+                        for(int i = 0; i < index.getComponentCount(); i++) {
+                            Rectangle bounds = index.getComponent(i).getBounds();
                             preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                             preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
                         }
-                        Insets insets = panel2.getInsets();
+                        Insets insets = index.getInsets();
                         preferredSize.width += insets.right;
                         preferredSize.height += insets.bottom;
-                        panel2.setMinimumSize(preferredSize);
-                        panel2.setPreferredSize(preferredSize);
+                        index.setMinimumSize(preferredSize);
+                        index.setPreferredSize(preferredSize);
                     }
                 }
-                tabbedPane1.addTab("\u8ba2\u9605\u62a5\u520a", panel2);
-
-                //======== panel4 ========
-                {
-                    panel4.setLayout(null);
-
-                    {
-                        // compute preferred size
-                        Dimension preferredSize = new Dimension();
-                        for(int i = 0; i < panel4.getComponentCount(); i++) {
-                            Rectangle bounds = panel4.getComponent(i).getBounds();
-                            preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
-                            preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
-                        }
-                        Insets insets = panel4.getInsets();
-                        preferredSize.width += insets.right;
-                        preferredSize.height += insets.bottom;
-                        panel4.setMinimumSize(preferredSize);
-                        panel4.setPreferredSize(preferredSize);
-                    }
-                }
-                tabbedPane1.addTab("\u6211\u7684\u8ba2\u9605", panel4);
+                tabbedPane1.addTab("\u9996\u9875", index);
 
                 //======== panel5 ========
                 {
@@ -166,19 +151,13 @@ public class subMgt extends JFrame {
                     //---- queryField ----
                     queryField.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
                     panel6.add(queryField);
-                    queryField.setBounds(430, 25, 200, 40);
-
-                    //---- queryTip ----
-                    queryTip.setText("\u8bf7\u8f93\u5165\u67e5\u8be2\u4e66\u540d\u6216\u4eba\u5458\uff1a");
-                    queryTip.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
-                    panel6.add(queryTip);
-                    queryTip.setBounds(new Rectangle(new Point(210, 30), queryTip.getPreferredSize()));
+                    queryField.setBounds(195, 25, 200, 40);
 
                     //---- queryButton ----
                     queryButton.setText("\u67e5\u8be2");
                     queryButton.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
                     panel6.add(queryButton);
-                    queryButton.setBounds(645, 25, queryButton.getPreferredSize().width, 40);
+                    queryButton.setBounds(410, 25, queryButton.getPreferredSize().width, 40);
                     panel6.add(queryList);
                     queryList.setBounds(20, 25, 160, 40);
 
@@ -205,6 +184,45 @@ public class subMgt extends JFrame {
                     }
                 }
                 tabbedPane1.addTab("\u8ba2\u5355\u67e5\u8be2", panel6);
+
+                //======== panel7 ========
+                {
+                    panel7.setLayout(null);
+
+                    //======== scrollPane2 ========
+                    {
+                        scrollPane2.setViewportView(userList);
+                    }
+                    panel7.add(scrollPane2);
+                    scrollPane2.setBounds(20, 70, 880, 435);
+
+                    //---- queryUserField ----
+                    queryUserField.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+                    panel7.add(queryUserField);
+                    queryUserField.setBounds(25, 15, 200, 40);
+
+                    //---- queryUserButton ----
+                    queryUserButton.setText("\u67e5\u8be2");
+                    queryUserButton.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+                    panel7.add(queryUserButton);
+                    queryUserButton.setBounds(245, 15, 78, 40);
+
+                    {
+                        // compute preferred size
+                        Dimension preferredSize = new Dimension();
+                        for(int i = 0; i < panel7.getComponentCount(); i++) {
+                            Rectangle bounds = panel7.getComponent(i).getBounds();
+                            preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
+                            preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
+                        }
+                        Insets insets = panel7.getInsets();
+                        preferredSize.width += insets.right;
+                        preferredSize.height += insets.bottom;
+                        panel7.setMinimumSize(preferredSize);
+                        panel7.setPreferredSize(preferredSize);
+                    }
+                }
+                tabbedPane1.addTab("\u7528\u6237\u5217\u8868", panel7);
 
                 //======== panel3 ========
                 {
@@ -264,6 +282,27 @@ public class subMgt extends JFrame {
                     }
                 }
                 tabbedPane1.addTab("\u4e2a\u4eba\u4fe1\u606f\u4fee\u6539", panel3);
+
+                //======== panel2 ========
+                {
+                    panel2.setLayout(null);
+
+                    {
+                        // compute preferred size
+                        Dimension preferredSize = new Dimension();
+                        for(int i = 0; i < panel2.getComponentCount(); i++) {
+                            Rectangle bounds = panel2.getComponent(i).getBounds();
+                            preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
+                            preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
+                        }
+                        Insets insets = panel2.getInsets();
+                        preferredSize.width += insets.right;
+                        preferredSize.height += insets.bottom;
+                        panel2.setMinimumSize(preferredSize);
+                        panel2.setPreferredSize(preferredSize);
+                    }
+                }
+                tabbedPane1.addTab("\u9996\u9875", panel2);
             }
             panel1.add(tabbedPane1);
             tabbedPane1.setBounds(0, 70, 935, 565);
@@ -317,16 +356,19 @@ public class subMgt extends JFrame {
     private JPanel panel1;
     private JLabel label1;
     private JTabbedPane tabbedPane1;
-    private JPanel panel2;
-    private JPanel panel4;
+    private JPanel index;
     private JPanel panel5;
     private JPanel panel6;
     private JTextField queryField;
-    private JLabel queryTip;
     private JButton queryButton;
     private JComboBox queryList;
     private JScrollPane scrollPane1;
     private JTable queryTable;
+    private JPanel panel7;
+    private JScrollPane scrollPane2;
+    private JTable userList;
+    private JTextField queryUserField;
+    private JButton queryUserButton;
     private JPanel panel3;
     private JLabel changUser;
     private JLabel changeSex;
@@ -337,19 +379,22 @@ public class subMgt extends JFrame {
     private JTextField changePhoneField;
     private JButton changeButton;
     private JComboBox changeSexList;
+    private JPanel panel2;
     private JButton logoutButton;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
     // 初始化用户信息
     public void initUserInfo() {
         // 请求接口获取当前登录用户的信息
-//        BaseResponse<User> userBaseResponse = userController.getUserById();
-//        System.out.println(userBaseResponse);
-        changeUserField.setText("渲染用户昵称的");
-        changEmailField.setText("渲染用户邮箱的");
-        changePhoneField.setText("渲染用户电话的");
+        BaseResponse<User> userBaseResponse = userController.getCurrentLoginUser();
+        User user = userBaseResponse.getData();
+        System.out.println(user);
+        // 将获取到的用户信息渲染到文本框上
+        changeUserField.setText(user.getNackname());
+        changEmailField.setText(user.getEmail());
+        changePhoneField.setText(user.getPhone());
         changeSexList.addItem("男");
         changeSexList.addItem("女");
-        changeSexList.setSelectedIndex(0);
+        changeSexList.setSelectedIndex(user.getGender());
     }
     // 初始化查询界面
     public void initQueryView() {
@@ -358,11 +403,14 @@ public class subMgt extends JFrame {
         queryList.addItem("按部门查询");
         // 查询表
         DefaultTableModel queryT = (DefaultTableModel) queryTable.getModel();
-        // 设置表头名
-        String[] rowName = new String[]{"订单编号","报刊名称","部门","用户名称","订阅份数","订阅月数","订单总金额"};
+        // 设置订单列表表头名
+        Object[] orderRowName = {"订单编号","报刊名称","部门","用户名称","订阅份数","订阅月数","订单总金额"};
         // 设置行与列
-        queryT.setColumnCount(3);
-        queryT.setColumnCount(rowName.length);
+        queryT.setRowCount(6);
+        queryT.setColumnCount(orderRowName.length);
+        for (int i = 0; i < orderRowName.length; i++) {
+            queryT.setValueAt(orderRowName[i],0,i);
+        }
     }
     // 监听事件
     public void listerner() {
@@ -380,7 +428,12 @@ public class subMgt extends JFrame {
                         // 获取用户输入的新性别
                         Integer changeSex = changeSexList.getSelectedIndex();
                         // 将获取的数据存入即将提交给接口进行修改的对象中
-
+                        BaseResponse<User> userBaseResponse = userController.getCurrentLoginUser();
+                        User user = userBaseResponse.getData();
+                        user.setNackname(modUserName);
+                        user.setEmail(modEmail);
+                        user.setPhone(modPhone);
+                        user.setGender(changeSex);
                         // 表单预验证
                         if (modUserName.trim().length() == 0
                                 || modEmail.trim().length() == 0
@@ -393,12 +446,10 @@ public class subMgt extends JFrame {
                             JOptionPane.showMessageDialog(null, "  用户昵称长度应为3-16位！");
                             return;
                         }
-
-                        // 请求接口修改用户信息
-//                        BaseResponse<String> StringBaseResponse = userController.userInfoUpdate();
-//                        String str = StringBaseResponse.getData();
-
-
+                        // 请求接口修改用户信息，将修改后的对象发送给接口请求修改
+                        BaseResponse<String> StringBaseResponse = userController.userInfoUpdate(user);
+                        String str = StringBaseResponse.getData();
+                        System.out.println(str);
                             JOptionPane.showMessageDialog(null,"修改用户信息成功！");
                             // 将修改成功后的信息重新渲染到文本框上
                             changeUserField.setText(modUserName);
@@ -418,6 +469,65 @@ public class subMgt extends JFrame {
                         JOptionPane.showMessageDialog(null,"您已退出当前账号登录，即将返回登录界面！");
                         // 创建登录界面
                         new Login();
+                    }
+                }
+        );
+        // 触发订单查询事件
+        queryButton.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        System.out.println("触发了订单查询按钮！");
+                    }
+                }
+        );
+        // 管理员按照不同方式查询信息
+        queryList.addItemListener(
+                new ItemListener() {
+                    @Override
+                    public void itemStateChanged(ItemEvent e) {
+                        if (e.getStateChange() == ItemEvent.SELECTED) {
+                            if (queryList.getSelectedIndex() == 0) {
+                                System.out.println("按书名查询");
+                            }
+                            else if (queryList.getSelectedIndex() == 1) {
+                                System.out.println("按人员查询");
+                            }
+                            else if (queryList.getSelectedIndex() == 2) {
+                                System.out.println("按部门查询");
+                            }
+                        }
+                    }
+                }
+        );
+        // 管理员对用户列表进行查询
+        queryUserButton.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        System.out.println("触发查询用户列表按钮！");
+                        // 用户列表
+                        DefaultTableModel userL = (DefaultTableModel) userList.getModel();
+                        // 设置用户列表表头名
+                        Object[] userRowName = {"账号","用户昵称","用户密码","性别","邮箱"};
+                        Object Sex = "男";
+                        userL.setRowCount(6);
+                        userL.setColumnCount(userRowName.length);
+                        for (int i = 0; i < userRowName.length; i++) {
+                            userL.setValueAt(userRowName[i],0,i);
+                        }
+                        // 请求接口获取用户列表
+                        BaseResponse<List<User>> userListBaseResponse = userController.getUserPage(60,7);
+                        List<User> userList = userListBaseResponse.getData();
+                        System.out.println(userList);
+                        for (int i = 1; i < userList.size(); i++) {
+                            User user = userList.get(i);
+                            userL.setValueAt(user.getAccount(),i,0);
+                            userL.setValueAt(user.getNackname(),i,1);
+                            userL.setValueAt(user.getPassword(),i,2);
+                            userL.setValueAt(Sex,i,3);
+                            userL.setValueAt(user.getEmail(),i,4);
+                        }
                     }
                 }
         );
