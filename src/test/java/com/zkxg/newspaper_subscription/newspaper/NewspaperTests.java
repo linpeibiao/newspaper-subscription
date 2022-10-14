@@ -32,6 +32,16 @@ public class NewspaperTests {
     }
 
     @Test
+    public void getNewsByName(){
+        System.out.println(newspaperController.getNewspaperByName("boy"));
+    }
+
+    @Test
+    public void getNewsByIdTest(){
+        System.out.println(newspaperController.getNewspaperById(1L));
+    }
+
+    @Test
     public void updateNewsTest(){
         userLogin();
         Newspaper newspaper = new Newspaper();
