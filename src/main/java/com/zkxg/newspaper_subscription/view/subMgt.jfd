@@ -23,14 +23,9 @@ new FormModel {
 					name: "tabbedPane1"
 					"font": new java.awt.Font( "Microsoft YaHei UI", 0, 20 )
 					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
-						name: "panel2"
+						name: "index"
 					}, new FormLayoutConstraints( null ) {
-						"title": "订阅报刊"
-					} )
-					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
-						name: "panel4"
-					}, new FormLayoutConstraints( null ) {
-						"title": "我的订阅"
+						"title": "首页"
 					} )
 					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
 						name: "panel5"
@@ -93,7 +88,7 @@ new FormModel {
 							"height": 435
 						} )
 						add( new FormComponent( "javax.swing.JTextField" ) {
-							name: "queryField2"
+							name: "queryUserField"
 							"font": #Font0
 						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 							"width": 200
@@ -102,7 +97,7 @@ new FormModel {
 							"y": 15
 						} )
 						add( new FormComponent( "javax.swing.JButton" ) {
-							name: "queryButton2"
+							name: "queryUserButton"
 							"text": "查询"
 							"font": #Font1
 						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
@@ -199,6 +194,11 @@ new FormModel {
 					}, new FormLayoutConstraints( null ) {
 						"title": "个人信息修改"
 					} )
+					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
+						name: "panel2"
+					}, new FormLayoutConstraints( null ) {
+						"title": "首页"
+					} )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"x": 0
 					"y": 70
@@ -225,4 +225,3 @@ new FormModel {
 		} )
 	}
 }
-
