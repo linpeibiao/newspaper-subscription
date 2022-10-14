@@ -53,6 +53,8 @@ public class NewspaperController {
         if (pageNum <= 0 || pageSize <= 0){
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
+        // 数据库是从0开始获取数据的，所以pageNum 要减1
+        pageNum -= 1;
         final List<Newspaper> newspaperPage = newspaperService.getNewspaperPage(pageNum, pageSize);
         return ResultUtils.success(newspaperPage);
     }

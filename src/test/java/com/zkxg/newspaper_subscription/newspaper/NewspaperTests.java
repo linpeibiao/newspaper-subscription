@@ -32,6 +32,15 @@ public class NewspaperTests {
     }
 
     @Test
+    public void getNewspaperPage(){
+        System.out.println(newspaperController.getNewspaperPage(1,2));
+    }
+    @Test
+    public void getNewspaperByTypeTest(){
+        System.out.println(newspaperController.getNewspaperByType("色情"));
+    }
+
+    @Test
     public void getNewsByName(){
         System.out.println(newspaperController.getNewspaperByName("boy"));
     }
@@ -82,5 +91,24 @@ public class NewspaperTests {
         final String data = newspaperController.add(newspaper).getData();
         System.out.println(data);
 
+    }
+
+    @Test
+    public void insertBatch(){
+        userLogin();
+        Newspaper newspaper = new Newspaper();
+        newspaper.setName("playboy");
+        newspaper.setNewspaperNumber("2022-10-15");
+//        newspaper.setCover("https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fnimg.ws.126.net%2F%3Furl%3Dhttp%253A%252F%252Fdingyue.ws.126.net%252F2022%252F0917%252F64851b3aj00ricdjz0038c000hf00m8c.jpg%26thumbnail%3D660x2147483647%26quality%3D80%26type%3Djpg&refer=http%3A%2F%2Fnimg.ws.126.net&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1668262720&t=cb76759415a2c95399ba5c3e9b823d3b");
+        newspaper.setType("色情");
+        newspaper.setBrief("playboy,你懂的");
+        newspaper.setPublisher("华夏出版社");
+        newspaper.setPublishTime("2022-10-10");
+        newspaper.setPrice(new BigDecimal("120"));
+        newspaper.setRemark("非常好看的杂志");
+        for (int i = 0; i < 1000; i++) {
+            newspaperController.add(newspaper);
+
+        }
     }
 }

@@ -3,7 +3,6 @@ package com.zkxg.newspaper_subscription.dao.impl;
 import com.zkxg.newspaper_subscription.dao.BaseDao;
 import com.zkxg.newspaper_subscription.dao.NewspaperDao;
 import com.zkxg.newspaper_subscription.model.entity.Newspaper;
-import com.zkxg.newspaper_subscription.model.entity.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -19,6 +18,44 @@ import java.util.List;
  * @description
  */
 public class NewspaperDaoImpl implements NewspaperDao {
+
+    @Override
+    public List<Newspaper> getNewspaperPage(Connection conn, int pageNum, int pageSize) throws SQLException {
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        List<Newspaper> newspaperList = new ArrayList<>();
+        if (null != conn){
+            // 在mysql数据库中，分页使用 limit startIndex，pageSize ; 总数
+            String sql = "select * from t_newspaper where is_deleted = 0 limit ?,?";
+
+            Object[] params = new Object[]{
+                    pageNum,
+                    pageSize
+            };
+            //查询
+            rs = BaseDao.execute(conn,pstm,rs,sql,params);
+            // 信息要脱敏，密码就不能暴露出去了
+            while (rs.next()){
+                Newspaper _newspaper = new Newspaper();
+                _newspaper.setId(rs.getLong("id"));
+                _newspaper.setName(rs.getString("name"));
+                _newspaper.setNewspaperNumber(rs.getString("newspaper_number"));
+                _newspaper.setCover(rs.getString("cover"));
+                _newspaper.setType(rs.getString("type"));
+                _newspaper.setBrief(rs.getString("brief"));
+                _newspaper.setPublisher(rs.getString("publisher"));
+                _newspaper.setPublishTime(rs.getString("publish_time"));
+                _newspaper.setPrice(rs.getBigDecimal("price"));
+                _newspaper.setRemark(rs.getString("remark"));
+                newspaperList.add(_newspaper);
+            }
+            //关闭资源
+            BaseDao.closeResource(null,pstm,rs);
+            System.out.println("dao方法获取用户表单成功");
+        }
+        return newspaperList;
+    }
+
     @Override
     public int add(Connection conn, Newspaper newspaper) throws SQLException {
         PreparedStatement pstm = null;
@@ -150,6 +187,42 @@ public class NewspaperDaoImpl implements NewspaperDao {
                     name
             };
             System.out.println("getNewspaperByName()----->"+sql);
+            //查询
+            rs = BaseDao.execute(conn,pstm,rs,sql,params);
+            //
+            while (rs.next()){
+                Newspaper _newspaper = new Newspaper();
+                _newspaper.setId(rs.getLong("id"));
+                _newspaper.setName(rs.getString("name"));
+                _newspaper.setNewspaperNumber(rs.getString("newspaper_number"));
+                _newspaper.setCover(rs.getString("cover"));
+                _newspaper.setType(rs.getString("type"));
+                _newspaper.setBrief(rs.getString("brief"));
+                _newspaper.setPublisher(rs.getString("publisher"));
+                _newspaper.setPublishTime(rs.getString("publish_time"));
+                _newspaper.setPrice(rs.getBigDecimal("price"));
+                _newspaper.setRemark(rs.getString("remark"));
+                newspaperList.add(_newspaper);
+            }
+            //关闭资源
+            BaseDao.closeResource(null,pstm,rs);
+            System.out.println("newspaperDao 名称模糊查询报刊信息成功");
+        }
+        return newspaperList;
+    }
+
+    @Override
+    public List<Newspaper> getNewspaperByType(Connection conn, String type) throws SQLException {
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        List<Newspaper> newspaperList = new ArrayList<>();
+        if (null != conn){
+            // 在mysql数据库中，分页使用 limit startIndex，pageSize ; 总数
+            String sql = "select * from t_newspaper where type = ? and is_deleted = 0";
+            Object[] params = new Object[]{
+                    type
+            };
+            System.out.println("getNewspaperByType()----->"+sql);
             //查询
             rs = BaseDao.execute(conn,pstm,rs,sql,params);
             //
