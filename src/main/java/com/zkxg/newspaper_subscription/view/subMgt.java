@@ -386,31 +386,16 @@ public class subMgt extends JFrame {
     // 初始化用户信息
     public void initUserInfo() {
         // 请求接口获取当前登录用户的信息
-        BaseResponse<User> userBaseResponse = this.userController.getCurrentLoginUser();
+        BaseResponse<User> userBaseResponse = userController.getCurrentLoginUser();
         User user = userBaseResponse.getData();
-        System.out.println(userBaseResponse);
-        // 监听性别选择
-        changeSexList.addItemListener(
-                new ItemListener() {
-                    @Override
-                    public void itemStateChanged(ItemEvent e) {
-                        if (e.getStateChange() == ItemEvent.SELECTED) {
-                            if (changeSexList.getSelectedIndex() == 0) {
-                                System.out.println("选择男性");
-                            } else  if (changeSexList.getSelectedIndex() == 1) {
-                                System.out.println("选择女性");
-                            }
-                        }
-                    }
-                }
-
-        );
-        changeUserField.setText("渲染用户昵称的");
-        changEmailField.setText("渲染用户邮箱的");
-        changePhoneField.setText("渲染用户电话的");
+        System.out.println(user);
+        // 将获取到的用户信息渲染到文本框上
+        changeUserField.setText(user.getNackname());
+        changEmailField.setText(user.getEmail());
+        changePhoneField.setText(user.getPhone());
         changeSexList.addItem("男");
         changeSexList.addItem("女");
-        changeSexList.setSelectedIndex(0);
+        changeSexList.setSelectedIndex(user.getGender());
     }
     // 初始化查询界面
     public void initQueryView() {
@@ -445,7 +430,12 @@ public class subMgt extends JFrame {
                         // 获取用户输入的新性别
                         Integer changeSex = changeSexList.getSelectedIndex();
                         // 将获取的数据存入即将提交给接口进行修改的对象中
-
+                        BaseResponse<User> userBaseResponse = userController.getCurrentLoginUser();
+                        User user = userBaseResponse.getData();
+                        user.setNackname(modUserName);
+                        user.setEmail(modEmail);
+                        user.setPhone(modPhone);
+                        user.setGender(changeSex);
                         // 表单预验证
                         if (modUserName.trim().length() == 0
                                 || modEmail.trim().length() == 0
@@ -458,12 +448,10 @@ public class subMgt extends JFrame {
                             JOptionPane.showMessageDialog(null, "  用户昵称长度应为3-16位！");
                             return;
                         }
-
-                        // 请求接口修改用户信息
-//                        BaseResponse<String> StringBaseResponse = userController.userInfoUpdate();
-//                        String str = StringBaseResponse.getData();
-
-
+                        // 请求接口修改用户信息，将修改后的对象发送给接口请求修改
+                        BaseResponse<String> StringBaseResponse = userController.userInfoUpdate(user);
+                        String str = StringBaseResponse.getData();
+                        System.out.println(str);
                             JOptionPane.showMessageDialog(null,"修改用户信息成功！");
                             // 将修改成功后的信息重新渲染到文本框上
                             changeUserField.setText(modUserName);
@@ -486,7 +474,7 @@ public class subMgt extends JFrame {
                     }
                 }
         );
-        // 触发订单查询时间
+        // 触发订单查询事件
         queryButton.addActionListener(
                 new ActionListener() {
                     @Override
