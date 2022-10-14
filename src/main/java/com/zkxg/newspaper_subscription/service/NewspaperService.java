@@ -12,5 +12,6 @@ public interface NewspaperService {
     int add(Newspaper newspaper);
     // 删除报刊
     int delete(Long id);
-
+    // 修改报刊信息
+    int update(Newspaper newspaper);
 }

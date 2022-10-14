@@ -27,6 +27,27 @@ public class NewspaperController {
     }
 
     /**
+     * 修改报刊信息
+     * @param newspaper
+     * @return
+     */
+    public BaseResponse<String> updateNewspaper(Newspaper newspaper){
+        // 判空
+        if (newspaper == null) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "请求参数为空");
+        }
+
+        // 判权
+        if (!isAdmin()){
+            throw new BusinessException(ErrorCode.NO_AUTH);
+        }
+
+        int update = newspaperService.update(newspaper);
+        return update > 0 ? ResultUtils.success("修改成功") : ResultUtils.success("修改失败");
+
+    }
+
+    /**
      * 通过id删除报刊信息
      * @param id
      * @return

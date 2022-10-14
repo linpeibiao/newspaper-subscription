@@ -32,6 +32,18 @@ public class NewspaperTests {
     }
 
     @Test
+    public void updateNewsTest(){
+        userLogin();
+        Newspaper newspaper = new Newspaper();
+        newspaper.setId(2L);
+        newspaper.setName("花花公子");
+        newspaper.setNewspaperNumber("2022-10-15");
+        String data = newspaperController.updateNewspaper(newspaper).getData();
+        System.out.println(data);
+
+    }
+
+    @Test
     public void deleteNewsTest(){
         userLogin();
         System.out.println(newspaperController.deleteNewsPaper(2L));

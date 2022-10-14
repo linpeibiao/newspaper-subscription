@@ -72,8 +72,36 @@ public class NewspaperDaoImpl implements NewspaperDao {
     }
 
     @Override
-    public int update(Long id) {
-        return 0;
+    public int update(Connection conn, Newspaper newspaper) throws SQLException {
+        PreparedStatement pstm = null;
+        int updateRows = 0;
+        if (conn != null) {
+            // 10个修改字段
+            String sql = "update t_newspaper set name=?,newspaper_number=?," +
+                    "cover=?,type=?,brief=?,publisher=?,publish_time=?,price=?," +
+                    "remark=?,update_time=? where id=? and is_deleted=0";
+            // 设置系统自动更新的值
+            newspaper.setUpdateTime(new Date());
+            Object params[] = new Object[]{
+                    newspaper.getName(),
+                    newspaper.getNewspaperNumber(),
+                    newspaper.getCover(),
+                    newspaper.getType(),
+                    newspaper.getBrief(),
+                    newspaper.getPublisher(),
+                    newspaper.getPublishTime(),
+                    newspaper.getPrice(),
+                    newspaper.getRemark(),
+                    newspaper.getUpdateTime(),
+                    newspaper.getId()
+            };
+            //执行sql语句
+            updateRows = BaseDao.execute(conn, pstm, sql, params);
+            //关闭资源
+            BaseDao.closeResource(null, pstm, null);
+            System.out.println("NewspaperDao 修改报刊信息成功");
+        }
+        return updateRows;
     }
 
     @Override

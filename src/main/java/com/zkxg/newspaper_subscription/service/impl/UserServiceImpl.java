@@ -218,6 +218,9 @@ public class UserServiceImpl implements UserService {
         if (user == null){
             throw new BusinessException(ErrorCode.NULL_ERROR);
         }
+        if (user.getId() == null || user.getId() <= 0){
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
         // 不修改账号和密码
         String nackname = user.getNackname();
         String realName = user.getRealName();
