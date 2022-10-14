@@ -4,6 +4,7 @@ import com.zkxg.newspaper_subscription.model.entity.Newspaper;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  * @author xiaohu
@@ -21,5 +22,7 @@ public interface NewspaperDao {
     int update(Connection conn, Newspaper newspaper) throws SQLException;
     // 查
     // 根据id
-    Newspaper getNewspaper(Long id);
+    Newspaper getUserById(Connection conn, Long id) throws SQLException;
+    // 名称模糊查询
+    List<Newspaper> getNewspaperByName(Connection conn, String name) throws SQLException;
 }

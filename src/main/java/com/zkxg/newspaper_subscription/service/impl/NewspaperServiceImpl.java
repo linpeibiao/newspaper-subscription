@@ -11,6 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  * @author xiaohu
@@ -22,6 +23,53 @@ public class NewspaperServiceImpl implements NewspaperService {
     private NewspaperDao newspaperDao;
     public NewspaperServiceImpl(){
         newspaperDao = new NewspaperDaoImpl();
+    }
+
+    @Override
+    public Newspaper getUserById(Long id) {
+        if (id == null || id <= 0){
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        Connection conn = null;
+        Newspaper newspaper = null;
+        try {
+            conn = BaseDao.getConnection();
+            newspaper = newspaperDao.getUserById(conn, id);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }finally {
+            BaseDao.closeResource(conn, null, null);
+        }
+        return newspaper;
+    }
+
+    @Override
+    public List<Newspaper> getNewspaperByName(String name) {
+        if (name == null || name.length() <= 0){
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        Connection conn = null;
+        List<Newspaper> newspaperList = null;
+        try{
+            conn = BaseDao.getConnection();
+            newspaperList = newspaperDao.getNewspaperByName(conn, name);
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            BaseDao.closeResource(conn, null, null);
+        }
+        return newspaperList;
+    }
+
+    @Override
+    public List<Newspaper> getNewspaperByType(String type) {
+
+        return null;
+    }
+
+    @Override
+    public List<Newspaper> getNewspaperPage(int pageNum, int pageSize) {
+        return null;
     }
 
     @Override

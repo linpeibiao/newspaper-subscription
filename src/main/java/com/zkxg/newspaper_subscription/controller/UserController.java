@@ -56,7 +56,7 @@ public class UserController {
      * @param pageSize
      * @return
      */
-    public BaseResponse<List> getUserPage(Integer pageNum, Integer pageSize){
+    public BaseResponse<List<User>> getUserPage(Integer pageNum, Integer pageSize){
         // 从第1页开始获取
         if (pageNum <= 0 || pageSize <= 0){
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
@@ -64,7 +64,7 @@ public class UserController {
         // 未登录且不是管理员不能获取用户列表
         User user = null;
         user = this.getCurrentLoginUser().getData();
-        if (user == null || user.getState() != 1){
+        if (user == null || user.getRole() != 1){
             throw new BusinessException(ErrorCode.NO_AUTH);
         }
 

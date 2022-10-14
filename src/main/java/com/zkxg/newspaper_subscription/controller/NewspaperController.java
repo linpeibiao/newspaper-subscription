@@ -9,6 +9,8 @@ import com.zkxg.newspaper_subscription.model.entity.User;
 import com.zkxg.newspaper_subscription.service.NewspaperService;
 import com.zkxg.newspaper_subscription.service.impl.NewspaperServiceImpl;
 
+import java.util.List;
+
 
 /**
  * @author xiaohu
@@ -24,6 +26,62 @@ public class NewspaperController {
     public NewspaperController(){
         newspaperService = new NewspaperServiceImpl();
         userController = new UserController();
+    }
+
+    /**
+     * 按照类型查询
+     * @param type
+     * @return
+     */
+    public BaseResponse<List<Newspaper>> getNewspaperByType(String type){
+        // 默认返回前十条信息
+        if (type == null){
+            return getNewspaperPage(1, 10);
+        }
+        final List<Newspaper> newspaperList = newspaperService.getNewspaperByType(type);
+        return ResultUtils.success(newspaperList);
+    }
+
+    /**
+     * 分页查询
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    public BaseResponse<List<Newspaper>> getNewspaperPage(Integer pageNum, Integer pageSize){
+        // 从第1页开始获取
+        if (pageNum <= 0 || pageSize <= 0){
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        final List<Newspaper> newspaperPage = newspaperService.getNewspaperPage(pageNum, pageSize);
+        return ResultUtils.success(newspaperPage);
+    }
+
+    /**
+     * 通过名称模糊查询
+     * @param name
+     * @return
+     */
+    public BaseResponse<List<Newspaper>> getNewspaperByName(String name){
+        // 空默认前十条
+        if (name == null){
+            return getNewspaperPage(1, 10);
+        }
+        final List<Newspaper> newspaperList = newspaperService.getNewspaperByName(name);
+        return ResultUtils.success(newspaperList);
+    }
+
+    /**
+     * 通过id获取报刊信息
+     * @param id
+     * @return
+     */
+    public BaseResponse<Newspaper> getNewspaperById(Long id){
+        if (id <= 0){
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        final Newspaper newspaper = newspaperService.getUserById(id);
+        return ResultUtils.success(newspaper);
     }
 
     /**
@@ -95,6 +153,6 @@ public class NewspaperController {
         if (user == null){
             throw new BusinessException(ErrorCode.NOT_LOGIN);
         }
-        return user.getState() == 1;
+        return user.getRole() == 1;
     }
 }

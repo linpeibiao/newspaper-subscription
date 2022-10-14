@@ -3,11 +3,15 @@ package com.zkxg.newspaper_subscription.dao.impl;
 import com.zkxg.newspaper_subscription.dao.BaseDao;
 import com.zkxg.newspaper_subscription.dao.NewspaperDao;
 import com.zkxg.newspaper_subscription.model.entity.Newspaper;
+import com.zkxg.newspaper_subscription.model.entity.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author xiaohu
@@ -105,7 +109,68 @@ public class NewspaperDaoImpl implements NewspaperDao {
     }
 
     @Override
-    public Newspaper getNewspaper(Long id) {
-        return null;
+    public Newspaper getUserById(Connection conn, Long id) throws SQLException {
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        Newspaper newspaper = null;
+        if (conn != null){
+            String sql = "select * from t_newspaper where id = ? and is_deleted=0";
+            Object[] params = new Object[]{id};
+            rs = BaseDao.execute(conn,pstm,rs,sql,params);
+            // 返回的信息一定要脱敏
+            while(rs.next()){
+                newspaper = new Newspaper();
+                newspaper.setId(rs.getLong("id"));
+                newspaper.setName(rs.getString("name"));
+                newspaper.setNewspaperNumber(rs.getString("newspaper_number"));
+                newspaper.setCover(rs.getString("cover"));
+                newspaper.setType(rs.getString("type"));
+                newspaper.setBrief(rs.getString("brief"));
+                newspaper.setPublisher(rs.getString("publisher"));
+                newspaper.setPublishTime(rs.getString("publish_time"));
+                newspaper.setPrice(rs.getBigDecimal("price"));
+                newspaper.setRemark(rs.getString("remark"));
+            }
+            System.out.println("newspaper 通过id获取报刊信息成功");
+        }
+        BaseDao.closeResource(null,pstm,rs);
+        return newspaper;
+    }
+
+    @Override
+    public List<Newspaper> getNewspaperByName(Connection conn, String name) throws SQLException {
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        List<Newspaper> newspaperList = new ArrayList<>();
+        if (null != conn){
+            // 在mysql数据库中，分页使用 limit startIndex，pageSize ; 总数
+            String sql = "select * from t_newspaper where name like ? and is_deleted = 0";
+            name = "%" + name + "%";
+            Object[] params = new Object[]{
+                    name
+            };
+            System.out.println("getNewspaperByName()----->"+sql);
+            //查询
+            rs = BaseDao.execute(conn,pstm,rs,sql,params);
+            //
+            while (rs.next()){
+                Newspaper _newspaper = new Newspaper();
+                _newspaper.setId(rs.getLong("id"));
+                _newspaper.setName(rs.getString("name"));
+                _newspaper.setNewspaperNumber(rs.getString("newspaper_number"));
+                _newspaper.setCover(rs.getString("cover"));
+                _newspaper.setType(rs.getString("type"));
+                _newspaper.setBrief(rs.getString("brief"));
+                _newspaper.setPublisher(rs.getString("publisher"));
+                _newspaper.setPublishTime(rs.getString("publish_time"));
+                _newspaper.setPrice(rs.getBigDecimal("price"));
+                _newspaper.setRemark(rs.getString("remark"));
+                newspaperList.add(_newspaper);
+            }
+            //关闭资源
+            BaseDao.closeResource(null,pstm,rs);
+            System.out.println("newspaperDao 名称模糊查询报刊信息成功");
+        }
+        return newspaperList;
     }
 }
