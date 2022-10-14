@@ -157,7 +157,7 @@ public class UserDaoImpl implements UserDao {
             updateRows = BaseDao.execute(conn, pstm, sql, params);
             //关闭资源
             BaseDao.closeResource(null, pstm, null);
-            System.out.println("UserDao修改用户信息成功");
+            System.out.println("UserDao 删除用户信息成功");
         }
         return updateRows;
     }

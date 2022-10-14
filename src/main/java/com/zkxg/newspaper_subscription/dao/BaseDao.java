@@ -39,6 +39,8 @@ public class BaseDao {
         password = params.getProperty("password");
     }
 
+    // TODO 封装基本的增删改查操作
+
     /**
      * 获取数据库连接
      * @return

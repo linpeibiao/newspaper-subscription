@@ -1,7 +1,9 @@
 package com.zkxg.newspaper_subscription.dao;
 
 import com.zkxg.newspaper_subscription.model.entity.Newspaper;
-import com.zkxg.newspaper_subscription.model.entity.User;
+
+import java.sql.Connection;
+import java.sql.SQLException;
 
 /**
  * @author xiaohu
@@ -10,13 +12,13 @@ import com.zkxg.newspaper_subscription.model.entity.User;
  */
 public interface NewspaperDao {
     // 增
-    int add(Newspaper newspaper);
+    int add(Connection conn, Newspaper newspaper) throws SQLException;
     // 删
     // 根据id
-    int delete(Long id);
+    int delete(Connection conn, Long id) throws SQLException;
     // 改
     // 根据id
-    int update(Long id);
+    int update(Connection conn, Newspaper newspaper) throws SQLException;
     // 查
     // 根据id
     Newspaper getNewspaper(Long id);
