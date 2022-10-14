@@ -25,4 +25,8 @@ public interface NewspaperDao {
     Newspaper getUserById(Connection conn, Long id) throws SQLException;
     // 名称模糊查询
     List<Newspaper> getNewspaperByName(Connection conn, String name) throws SQLException;
+
+    List<Newspaper> getNewspaperByType(Connection conn, String type) throws SQLException;
+
+    List<Newspaper> getNewspaperPage(Connection conn, int pageNum, int pageSize) throws SQLException;
 }

@@ -6,6 +6,7 @@ import com.zkxg.newspaper_subscription.dao.NewspaperDao;
 import com.zkxg.newspaper_subscription.dao.impl.NewspaperDaoImpl;
 import com.zkxg.newspaper_subscription.exception.BusinessException;
 import com.zkxg.newspaper_subscription.model.entity.Newspaper;
+import com.zkxg.newspaper_subscription.model.entity.User;
 import com.zkxg.newspaper_subscription.service.NewspaperService;
 import org.apache.commons.lang3.StringUtils;
 
@@ -63,13 +64,36 @@ public class NewspaperServiceImpl implements NewspaperService {
 
     @Override
     public List<Newspaper> getNewspaperByType(String type) {
-
-        return null;
+        if (type == null) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        Connection conn = null;
+        List<Newspaper> newspaperList = null;
+        try{
+            conn = BaseDao.getConnection();
+            newspaperList = newspaperDao.getNewspaperByType(conn, type);
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            BaseDao.closeResource(conn, null, null);
+        }
+        return newspaperList;
     }
 
     @Override
     public List<Newspaper> getNewspaperPage(int pageNum, int pageSize) {
-        return null;
+        Connection conn = null;
+        List<Newspaper> newspaperList = null;
+        try {
+            conn = BaseDao.getConnection();
+            newspaperList = newspaperDao.getNewspaperPage(conn, pageNum, pageSize);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }finally{
+            BaseDao.closeResource(conn,null,null);
+        }
+        System.out.println("Service获取用户列表成功!");
+        return newspaperList;
     }
 
     @Override
