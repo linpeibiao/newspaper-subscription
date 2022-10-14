@@ -26,6 +26,8 @@ public class Newspaper {
     private String cover;
     // 类别
     private String type;
+    // 简介
+    private String brief;
     // 出版社
     private String publisher;
     // 出版时间
@@ -43,5 +45,5 @@ public class Newspaper {
     // 更新时间
     private Date updateTime;
     // 逻辑删除
-    private Boolean deleted;
+    private Integer deleted;
 }

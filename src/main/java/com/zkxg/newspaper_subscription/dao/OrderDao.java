@@ -1,7 +1,6 @@
 package com.zkxg.newspaper_subscription.dao;
 
 import com.zkxg.newspaper_subscription.model.entity.Order;
-import com.zkxg.newspaper_subscription.model.entity.User;
 
 /**
  * @author xiaohu
