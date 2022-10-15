@@ -4,6 +4,7 @@ import com.zkxg.newspaper_subscription.model.entity.Order;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  * @author xiaohu
@@ -20,8 +21,8 @@ public interface OrderDao {
     // 根据id
     int update(Connection conn, Long id) throws SQLException;
     // 查
-    // 根据id
-    Order getOrder(Connection conn, Long id) throws SQLException;
+    // 根据UserId
+    List<Order> getOrderByUserId(Connection conn, Long UserId) throws SQLException;
     // 根据订单号
     Order getOrderByOrderNumber(Connection conn, String orderNumber) throws SQLException;
 }

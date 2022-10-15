@@ -29,12 +29,19 @@ public class OrderTests {
         // 首先要登陆
         userController.userLogin(loginInfo).getData();
     }
+
+    @Test
+    public void getOrderByUserIdTest(){
+        userLogin();
+        System.out.println(orderController.getOrderByUserId(7L));
+    }
+
     @Test
     public void orderNewsTest(){
         userLogin();
         OrderDto orderDto = new OrderDto();
-        orderDto.setUserId(2L);
-        orderDto.setNewspaperId(1L);
+        orderDto.setUserId(7L);
+        orderDto.setNewspaperId(112L);
         orderDto.setPeriod(12);
         orderDto.setCount(2);
         orderDto.setSinglePrice(new BigDecimal("120"));

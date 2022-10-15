@@ -3,6 +3,7 @@ import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.List;
 
 import com.zkxg.newspaper_subscription.common.ErrorCode;
 import com.zkxg.newspaper_subscription.dao.BaseDao;
@@ -90,5 +91,21 @@ public class OrderServiceImpl implements OrderService {
             BaseDao.closeResource(conn, null, null);
         }
         return order;
+    }
+
+    @Override
+    public List<Order> getOrderByUserId(Long userId) {
+        List<Order> orderList = null;
+        Connection conn = null;
+        try {
+            conn = BaseDao.getConnection();
+            // TODO 给订单表用户id创建索引
+            orderList = orderDao.getOrderByUserId(conn, userId);
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally{
+            BaseDao.closeResource(conn, null, null);
+        }
+        return orderList;
     }
 }

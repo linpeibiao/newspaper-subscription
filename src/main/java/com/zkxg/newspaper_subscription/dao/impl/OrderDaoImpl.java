@@ -2,12 +2,16 @@ package com.zkxg.newspaper_subscription.dao.impl;
 
 import com.zkxg.newspaper_subscription.dao.BaseDao;
 import com.zkxg.newspaper_subscription.dao.OrderDao;
+import com.zkxg.newspaper_subscription.model.entity.Newspaper;
 import com.zkxg.newspaper_subscription.model.entity.Order;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author xiaohu
@@ -61,8 +65,38 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     @Override
-    public Order getOrder(Connection conn, Long id) throws SQLException {
-        return null;
+    public List<Order> getOrderByUserId(Connection conn, Long userId) throws SQLException {
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        List<Order> orderList = new ArrayList<>();
+        if (null != conn){
+            String sql = "select * from t_order where user_id = ? and is_deleted = 0";
+            Object[] params = new Object[]{
+                    userId
+            };
+            //查询
+            rs = BaseDao.execute(conn,pstm,rs,sql,params);
+            //
+            while (rs.next()){
+                Order _order = new Order();
+                _order.setId(rs.getLong("id"));
+                _order.setUserId(rs.getLong("user_id"));
+                _order.setNewspaperId(rs.getLong("newspaper_id"));
+                _order.setOrderNumber(rs.getString("order_number"));
+                _order.setPeriod(rs.getInt("period"));
+                _order.setSubscriptUnit(rs.getString("subscript_unit"));
+                _order.setCount(rs.getInt("count"));
+                _order.setTotalPrice(rs.getBigDecimal("total_price"));
+                _order.setExpiryTime(rs.getDate("expiry_time"));
+                _order.setRemark(rs.getString("remark"));
+                _order.setCreateTime(rs.getDate("create_time"));
+                orderList.add(_order);
+            }
+            //关闭资源
+            BaseDao.closeResource(null,pstm,rs);
+            System.out.println("OrderDao 查询订阅信息成功");
+        }
+        return orderList;
     }
 
     @Override

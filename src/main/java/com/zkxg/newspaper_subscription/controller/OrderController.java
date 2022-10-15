@@ -6,8 +6,11 @@ import com.zkxg.newspaper_subscription.common.ResultUtils;
 import com.zkxg.newspaper_subscription.exception.BusinessException;
 import com.zkxg.newspaper_subscription.model.dto.OrderDto;
 import com.zkxg.newspaper_subscription.model.entity.Order;
+import com.zkxg.newspaper_subscription.model.entity.User;
 import com.zkxg.newspaper_subscription.service.OrderService;
 import com.zkxg.newspaper_subscription.service.impl.OrderServiceImpl;
+
+import java.util.List;
 
 /**
  * @author xiaohu
@@ -17,12 +20,32 @@ import com.zkxg.newspaper_subscription.service.impl.OrderServiceImpl;
 public class OrderController {
     // 引入service层
     private OrderService orderService;
-
     // 引入报刊业务层接口
     private NewspaperController newspaperController;
+    // 引入用户业务层接口
+    private UserController userController;
     public OrderController(){
         orderService = new OrderServiceImpl();
         newspaperController = new NewspaperController();
+        userController = new UserController();
+    }
+
+    /**
+     * 通过用户id获取订单
+     * @param id
+     * @return
+     */
+    public BaseResponse<List<Order>> getOrderByUserId(Long userId){
+        if (userId <= 0){
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        // 判断登录
+        User user = userController.getCurrentLoginUser().getData();
+        if (user == null || !user.getId().equals(userId)){
+            throw new BusinessException(ErrorCode.NO_AUTH);
+        }
+        List<Order> orderList = orderService.getOrderByUserId(userId);
+        return ResultUtils.success(orderList);
     }
 
     /**
