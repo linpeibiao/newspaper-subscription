@@ -15,4 +15,8 @@ public interface OrderService {
     Order orderNewspaper(OrderDto orderDto);
     // 用户查看自己的订阅
     List<Order> getOrderByUserId(Long id);
+    // 通过id删除订单
+    int deleteOrder(Long id);
+    // 通过订单号获取订单详情
+    Order getOrderByOrderNumber(String orderNumber);
 }

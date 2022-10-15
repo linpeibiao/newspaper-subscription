@@ -34,10 +34,10 @@ public class Order {
     private BigDecimal totalPrice;
     // 到期时间
     private Date expiryTime;
-    // 备用字段1
-    private String backup1;
-    // 备用字段2
-    private String backup2;
+    // 用户名称
+    private String userName;
+    // 报刊名称
+    private String newspaperName;
     // 备注
     private String remark;
     // 创建时间

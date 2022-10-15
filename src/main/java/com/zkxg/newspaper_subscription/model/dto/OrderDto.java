@@ -18,8 +18,12 @@ import java.math.BigDecimal;
 public class OrderDto {
     // 用户id
     private Long userId;
+    // 用户名称
+    private String userName;
     // 报刊id
     private Long newspaperId;
+    // 报刊名称
+    private String newspaperName;
     // 订阅周期
     private Integer period;
     // 订阅份数

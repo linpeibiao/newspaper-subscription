@@ -14,6 +14,7 @@ import com.zkxg.newspaper_subscription.model.dto.OrderDto;
 import com.zkxg.newspaper_subscription.model.entity.Order;
 import com.zkxg.newspaper_subscription.service.OrderService;
 import com.zkxg.newspaper_subscription.util.SnowFlakeGenerateWorker;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * @author xiaohu
@@ -39,6 +40,11 @@ public class OrderServiceImpl implements OrderService {
         }
         if (newspaperId == null || newspaperId <= 0){
             throw new BusinessException(ErrorCode.PARAMS_ERROR, "报刊id格式错误");
+        }
+        String userName = orderDto.getUserName();
+        String newspaperName = orderDto.getNewspaperName();
+        if (StringUtils.isAnyEmpty(userName, newspaperName)){
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "用户或报刊名称不能为空");
         }
 
         // 判断订阅数量和期数
@@ -66,6 +72,8 @@ public class OrderServiceImpl implements OrderService {
             order = new Order();
             order.setOrderNumber(orderNumber);
             order.setUserId(userId);
+            order.setUserName(userName);
+            order.setNewspaperName(newspaperName);
             order.setNewspaperId(newspaperId);
             order.setPeriod(period);
             order.setCount(count);
@@ -107,5 +115,43 @@ public class OrderServiceImpl implements OrderService {
             BaseDao.closeResource(conn, null, null);
         }
         return orderList;
+    }
+
+    @Override
+    public int deleteOrder(Long id) {
+        Connection conn = null;
+        int delete = 0;
+        try{
+            conn = BaseDao.getConnection();
+            conn.setAutoCommit(false);
+            delete = orderDao.delete(conn, id);
+            conn.commit();
+        }catch (SQLException e){
+            // 出现异常，事务回滚
+            try {
+                conn.rollback();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+            e.printStackTrace();
+        }finally {
+            BaseDao.closeResource(conn, null, null);
+        }
+        return delete;
+    }
+
+    @Override
+    public Order getOrderByOrderNumber(String orderNumber) {
+        Connection conn = null;
+        Order order= null;
+        try{
+            conn = BaseDao.getConnection();
+            order = orderDao.getOrderByOrderNumber(conn, orderNumber);
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            BaseDao.closeResource(conn, null, null);
+        }
+        return order;
     }
 }

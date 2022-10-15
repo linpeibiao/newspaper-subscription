@@ -29,6 +29,17 @@ public class OrderTests {
         // 首先要登陆
         userController.userLogin(loginInfo).getData();
     }
+    @Test
+    public void getOrderByOrderNumberTest(){
+        userLogin();
+        System.out.println(orderController.getOrderInfoByOrderNumber("1030884685401554944").getData());
+    }
+
+    @Test
+    public void deleteOrderTest(){
+        userLogin();
+        orderController.deleteOrder(2L);
+    }
 
     @Test
     public void getOrderByUserIdTest(){
@@ -41,6 +52,8 @@ public class OrderTests {
         userLogin();
         OrderDto orderDto = new OrderDto();
         orderDto.setUserId(7L);
+        orderDto.setUserName("小虎哥");
+        orderDto.setNewspaperName("花花公子");
         orderDto.setNewspaperId(112L);
         orderDto.setPeriod(12);
         orderDto.setCount(2);

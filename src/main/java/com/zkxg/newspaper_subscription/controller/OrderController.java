@@ -9,6 +9,7 @@ import com.zkxg.newspaper_subscription.model.entity.Order;
 import com.zkxg.newspaper_subscription.model.entity.User;
 import com.zkxg.newspaper_subscription.service.OrderService;
 import com.zkxg.newspaper_subscription.service.impl.OrderServiceImpl;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 
@@ -30,9 +31,46 @@ public class OrderController {
         userController = new UserController();
     }
 
+
+    /**
+     * 通过订单号获取订单详情
+     * @param orderNumber
+     * @return
+     */
+    public BaseResponse<Order> getOrderInfoByOrderNumber(String orderNumber){
+        // 判空
+        if (StringUtils.isAnyEmpty(orderNumber)){
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        // 判断登录态，订单只有用户自己才可以获取得到
+        if (userController.getCurrentLoginUser().getData() == null){
+            throw new BusinessException(ErrorCode.NOT_LOGIN);
+        }
+        Order order = orderService.getOrderByOrderNumber(orderNumber);
+        return ResultUtils.success(order);
+    }
+
+    /**
+     * 通过id删除订单信息
+     * @param id
+     * @return
+     */
+    // TODO 判断该订单是否属于该用户，也就是通过id获取订单，然后拿到用户id与当前登录用户id比较是否相同
+    public BaseResponse<String> deleteOrder(Long id){
+        if (id == null || id <= 0){
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        // 判断当前用户
+        if (userController.getCurrentLoginUser().getData() == null){
+            throw new BusinessException(ErrorCode.NOT_LOGIN);
+        }
+        int delete = orderService.deleteOrder(id);
+        return delete > 0 ? ResultUtils.success("删除成功") : ResultUtils.success("删除失败");
+    }
+
     /**
      * 通过用户id获取订单
-     * @param id
+     * @param userId
      * @return
      */
     public BaseResponse<List<Order>> getOrderByUserId(Long userId){
