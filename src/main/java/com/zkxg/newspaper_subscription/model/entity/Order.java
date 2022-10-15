@@ -26,6 +26,8 @@ public class Order {
     private Long newspaperId;
     // 订阅周期
     private Integer period;
+    // 订阅周期单位
+    private String subscriptUnit;
     // 订阅份数
     private Integer count;
     // 总价格
@@ -43,5 +45,5 @@ public class Order {
     // 更新时间
     private Date updateTime;
     // 逻辑删除
-    private Boolean deleted;
+    private Integer deleted;
 }
