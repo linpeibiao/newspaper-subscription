@@ -28,6 +28,16 @@ public class UserController {
     }
 
     /**
+     * 用户退出登录
+     * @return
+     */
+    public BaseResponse<String> logout(){
+        // 直接将ThreadLocal的值remove 即可
+        tl.remove();
+        return ResultUtils.success("退出登陆成功");
+    }
+
+    /**
      * 获取当前登录用户
      * @return
      */
