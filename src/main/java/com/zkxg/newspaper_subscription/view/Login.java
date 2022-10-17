@@ -5,13 +5,9 @@
 package com.zkxg.newspaper_subscription.view;
 
 import com.zkxg.newspaper_subscription.common.BaseResponse;
-import com.zkxg.newspaper_subscription.common.ErrorCode;
-import com.zkxg.newspaper_subscription.common.ResultUtils;
 import com.zkxg.newspaper_subscription.controller.UserController;
-import com.zkxg.newspaper_subscription.dao.UserDao;
 import com.zkxg.newspaper_subscription.model.entity.User;
 import com.zkxg.newspaper_subscription.model.vo.LoginInfo;
-import com.zkxg.newspaper_subscription.service.UserService;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

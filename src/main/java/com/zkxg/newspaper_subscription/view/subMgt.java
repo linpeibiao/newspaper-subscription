@@ -7,16 +7,11 @@ package com.zkxg.newspaper_subscription.view;
 import java.awt.*;
 import java.awt.event.*;
 import java.math.BigDecimal;
-import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Vector;
 import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
-import com.jgoodies.forms.factories.*;
-import com.jgoodies.forms.layout.*;
+
 
 //import com.jgoodies.forms.factories.*;
 import com.zkxg.newspaper_subscription.common.BaseResponse;
@@ -26,8 +21,7 @@ import com.zkxg.newspaper_subscription.controller.UserController;
 import com.zkxg.newspaper_subscription.model.entity.Newspaper;
 import com.zkxg.newspaper_subscription.model.entity.Order;
 import com.zkxg.newspaper_subscription.model.entity.User;
-import com.zkxg.newspaper_subscription.model.vo.LoginInfo;
-import info.clearthought.layout.*;
+
 
 /**
  * @author unknown
@@ -78,6 +72,10 @@ public class subMgt extends JFrame {
         newsNextPageButton = new JButton();
         newsPrePageButton = new JButton();
         detailButton = new JButton();
+        queryNewsList = new JComboBox();
+        queryNewsField = new JTextField();
+        queryNewsButton = new JButton();
+        queryNewsButton2 = new JButton();
         panel5 = new JPanel();
         panel6 = new JPanel();
         queryField = new JTextField();
@@ -129,13 +127,11 @@ public class subMgt extends JFrame {
         //======== panel1 ========
         {
             panel1.setBackground(new Color(0x4c5052));
-            panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing
-            . border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frmDes\u0069gner \u0045valua\u0074ion", javax. swing. border. TitledBorder
-            . CENTER, javax. swing. border. TitledBorder. BOTTOM, new java .awt .Font ("D\u0069alog" ,java .
-            awt .Font .BOLD ,12 ), java. awt. Color. red) ,panel1. getBorder( )) )
-            ; panel1. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e
-            ) {if ("\u0062order" .equals (e .getPropertyName () )) throw new RuntimeException( ); }} )
-            ;
+            panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border. EmptyBorder(
+            0, 0, 0, 0) , "JF\u006frmDes\u0069gner \u0045valua\u0074ion", javax. swing. border. TitledBorder. CENTER, javax. swing. border. TitledBorder
+            . BOTTOM, new java .awt .Font ("D\u0069alog" ,java .awt .Font .BOLD ,12 ), java. awt. Color.
+            red) ,panel1. getBorder( )) ); panel1. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .
+            beans .PropertyChangeEvent e) {if ("\u0062order" .equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
             panel1.setLayout(null);
 
             //---- label1 ----
@@ -153,25 +149,44 @@ public class subMgt extends JFrame {
                 {
                     index.setLayout(null);
                     index.add(newsOrderList);
-                    newsOrderList.setBounds(10, 80, 875, 305);
+                    newsOrderList.setBounds(10, 130, 875, 305);
 
                     //---- newsNextPageButton ----
                     newsNextPageButton.setText("\u4e0b\u4e00\u9875");
                     newsNextPageButton.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
                     index.add(newsNextPageButton);
-                    newsNextPageButton.setBounds(795, 415, 94, 40);
+                    newsNextPageButton.setBounds(795, 450, 94, 40);
 
                     //---- newsPrePageButton ----
                     newsPrePageButton.setText("\u4e0a\u4e00\u9875");
                     newsPrePageButton.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
                     index.add(newsPrePageButton);
-                    newsPrePageButton.setBounds(670, 415, 94, 40);
+                    newsPrePageButton.setBounds(675, 450, 94, 40);
 
                     //---- detailButton ----
                     detailButton.setText("\u62a5\u520a\u8be6\u60c5");
                     detailButton.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
                     index.add(detailButton);
                     detailButton.setBounds(775, 25, detailButton.getPreferredSize().width, 40);
+                    index.add(queryNewsList);
+                    queryNewsList.setBounds(10, 25, 135, 40);
+
+                    //---- queryNewsField ----
+                    queryNewsField.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+                    index.add(queryNewsField);
+                    queryNewsField.setBounds(165, 25, 200, 40);
+
+                    //---- queryNewsButton ----
+                    queryNewsButton.setText("\u67e5\u8be2");
+                    queryNewsButton.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+                    index.add(queryNewsButton);
+                    queryNewsButton.setBounds(380, 25, 78, 40);
+
+                    //---- queryNewsButton2 ----
+                    queryNewsButton2.setText("\u8ba2\u9605");
+                    queryNewsButton2.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+                    index.add(queryNewsButton2);
+                    queryNewsButton2.setBounds(680, 25, queryNewsButton2.getPreferredSize().width, 40);
 
                     {
                         // compute preferred size
@@ -471,7 +486,7 @@ public class subMgt extends JFrame {
             logoutButton.setText("\u9000\u51fa\u767b\u5f55");
             logoutButton.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
             panel1.add(logoutButton);
-            logoutButton.setBounds(new Rectangle(new Point(785, 35), logoutButton.getPreferredSize()));
+            logoutButton.setBounds(new Rectangle(new Point(770, 35), logoutButton.getPreferredSize()));
 
             {
                 // compute preferred size
@@ -521,6 +536,10 @@ public class subMgt extends JFrame {
     private JButton newsNextPageButton;
     private JButton newsPrePageButton;
     private JButton detailButton;
+    private JComboBox queryNewsList;
+    private JTextField queryNewsField;
+    private JButton queryNewsButton;
+    private JButton queryNewsButton2;
     private JPanel panel5;
     private JPanel panel6;
     private JTextField queryField;
@@ -581,7 +600,9 @@ public class subMgt extends JFrame {
     public void initQueryView() {
         queryList.addItem("按订单号查询");
         queryList.addItem("按用户id查询");
-
+        queryNewsList.addItem("按报刊名称查询");
+        queryNewsList.addItem("按报刊类型查询");
+        queryNewsField.setToolTipText("请输入查询内容");
     }
     // 初始化订阅首页界面
     public void initIndexView() {
