@@ -4,7 +4,10 @@ import com.zkxg.newspaper_subscription.dao.BaseDao;
 import com.zkxg.newspaper_subscription.dao.OrderDao;
 import com.zkxg.newspaper_subscription.model.entity.Newspaper;
 import com.zkxg.newspaper_subscription.model.entity.Order;
+import com.zkxg.newspaper_subscription.model.entity.User;
+import com.zkxg.newspaper_subscription.model.vo.UserCostInfo;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -149,5 +152,58 @@ public class OrderDaoImpl implements OrderDao {
             System.out.println("OrderDao 查询订阅信息成功");
         }
         return order;
+    }
+
+    @Override
+    public int getCountByNewspaperId(Connection conn, Long newspaperId) throws SQLException {
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        int count = 0;
+        if (conn != null) {
+            //
+            String sql = "select sum(count) as count from t_order where newspaper_id = ? and is_deleted=0";
+            Object params[] = new Object[]{
+                    newspaperId
+            };
+            //执行sql语句
+            rs = BaseDao.execute(conn,pstm,rs,sql,params);
+            while (rs.next()){
+                count = rs.getInt("count");
+            }
+            //关闭资源
+            BaseDao.closeResource(null, pstm, null);
+            System.out.println("OrderDao 查询统计信息成功");
+        }
+        return count;
+    }
+
+    @Override
+    public List<UserCostInfo> getCostMostUser(Connection conn, int n) throws SQLException{
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        List<UserCostInfo> userList = null;
+        if (conn != null){
+            userList = new ArrayList<>();
+            String sql = "select u.*, cost.total_cost from t_user as u," +
+                    " (select user_id, sum(total_price) as total_cost from t_order " +
+                    "where is_deleted = 0 group by user_id ORDER BY total_cost desc limit 1,?) " +
+                    "as cost " +
+                    "where cost.user_id = u.id;";
+            Object[] params = new Object[]{n};
+            rs = BaseDao.execute(conn,pstm,rs,sql,params);
+            // 返回的信息一定要脱敏
+            while(rs.next()){
+                UserCostInfo _user = new UserCostInfo();
+                _user.setUserId(rs.getLong("id"));
+                _user.setAccount(rs.getString("account"));
+                _user.setNackname(rs.getString("nackname"));
+                _user.setAvatar(rs.getString("avatar"));
+                _user.setTotalCost(rs.getBigDecimal("total_cost"));
+                userList.add(_user);
+            }
+            System.out.println("统计用户消费信息成功");
+        }
+        BaseDao.closeResource(null,pstm,rs);
+        return userList;
     }
 }

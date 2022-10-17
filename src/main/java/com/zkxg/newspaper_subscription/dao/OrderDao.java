@@ -1,6 +1,8 @@
 package com.zkxg.newspaper_subscription.dao;
 
 import com.zkxg.newspaper_subscription.model.entity.Order;
+import com.zkxg.newspaper_subscription.model.entity.User;
+import com.zkxg.newspaper_subscription.model.vo.UserCostInfo;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -25,4 +27,8 @@ public interface OrderDao {
     List<Order> getOrderByUserId(Connection conn, Long UserId) throws SQLException;
     // 根据订单号
     Order getOrderByOrderNumber(Connection conn, String orderNumber) throws SQLException;
+    // 通过报刊ID获取该报刊被订阅的总数量
+    int getCountByNewspaperId(Connection conn, Long newspaperId) throws SQLException;
+    // 查询花钱第n多的用户
+    List<UserCostInfo> getCostMostUser(Connection conn, int n) throws SQLException;
 }

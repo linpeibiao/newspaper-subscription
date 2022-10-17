@@ -18,8 +18,6 @@ import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
-import com.jgoodies.forms.factories.*;
-import com.jgoodies.forms.layout.*;
 
 //import com.jgoodies.forms.factories.*;
 import com.zkxg.newspaper_subscription.common.BaseResponse;
@@ -29,8 +27,6 @@ import com.zkxg.newspaper_subscription.controller.UserController;
 import com.zkxg.newspaper_subscription.model.entity.Newspaper;
 import com.zkxg.newspaper_subscription.model.entity.Order;
 import com.zkxg.newspaper_subscription.model.entity.User;
-import com.zkxg.newspaper_subscription.model.vo.LoginInfo;
-import info.clearthought.layout.*;
 
 /**
  * @author unknown
