@@ -89,7 +89,7 @@ new FormModel {
 							name: "queryField"
 							"font": new java.awt.Font( "Microsoft YaHei UI", 0, 20 )
 						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-							"x": 195
+							"x": 145
 							"y": 25
 							"width": 200
 							"height": 40
@@ -99,14 +99,14 @@ new FormModel {
 							"text": "查询"
 							"font": &Font0 new java.awt.Font( "Microsoft YaHei UI", 0, 20 )
 						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-							"x": 410
+							"x": 365
 							"y": 25
 							"height": 40
 						} )
 						add( new FormComponent( "javax.swing.JComboBox" ) {
 							name: "queryList"
 						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-							"width": 160
+							"width": 110
 							"height": 40
 							"x": 20
 							"y": 25
@@ -133,6 +133,32 @@ new FormModel {
 						} )
 					}, new FormLayoutConstraints( null ) {
 						"title": "订单查询"
+					} )
+					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
+						name: "panel4"
+						add( new FormComponent( "javax.swing.JButton" ) {
+							name: "currentOrderButton"
+							"text": "获取当前用户订单"
+							"font": #Font0
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+							"width": 194
+							"height": 40
+							"x": 25
+							"y": 20
+						} )
+						add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+							name: "scrollPane3"
+							add( new FormComponent( "javax.swing.JTable" ) {
+								name: "queryTable2"
+							} )
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+							"x": 25
+							"y": 85
+							"width": 860
+							"height": 410
+						} )
+					}, new FormLayoutConstraints( null ) {
+						"title": "我的订单"
 					} )
 					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
 						name: "panel7"

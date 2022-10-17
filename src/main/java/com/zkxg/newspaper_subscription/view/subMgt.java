@@ -5,10 +5,7 @@
 package com.zkxg.newspaper_subscription.view;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
+import java.awt.event.*;
 import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.util.Date;
@@ -45,14 +42,7 @@ public class subMgt extends JFrame {
     // 待删除的订单的 id
     public static Long deleteOrderId;
     // 判断字符串是否为纯数字
-    public static boolean isNumeric(String str){
-        for (int i = 0; i < str.length(); i++){
-            if (!Character.isDigit(str.charAt(i))){
-                return false;
-            }
-        }
-        return true;
-    }
+    public static User currentUser;
     public subMgt() {
         userController = new UserController();
         newspaperController = new NewspaperController();
@@ -94,6 +84,10 @@ public class subMgt extends JFrame {
         scrollPane1 = new JScrollPane();
         queryTable = new JTable();
         deleteOrderButton = new JButton();
+        panel4 = new JPanel();
+        currentOrderButton = new JButton();
+        scrollPane3 = new JScrollPane();
+        queryTable2 = new JTable();
         panel7 = new JPanel();
         scrollPane2 = new JScrollPane();
         userList = new JTable();
@@ -133,12 +127,11 @@ public class subMgt extends JFrame {
         //======== panel1 ========
         {
             panel1.setBackground(new Color(0x4c5052));
-            panel1.setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax . swing. border
-            .EmptyBorder ( 0, 0 ,0 , 0) ,  "JFor\u006dDesi\u0067ner \u0045valu\u0061tion" , javax. swing .border . TitledBorder. CENTER ,javax
-            . swing. border .TitledBorder . BOTTOM, new java. awt .Font ( "Dia\u006cog", java .awt . Font. BOLD ,
-            12 ) ,java . awt. Color .red ) ,panel1. getBorder () ) ); panel1. addPropertyChangeListener( new java. beans
-            .PropertyChangeListener ( ){ @Override public void propertyChange (java . beans. PropertyChangeEvent e) { if( "bord\u0065r" .equals ( e.
-            getPropertyName () ) )throw new RuntimeException( ) ;} } );
+            panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border. EmptyBorder(
+            0, 0, 0, 0) , "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn", javax. swing. border. TitledBorder. CENTER, javax. swing. border. TitledBorder
+            . BOTTOM, new java .awt .Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 ), java. awt. Color.
+            red) ,panel1. getBorder( )) ); panel1. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .
+            beans .PropertyChangeEvent e) {if ("\u0062ord\u0065r" .equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
             panel1.setLayout(null);
 
             //---- label1 ----
@@ -225,15 +218,15 @@ public class subMgt extends JFrame {
                     //---- queryField ----
                     queryField.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
                     panel6.add(queryField);
-                    queryField.setBounds(195, 25, 200, 40);
+                    queryField.setBounds(145, 25, 200, 40);
 
                     //---- queryButton ----
                     queryButton.setText("\u67e5\u8be2");
                     queryButton.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
                     panel6.add(queryButton);
-                    queryButton.setBounds(410, 25, queryButton.getPreferredSize().width, 40);
+                    queryButton.setBounds(365, 25, queryButton.getPreferredSize().width, 40);
                     panel6.add(queryList);
-                    queryList.setBounds(20, 25, 160, 40);
+                    queryList.setBounds(20, 25, 110, 40);
 
                     //======== scrollPane1 ========
                     {
@@ -264,6 +257,40 @@ public class subMgt extends JFrame {
                     }
                 }
                 tabbedPane1.addTab("\u8ba2\u5355\u67e5\u8be2", panel6);
+
+                //======== panel4 ========
+                {
+                    panel4.setLayout(null);
+
+                    //---- currentOrderButton ----
+                    currentOrderButton.setText("\u83b7\u53d6\u5f53\u524d\u7528\u6237\u8ba2\u5355");
+                    currentOrderButton.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+                    panel4.add(currentOrderButton);
+                    currentOrderButton.setBounds(25, 20, 194, 40);
+
+                    //======== scrollPane3 ========
+                    {
+                        scrollPane3.setViewportView(queryTable2);
+                    }
+                    panel4.add(scrollPane3);
+                    scrollPane3.setBounds(25, 85, 860, 410);
+
+                    {
+                        // compute preferred size
+                        Dimension preferredSize = new Dimension();
+                        for(int i = 0; i < panel4.getComponentCount(); i++) {
+                            Rectangle bounds = panel4.getComponent(i).getBounds();
+                            preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
+                            preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
+                        }
+                        Insets insets = panel4.getInsets();
+                        preferredSize.width += insets.right;
+                        preferredSize.height += insets.bottom;
+                        panel4.setMinimumSize(preferredSize);
+                        panel4.setPreferredSize(preferredSize);
+                    }
+                }
+                tabbedPane1.addTab("\u6211\u7684\u8ba2\u5355", panel4);
 
                 //======== panel7 ========
                 {
@@ -504,6 +531,10 @@ public class subMgt extends JFrame {
     private JScrollPane scrollPane1;
     private JTable queryTable;
     private JButton deleteOrderButton;
+    private JPanel panel4;
+    private JButton currentOrderButton;
+    private JScrollPane scrollPane3;
+    private JTable queryTable2;
     private JPanel panel7;
     private JScrollPane scrollPane2;
     private JTable userList;
@@ -540,6 +571,7 @@ public class subMgt extends JFrame {
         BaseResponse<User> userBaseResponse = userController.getCurrentLoginUser();
         User user = userBaseResponse.getData();
         System.out.println(user);
+        currentUser = user;
         // 将获取到的用户信息渲染到文本框上
         changeUserField.setText(user.getNackname());
         changEmailField.setText(user.getEmail());
@@ -639,6 +671,9 @@ public class subMgt extends JFrame {
                         DefaultTableModel queryT = (DefaultTableModel) queryTable.getModel();
                         // 设置订单列表表头名
                         Object[] orderRowName = {"订单编号","订单Id","报刊名称","用户昵称","订阅份数","订单总金额"};
+                        queryT.getDataVector().clear(); // 清除表格数据
+                        queryT.fireTableDataChanged(); // 通知模型更新
+                        queryTable.updateUI(); // 更新表格
                         // 表单预验证
                         if (queryField.getText().length() == 0) {
                             JOptionPane.showMessageDialog(null, "查询内容不能为空");
@@ -650,9 +685,6 @@ public class subMgt extends JFrame {
                         // 按订单号分类查
                         if (queryList.getSelectedIndex() == 0) {
                             System.out.println("按订单号查");
-                            queryT.getDataVector().clear(); // 清除表格数据
-                            queryT.fireTableDataChanged(); // 通知模型更新
-                            queryTable.updateUI(); // 更新表格
                             BaseResponse<Order> orderBaseResponse = orderController.getOrderInfoByOrderNumber(queryField.getText());
                             Order order = orderBaseResponse.getData();
                             System.out.println(order);
@@ -665,61 +697,33 @@ public class subMgt extends JFrame {
                             }
                             Object[] orderList = {order.getOrderNumber(),order.getId(),order.getNewspaperName(),order.getUserName(),order.getCount(),order.getTotalPrice()};
                             // 设置行与列
-                            queryT.setRowCount(5);
+                            queryT.setRowCount(2);
                             queryT.setColumnCount(orderRowName.length);
                             for (int i = 0; i < orderRowName.length; i++) {
                                 queryT.setValueAt(orderRowName[i],0,i);
                                 queryT.setValueAt(orderList[i],1,i);
                             }
-                            queryTable.getSelectionModel().addListSelectionListener(
-                                    new ListSelectionListener() {
-                                        @Override
-                                        public void valueChanged(ListSelectionEvent e) {
-                                            int row = queryTable.getSelectedRow(); // 选中行
-                                            deleteOrderId = Long.valueOf(queryTable.getValueAt(row,1).toString());
-                                            System.out.println(deleteOrderId);
-                                            return;
-                                        }
-                                    }
-                            );
-                            return;
                         }
                         // 按用户id分类查
                         else if (queryList.getSelectedIndex() == 1) {
                             System.out.println("按用户id查");
-                            queryT.getDataVector().clear(); // 清除表格数据
-                            queryT.fireTableDataChanged(); // 通知模型更新
-                            queryTable.updateUI(); // 更新表格
-                            BaseResponse<List<Order>> orderBaseResponse = orderController.getOrderByUserId(Long.valueOf(queryField.getText()));
-                            List<Order> order = orderBaseResponse.getData();
-                            if(order == null) {
-                                JOptionPane.showMessageDialog(null, "查无此订单！");
-                                queryT.getDataVector().clear(); // 清除表格数据
-                                queryT.fireTableDataChanged(); // 通知模型更新
-                                queryTable.updateUI(); // 更新表格
-                                return;
-                            }
-                            Object[] orderList = {};
-                            // 设置行与列
-                            queryT.setRowCount(5);
-                            queryT.setColumnCount(orderRowName.length);
-                            for (int i = 0; i < orderRowName.length; i++) {
-                                queryT.setValueAt(orderRowName[i],0,i);
-                                queryT.setValueAt(orderList[i],1,i);
-                            }
-                            for (int i = 1; i < order.size(); i++) {
-                                Order orderL = order.get(i);
-                                queryT.setValueAt(orderL.getOrderNumber(),i,0);
-                                queryT.setValueAt(orderL.getNewspaperName(),i,1);
-                                queryT.setValueAt(orderL.getUserName(),i,2);
-                                queryT.setValueAt(orderL.getCount(),i,0);
-                                queryT.setValueAt(orderL.getTotalPrice(),i,3);
-                            }
-                            System.out.println(order);
                         }
                     }
                 }
 
+        );
+        // 点击获取选中行的订单id
+        queryTable.addMouseListener(
+                new MouseAdapter() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        if (e.getButton() == e.BUTTON1) {
+                            int row = queryTable.getSelectedRow();
+                            deleteOrderId = Long.valueOf(queryTable.getValueAt(row,1).toString());
+                            System.out.println(deleteOrderId);
+                        }
+                    }
+                }
         );
         // 删除选中的订单
         deleteOrderButton.addActionListener(
@@ -736,12 +740,67 @@ public class subMgt extends JFrame {
                             return;
                         }
                         BaseResponse<String> deleteOrderBaseResponse = orderController.deleteOrder(deleteOrderId);
-                        JOptionPane.showMessageDialog(null,"删除订单成功!");
+                        queryField.setText("");
                         deleteOrderId = null;
-                        // 清除表格数据
+                        JOptionPane.showMessageDialog(null,"删除订单成功!");
+                        // 建空表代替原表
+                        DefaultTableModel queryT = (DefaultTableModel) queryTable.getModel();
+                        queryT.getDataVector().clear(); // 清除表格数据
+                        queryT.fireTableDataChanged(); // 通知模型更新
+                        queryTable.updateUI(); // 更新表格
                     }
                 }
         );
+        // 获取当前用户订单
+        currentOrderButton.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        // 查询表
+                        DefaultTableModel queryT2 = (DefaultTableModel) queryTable2.getModel();
+                        // 设置订单列表表头名
+                        Object[] orderRowName = {"订单编号","订单Id","报刊名称","用户昵称","订阅份数","订单总金额"};
+                        if (currentUser.getId() == null) {
+                            JOptionPane.showMessageDialog(null,"登录后才能查看用户订单！");
+                            return;
+                        }
+                        if(newspaperController.isAdmin()) {
+                            JOptionPane.showMessageDialog(null,"该模块仅对普通用户开放！");
+                            return;
+                        }
+                        queryT2.getDataVector().clear(); // 清除表格数据
+                        queryT2.fireTableDataChanged(); // 通知模型更新
+                        queryTable.updateUI(); // 更新表格
+                        BaseResponse<List<Order>> orderBaseResponse = orderController.getOrderByUserId(Long.valueOf(currentUser.getId()));
+                        List<Order> order = orderBaseResponse.getData();
+                        // 设置行与列
+                        queryT2.setRowCount(order.size()+1);
+                        queryT2.setColumnCount(orderRowName.length);
+                        if(order == null) {
+                            JOptionPane.showMessageDialog(null, "暂无订单！");
+                            queryT2.getDataVector().clear(); // 清除表格数据
+                            queryT2.fireTableDataChanged(); // 通知模型更新
+                            queryTable.updateUI(); // 更新表格
+                            return;
+                        }
+                        for (int i = 0; i < orderRowName.length; i++) {
+                            queryT2.setValueAt(orderRowName[i],0,i);
+                        }
+                        for (int i = 0; i < order.size(); i++) {
+                            Order orderL = order.get(i);
+                            queryT2.setValueAt(orderL.getOrderNumber(),i+1,0);
+                            queryT2.setValueAt(orderL.getId(),i+1,1);
+                            queryT2.setValueAt(orderL.getNewspaperName(),i+1,2);
+                            queryT2.setValueAt(orderL.getUserName(),i+1,3);
+                            queryT2.setValueAt(orderL.getCount(),i+1,4);
+                            queryT2.setValueAt(orderL.getTotalPrice(),i+1,5);
+
+                        }
+                        System.out.println(order);
+                    }
+                }
+        );
+
         // 管理员对用户列表进行查询
         queryUserButton.addActionListener(
                 new ActionListener() {
@@ -768,7 +827,7 @@ public class subMgt extends JFrame {
                         List<User> userList = userListBaseResponse.getData();
                         System.out.println(userList);
                         for (int i = 1; i < userList.size(); i++) {
-                            User user = userList.get(i);
+                            User user = userList.get(i-1);
                             userL.setValueAt(user.getAccount(),i,0);
                             userL.setValueAt(user.getNackname(),i,1);
                             userL.setValueAt(Sex,i,2);
