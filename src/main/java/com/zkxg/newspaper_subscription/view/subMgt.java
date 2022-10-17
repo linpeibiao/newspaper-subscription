@@ -878,7 +878,7 @@ public class subMgt extends JFrame {
                         // 获取新报刊价格(先将价格从字符串转换成BIgDecimal类型)
                         BigDecimal bd = new BigDecimal(addNewsPriceField.getText());
                         bd = bd.setScale(3, BigDecimal.ROUND_HALF_UP);
-                        if ((isNumeric(addNewsPriceField.getText())) || Integer.valueOf(addNewsPriceField.getText()) < 0) {
+                        if ( Integer.valueOf(addNewsPriceField.getText()) < 0) {
                             JOptionPane.showMessageDialog(null,"价格必须是大于0的数字");
                             return;
                         }
