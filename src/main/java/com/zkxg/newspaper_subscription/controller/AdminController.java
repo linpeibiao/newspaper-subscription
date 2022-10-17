@@ -4,10 +4,13 @@ import com.zkxg.newspaper_subscription.common.BaseResponse;
 import com.zkxg.newspaper_subscription.common.ErrorCode;
 import com.zkxg.newspaper_subscription.common.ResultUtils;
 import com.zkxg.newspaper_subscription.exception.BusinessException;
+import com.zkxg.newspaper_subscription.model.vo.NewspaperInfo;
 import com.zkxg.newspaper_subscription.model.vo.UserInfo;
 import com.zkxg.newspaper_subscription.service.OrderService;
 import com.zkxg.newspaper_subscription.service.impl.OrderServiceImpl;
+import org.springframework.beans.factory.annotation.Value;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -22,6 +25,25 @@ public class AdminController {
     public AdminController(){
         orderService = new OrderServiceImpl();
         newspaperController = new NewspaperController();
+    }
+
+    /**
+     * 获取报刊信息按照某阶段内受欢迎程度
+     * @param start
+     * @param end
+     * @return
+     */
+    public BaseResponse<List<NewspaperInfo>> getPopularNewspaper(Date start, Date end, int n){
+        // 不判空了
+        if (n <= 0){
+            n = 10; // 默认取前十条
+        }
+        // 判权
+        if (!newspaperController.isAdmin()){
+            throw new BusinessException(ErrorCode.NO_AUTH);
+        }
+        List<NewspaperInfo> newspaperList = orderService.getPopularNewspaper(start, end, n);
+        return ResultUtils.success(newspaperList);
     }
 
     /**

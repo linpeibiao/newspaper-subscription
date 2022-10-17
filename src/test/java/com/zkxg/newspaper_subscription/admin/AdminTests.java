@@ -5,6 +5,10 @@ import com.zkxg.newspaper_subscription.controller.UserController;
 import com.zkxg.newspaper_subscription.model.vo.LoginInfo;
 import org.junit.Test;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * @author xiaohu
  * @date 2022/10/17/ 10:10
@@ -25,6 +29,15 @@ public class AdminTests {
         loginInfo.setPassword("linxiaohu");
         // 首先要登陆
         userController.userLogin(loginInfo).getData();
+    }
+
+    @Test
+    public void getPopularNewspaperTest() throws ParseException {
+        userLogin();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date start = simpleDateFormat.parse("2022-10-15 00:00:00");
+        Date end = simpleDateFormat.parse("2022-10-17 00:00:00");
+        System.out.println(adminController.getPopularNewspaper(start, end, 0).getData());
     }
 
     @Test

@@ -1,10 +1,12 @@
 package com.zkxg.newspaper_subscription.dao;
 
 import com.zkxg.newspaper_subscription.model.entity.Order;
+import com.zkxg.newspaper_subscription.model.vo.NewspaperInfo;
 import com.zkxg.newspaper_subscription.model.vo.UserInfo;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -32,4 +34,7 @@ public interface OrderDao {
     List<UserInfo> getCostMostUser(Connection conn, int n) throws SQLException;
     // 查询订单数前n的用户
     List<UserInfo> getOrderMostUser(Connection conn, int n) throws SQLException;
+    // 查询不同时间阶段内受欢迎程度的报刊信息
+    // TODO 给创建时间添加索引，而且在查询的时候一定要按照标准格式，否则索引会失效
+    List<NewspaperInfo> getPopularNewspaper(Connection conn, String start, String end, int n) throws SQLException;
 }

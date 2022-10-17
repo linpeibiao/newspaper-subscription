@@ -3,6 +3,7 @@ package com.zkxg.newspaper_subscription.dao.impl;
 import com.zkxg.newspaper_subscription.dao.BaseDao;
 import com.zkxg.newspaper_subscription.dao.OrderDao;
 import com.zkxg.newspaper_subscription.model.entity.Order;
+import com.zkxg.newspaper_subscription.model.vo.NewspaperInfo;
 import com.zkxg.newspaper_subscription.model.vo.UserInfo;
 
 import java.sql.Connection;
@@ -10,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -238,5 +240,57 @@ public class OrderDaoImpl implements OrderDao {
         }
         BaseDao.closeResource(null,pstm,rs);
         return userList;
+    }
+
+    @Override
+    public List<NewspaperInfo> getPopularNewspaper(Connection conn, String start, String end, int n) throws SQLException {
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        List<NewspaperInfo> newspaperList = null;
+        if (conn != null){
+            newspaperList = new ArrayList<>();
+            String sql = "SELECT " +
+                    "n.*," +
+                    "oq.order_quantity " +
+                    "FROM " +
+                    "t_newspaper AS n," +
+                    "(" +
+                    "SELECT DISTINCT " +
+                    "newspaper_id," +
+                    "count(*) AS order_quantity " +
+                    "FROM " +
+                    "t_order " +
+                    "WHERE " +
+                    "is_deleted = 0 " +
+                    "and create_time >= ? and create_time <= ? " +
+                    "GROUP BY " +
+                    "newspaper_id " +
+                    "ORDER BY " +
+                    "order_quantity DESC " +
+                    "LIMIT 1,?" +
+                    ") AS oq " +
+                    "WHERE " +
+                    "n.id = oq.newspaper_id;";
+            Object[] params = new Object[]{
+                    start,
+                    end,
+                    n
+            };
+            rs = BaseDao.execute(conn,pstm,rs,sql,params);
+            // 返回的信息一定要脱敏
+            while(rs.next()){
+                NewspaperInfo _newspaperInfo = new NewspaperInfo();
+                _newspaperInfo.setNewspaperId(rs.getLong("id"));
+                _newspaperInfo.setNewspaperName(rs.getString("name"));
+                _newspaperInfo.setCover(rs.getString("cover"));
+                _newspaperInfo.setType(rs.getString("type"));
+                _newspaperInfo.setPublisher(rs.getString("publisher"));
+                _newspaperInfo.setOrderQuantity(rs.getInt("order_quantity"));
+                newspaperList.add(_newspaperInfo);
+            }
+            System.out.println("统计报刊订阅信息成功");
+        }
+        BaseDao.closeResource(null,pstm,rs);
+        return newspaperList;
     }
 }
