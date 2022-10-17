@@ -24,56 +24,42 @@ new FormModel {
 					"font": new java.awt.Font( "Microsoft YaHei UI", 0, 20 )
 					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
 						name: "index"
-						add( new FormComponent( "javax.swing.JLabel" ) {
-							name: "label2"
+						add( new FormComponent( "javax.swing.JTable" ) {
+							name: "newsOrderList"
 						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-							"x": 60
-							"y": 70
-							"width": 100
-							"height": 100
+							"width": 875
+							"height": 305
+							"x": 10
+							"y": 80
 						} )
-						add( new FormComponent( "javax.swing.JLabel" ) {
-							name: "label3"
+						add( new FormComponent( "javax.swing.JButton" ) {
+							name: "newsNextPageButton"
+							"text": "下一页"
+							"font": &Font0 new java.awt.Font( "Microsoft YaHei UI", 0, 20 )
 						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-							"width": 100
-							"height": 100
-							"x": 200
-							"y": 70
+							"width": 94
+							"height": 40
+							"x": 795
+							"y": 415
 						} )
-						add( new FormComponent( "javax.swing.JLabel" ) {
-							name: "label4"
-							"text": "报刊名："
+						add( new FormComponent( "javax.swing.JButton" ) {
+							name: "newsPrePageButton"
+							"text": "上一页"
+							"font": #Font0
 						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-							"x": 55
-							"y": 180
-							"width": 105
+							"width": 94
+							"height": 40
+							"x": 670
+							"y": 415
 						} )
-						add( new FormComponent( "javax.swing.JLabel" ) {
-							name: "label5"
-							"text": "报刊名："
+						add( new FormComponent( "javax.swing.JButton" ) {
+							name: "detailButton"
+							"text": "报刊详情"
+							"font": #Font0
 						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-							"width": 105
-							"height": 17
-							"x": 200
-							"y": 180
-						} )
-						add( new FormComponent( "javax.swing.JLabel" ) {
-							name: "label6"
-							"text": "类型："
-						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-							"width": 105
-							"height": 17
-							"x": 55
-							"y": 200
-						} )
-						add( new FormComponent( "javax.swing.JLabel" ) {
-							name: "label7"
-							"text": "类型："
-						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-							"width": 105
-							"height": 17
-							"x": 200
-							"y": 200
+							"height": 40
+							"x": 775
+							"y": 25
 						} )
 					}, new FormLayoutConstraints( null ) {
 						"title": "首页"
@@ -97,7 +83,7 @@ new FormModel {
 						add( new FormComponent( "javax.swing.JButton" ) {
 							name: "queryButton"
 							"text": "查询"
-							"font": &Font0 new java.awt.Font( "Microsoft YaHei UI", 0, 20 )
+							"font": #Font0
 						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 							"x": 365
 							"y": 25

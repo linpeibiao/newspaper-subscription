@@ -1,0 +1,129 @@
+JFDML JFormDesigner: "8.0.0.0.194" Java: "11.0.7" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
+			name: "this"
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
+				name: "panel1"
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "imageLabel"
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 290
+					"height": 515
+					"x": 10
+					"y": 10
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label2"
+					"text": "报刊名称："
+					"font": &Font0 new java.awt.Font( "Microsoft YaHei UI", 0, 20 )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 105
+					"height": 40
+					"x": 320
+					"y": 40
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label3"
+					"text": "出版报社："
+					"font": #Font0
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 105
+					"height": 40
+					"x": 320
+					"y": 115
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label4"
+					"text": "报刊类型："
+					"font": #Font0
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 105
+					"height": 40
+					"x": 320
+					"y": 190
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label5"
+					"text": "报刊单价："
+					"font": #Font0
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 105
+					"height": 40
+					"x": 320
+					"y": 270
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label6"
+					"text": "内容介绍："
+					"font": #Font0
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 105
+					"height": 40
+					"x": 320
+					"y": 350
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "detailNameLabel"
+					"text": "仲恺鹿晗"
+					"font": #Font0
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"height": 40
+					"x": 450
+					"y": 40
+					"width": 200
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "detailPublishLabel"
+					"text": "仲恺鹿晗"
+					"font": #Font0
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"height": 40
+					"x": 450
+					"y": 115
+					"width": 200
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "detailTypeLabel"
+					"text": "仲恺鹿晗"
+					"font": #Font0
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"height": 40
+					"x": 450
+					"y": 190
+					"width": 200
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "detailPriceLabel"
+					"text": "仲恺鹿晗"
+					"font": #Font0
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"height": 40
+					"x": 450
+					"y": 270
+					"width": 200
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "detailBriefLabel"
+					"text": "仲恺鹿晗"
+					"font": new java.awt.Font( "Microsoft YaHei UI", 0, 18 )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 215
+					"height": 95
+					"x": 320
+					"y": 365
+				} )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 5
+				"y": 5
+				"height": 535
+				"width": 715
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 730, 575 )
+		} )
+	}
+}

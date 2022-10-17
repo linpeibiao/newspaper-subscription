@@ -39,10 +39,14 @@ public class subMgt extends JFrame {
     private OrderController orderController;
     // 控制用户列表的分页
     public static int getPage = 1;
+    // 控制报刊列表的分页
+    public static int getNewsPage = 1;
     // 待删除的订单的 id
     public static Long deleteOrderId;
     // 判断字符串是否为纯数字
     public static User currentUser;
+    // 获取表格选中报刊的Id
+    public static Long newspaperId;
     public subMgt() {
         userController = new UserController();
         newspaperController = new NewspaperController();
@@ -70,12 +74,10 @@ public class subMgt extends JFrame {
         label1 = new JLabel();
         tabbedPane1 = new JTabbedPane();
         index = new JPanel();
-        label2 = new JLabel();
-        label3 = new JLabel();
-        label4 = new JLabel();
-        label5 = new JLabel();
-        label6 = new JLabel();
-        label7 = new JLabel();
+        newsOrderList = new JTable();
+        newsNextPageButton = new JButton();
+        newsPrePageButton = new JButton();
+        detailButton = new JButton();
         panel5 = new JPanel();
         panel6 = new JPanel();
         queryField = new JTextField();
@@ -127,11 +129,13 @@ public class subMgt extends JFrame {
         //======== panel1 ========
         {
             panel1.setBackground(new Color(0x4c5052));
-            panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border. EmptyBorder(
-            0, 0, 0, 0) , "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn", javax. swing. border. TitledBorder. CENTER, javax. swing. border. TitledBorder
-            . BOTTOM, new java .awt .Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 ), java. awt. Color.
-            red) ,panel1. getBorder( )) ); panel1. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .
-            beans .PropertyChangeEvent e) {if ("\u0062ord\u0065r" .equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
+            panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing
+            . border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frmDes\u0069gner \u0045valua\u0074ion", javax. swing. border. TitledBorder
+            . CENTER, javax. swing. border. TitledBorder. BOTTOM, new java .awt .Font ("D\u0069alog" ,java .
+            awt .Font .BOLD ,12 ), java. awt. Color. red) ,panel1. getBorder( )) )
+            ; panel1. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e
+            ) {if ("\u0062order" .equals (e .getPropertyName () )) throw new RuntimeException( ); }} )
+            ;
             panel1.setLayout(null);
 
             //---- label1 ----
@@ -148,30 +152,26 @@ public class subMgt extends JFrame {
                 //======== index ========
                 {
                     index.setLayout(null);
-                    index.add(label2);
-                    label2.setBounds(60, 70, 100, 100);
-                    index.add(label3);
-                    label3.setBounds(200, 70, 100, 100);
+                    index.add(newsOrderList);
+                    newsOrderList.setBounds(10, 80, 875, 305);
 
-                    //---- label4 ----
-                    label4.setText("\u62a5\u520a\u540d\uff1a");
-                    index.add(label4);
-                    label4.setBounds(55, 180, 105, label4.getPreferredSize().height);
+                    //---- newsNextPageButton ----
+                    newsNextPageButton.setText("\u4e0b\u4e00\u9875");
+                    newsNextPageButton.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+                    index.add(newsNextPageButton);
+                    newsNextPageButton.setBounds(795, 415, 94, 40);
 
-                    //---- label5 ----
-                    label5.setText("\u62a5\u520a\u540d\uff1a");
-                    index.add(label5);
-                    label5.setBounds(200, 180, 105, 17);
+                    //---- newsPrePageButton ----
+                    newsPrePageButton.setText("\u4e0a\u4e00\u9875");
+                    newsPrePageButton.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+                    index.add(newsPrePageButton);
+                    newsPrePageButton.setBounds(670, 415, 94, 40);
 
-                    //---- label6 ----
-                    label6.setText("\u7c7b\u578b\uff1a");
-                    index.add(label6);
-                    label6.setBounds(55, 200, 105, 17);
-
-                    //---- label7 ----
-                    label7.setText("\u7c7b\u578b\uff1a");
-                    index.add(label7);
-                    label7.setBounds(200, 200, 105, 17);
+                    //---- detailButton ----
+                    detailButton.setText("\u62a5\u520a\u8be6\u60c5");
+                    detailButton.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+                    index.add(detailButton);
+                    detailButton.setBounds(775, 25, detailButton.getPreferredSize().width, 40);
 
                     {
                         // compute preferred size
@@ -517,12 +517,10 @@ public class subMgt extends JFrame {
     private JLabel label1;
     private JTabbedPane tabbedPane1;
     private JPanel index;
-    private JLabel label2;
-    private JLabel label3;
-    private JLabel label4;
-    private JLabel label5;
-    private JLabel label6;
-    private JLabel label7;
+    private JTable newsOrderList;
+    private JButton newsNextPageButton;
+    private JButton newsPrePageButton;
+    private JButton detailButton;
     private JPanel panel5;
     private JPanel panel6;
     private JTextField queryField;
@@ -570,7 +568,6 @@ public class subMgt extends JFrame {
         // 请求接口获取当前登录用户的信息
         BaseResponse<User> userBaseResponse = userController.getCurrentLoginUser();
         User user = userBaseResponse.getData();
-        System.out.println(user);
         currentUser = user;
         // 将获取到的用户信息渲染到文本框上
         changeUserField.setText(user.getNackname());
@@ -586,27 +583,131 @@ public class subMgt extends JFrame {
         queryList.addItem("按用户id查询");
 
     }
-    // 初始化首页界面
+    // 初始化订阅首页界面
     public void initIndexView() {
+        // 报刊表
+        getNewsPage = 1;
+        DefaultTableModel newsOrderL = (DefaultTableModel) newsOrderList.getModel(); 
+        Object[] newsRowName = {"报刊编号","报刊名称","出版社","报刊类型","报刊单价"};
+        newsOrderL.setRowCount(20);
+        newsOrderL.setColumnCount(newsRowName.length);
+        // 设置表头名
+        for (int i =0; i< newsRowName.length; i++) {
+            newsOrderL.setValueAt(newsRowName[i],0,i);
+        }
         // 请求接口获取报刊信息
-        BaseResponse<List<Newspaper>> newsBaseResponse = newspaperController.getNewspaperByType("色情");
+        BaseResponse<List<Newspaper>> newsBaseResponse = newspaperController.getNewspaperPage(getNewsPage,20);
         List<Newspaper> newsList = newsBaseResponse.getData();
-        Newspaper newspaper = newsList.get(0);
-        System.out.println(newspaper);
-        ImageIcon image = new ImageIcon("src/main/java/com/zkxg/newspaper_subscription/view/avatar.jpg");
-        image.setImage(image.getImage().getScaledInstance(100,100,Image.SCALE_DEFAULT));
-        label2.setIcon(image);
-        label4.setText(label4.getText() + newspaper.getName());
-        label3.setIcon(image);
-        label5.setText(label4.getText() + newspaper.getName());
-        label6.setText(label6.getText() + newspaper.getType());
-        label7.setText(label7.getText() + newspaper.getType());
+        for (int i = 1; i < newsList.size(); i++) {
+            Newspaper newspaper = newsList.get(i-1);
+            newsOrderL.setValueAt(newspaper.getId(),i,0);
+            newsOrderL.setValueAt(newspaper.getName(),i,1);
+            newsOrderL.setValueAt(newspaper.getPublisher(),i,2);
+            newsOrderL.setValueAt(newspaper.getType(),i,3);
+            newsOrderL.setValueAt(newspaper.getPrice(),i,4);
+            System.out.println(newspaper);
+        }
+//        ImageIcon image = new ImageIcon("src/main/java/com/zkxg/newspaper_subscription/view/avatar.jpg");
+//        image.setImage(image.getImage().getScaledInstance(100,100,Image.SCALE_DEFAULT));
+//        label2.setIcon(image);
+//        label4.setText(label4.getText() + newspaper.getName());
+//        label3.setIcon(image);
+//        label5.setText(label4.getText() + newspaper.getName());
+//        label6.setText(label6.getText() + newspaper.getType());
+//        label7.setText(label7.getText() + newspaper.getType());
     }
     // 监听事件
     public void listerner() {
-        // 触发修改账号信息事件
-        changeButton.addActionListener(
+        // 获取上一页报刊
+        newsPrePageButton.addActionListener(
                 new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        System.out.println("获取上一页报刊");
+                        // 重新渲染表格
+                        DefaultTableModel newsOrderL = (DefaultTableModel) newsOrderList.getModel();
+                        Object[] newsRowName = {"报刊编号","报刊名称","出版社","报刊类型","报刊单价"};
+                        newsOrderL.setRowCount(20);
+                        newsOrderL.setColumnCount(newsRowName.length);
+                        for (int i =0; i< newsRowName.length; i++) {
+                            newsOrderL.setValueAt(newsRowName[i],0,i);
+                        }
+                        if (getNewsPage == 1) {
+                            JOptionPane.showMessageDialog(null,"当前所处位置已是第一页！");
+                            return;
+                        }
+                        // 请求接口获取报刊信息
+                        BaseResponse<List<Newspaper>> newsBaseResponse = newspaperController.getNewspaperPage(getNewsPage-=17,20);
+                        List<Newspaper> newsList = newsBaseResponse.getData();
+                        for (int i = 1; i < newsList.size(); i++) {
+                            Newspaper newspaper = newsList.get(i-1);
+                            newsOrderL.setValueAt(newspaper.getId(),i,0);
+                            newsOrderL.setValueAt(newspaper.getName(),i,1);
+                            newsOrderL.setValueAt(newspaper.getPublisher(),i,2);
+                            newsOrderL.setValueAt(newspaper.getType(),i,3);
+                            newsOrderL.setValueAt(newspaper.getPrice(),i,4);
+                        }
+                    }
+                }
+        );
+        // 获取下一页报刊
+        newsNextPageButton.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        System.out.println("获取下一页报刊");
+                        // 重新渲染表格
+                        DefaultTableModel newsOrderL = (DefaultTableModel) newsOrderList.getModel();
+                        Object[] newsRowName = {"报刊编号","报刊名称","出版社","报刊类型","报刊单价"};
+                        newsOrderL.setRowCount(20);
+                        newsOrderL.setColumnCount(newsRowName.length);
+                        for (int i =0; i< newsRowName.length; i++) {
+                            newsOrderL.setValueAt(newsRowName[i],0,i);
+                        }
+                        // 请求接口获取报刊信息
+                        BaseResponse<List<Newspaper>> newsBaseResponse = newspaperController.getNewspaperPage(getNewsPage+=17,20);
+                        List<Newspaper> newsList = newsBaseResponse.getData();
+                        if (newsList.size() == 0) {
+                            JOptionPane.showMessageDialog(null,"已经到最后一页啦！");
+                            return;
+                        }
+                        for (int i = 1; i < newsList.size(); i++) {
+                            Newspaper newspaper = newsList.get(i-1);
+                            newsOrderL.setValueAt(newspaper.getId(),i,0);
+                            newsOrderL.setValueAt(newspaper.getName(),i,1);
+                            newsOrderL.setValueAt(newspaper.getPublisher(),i,2);
+                            newsOrderL.setValueAt(newspaper.getType(),i,3);
+                            newsOrderL.setValueAt(newspaper.getPrice(),i,4);
+                        }
+                    }
+                }
+        );
+        // 查看报刊详情
+        detailButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("触发查看报刊详情按钮");
+                if (newspaperId == null) {
+                    JOptionPane.showMessageDialog(null,"请选择需要查看的报刊！");
+                    return;
+                }
+                new newsDetail();
+                newspaperId = null;
+            }
+        });
+        // 点击获取报刊Id
+        newsOrderList.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (e.getButton() == e.BUTTON1) {
+                    int row = newsOrderList.getSelectedRow(); // 获取选中行的报刊id
+                    newspaperId = Long.valueOf(newsOrderList.getValueAt(row,0).toString());
+                    System.out.println(newspaperId);
+                }
+            }
+        });
+        // 触发修改账号信息事件
+        changeButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         // 获取用户输入的新用户名
@@ -650,8 +751,7 @@ public class subMgt extends JFrame {
                 }
         );
         // 触发注销账号事件
-        logoutButton.addActionListener(
-                new ActionListener() {
+        logoutButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         // 关闭主界面
@@ -663,8 +763,7 @@ public class subMgt extends JFrame {
                 }
         );
         // 触发订单查询事件
-        queryButton.addActionListener(
-                new ActionListener() {
+        queryButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         // 查询表
@@ -713,8 +812,7 @@ public class subMgt extends JFrame {
 
         );
         // 点击获取选中行的订单id
-        queryTable.addMouseListener(
-                new MouseAdapter() {
+        queryTable.addMouseListener(new MouseAdapter() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
                         if (e.getButton() == e.BUTTON1) {
@@ -726,8 +824,7 @@ public class subMgt extends JFrame {
                 }
         );
         // 删除选中的订单
-        deleteOrderButton.addActionListener(
-                new ActionListener() {
+        deleteOrderButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         // 管理员无法删除订单
@@ -752,8 +849,7 @@ public class subMgt extends JFrame {
                 }
         );
         // 获取当前用户订单
-        currentOrderButton.addActionListener(
-                new ActionListener() {
+        currentOrderButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         // 查询表
@@ -802,8 +898,7 @@ public class subMgt extends JFrame {
         );
 
         // 管理员对用户列表进行查询
-        queryUserButton.addActionListener(
-                new ActionListener() {
+        queryUserButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         System.out.println("触发查询用户列表按钮！");
@@ -837,8 +932,7 @@ public class subMgt extends JFrame {
                 }
         );
         // 获取上一页数据
-        prePageButton.addActionListener(
-                new ActionListener() {
+        prePageButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         System.out.println("获取上一页数据");
@@ -871,8 +965,7 @@ public class subMgt extends JFrame {
                 }
         );
         // 获取下一页数据
-        nextPageButton.addActionListener(
-                new ActionListener() {
+        nextPageButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         System.out.println("获取下一页数据");
@@ -904,8 +997,7 @@ public class subMgt extends JFrame {
                 }
         );
         // 添加新报刊
-        addNewsButton.addActionListener(
-                new ActionListener() {
+        addNewsButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (!(newspaperController.isAdmin())) {
