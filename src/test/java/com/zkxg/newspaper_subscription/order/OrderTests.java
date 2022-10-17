@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import com.zkxg.newspaper_subscription.controller.OrderController;
 import com.zkxg.newspaper_subscription.controller.UserController;
 import com.zkxg.newspaper_subscription.model.dto.OrderDto;
+import com.zkxg.newspaper_subscription.model.entity.User;
 import com.zkxg.newspaper_subscription.model.vo.LoginInfo;
 import org.junit.Test;
 
@@ -20,15 +21,23 @@ public class OrderTests {
         orderController = new OrderController();
     }
 
-    public void userLogin(){
+    public User userLogin(){
         // 先登录
         LoginInfo loginInfo = new LoginInfo();
         loginInfo.setAccount("linxiaohu2");
         loginInfo.setPhone("");
         loginInfo.setPassword("linxiaohu");
         // 首先要登陆
-        userController.userLogin(loginInfo).getData();
+        return userController.userLogin(loginInfo).getData();
     }
+
+    @Test
+    public void getUserCostInfoByUserIdTest(){
+        final User user = userLogin();
+        System.out.println(orderController.getUserCostInfoByUserId(user.getId()).getData());
+
+    }
+
     @Test
     public void getOrderByOrderNumberTest(){
         userLogin();

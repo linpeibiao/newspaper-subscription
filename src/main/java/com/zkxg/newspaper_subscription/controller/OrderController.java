@@ -7,6 +7,7 @@ import com.zkxg.newspaper_subscription.exception.BusinessException;
 import com.zkxg.newspaper_subscription.model.dto.OrderDto;
 import com.zkxg.newspaper_subscription.model.entity.Order;
 import com.zkxg.newspaper_subscription.model.entity.User;
+import com.zkxg.newspaper_subscription.model.vo.UserCostInfo;
 import com.zkxg.newspaper_subscription.service.OrderService;
 import com.zkxg.newspaper_subscription.service.impl.OrderServiceImpl;
 import org.apache.commons.lang3.StringUtils;
@@ -67,8 +68,18 @@ public class OrderController {
         return delete > 0 ? ResultUtils.success("删除成功") : ResultUtils.success("删除失败");
     }
 
+    // TODO 统计用户在报刊上的开销详情，按照type分类
+    public BaseResponse<UserCostInfo> getUserCostInfoByUserId(Long userId){
+        if (userId == null || userId <= 0){
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        // TODO 判端登录
+        UserCostInfo userCostInfo = orderService.getUserCostInfoByUserId(userId);
+        return ResultUtils.success(userCostInfo);
+    }
+
     /**
-     * 通过用户id获取订单
+     * 通过用户id获取该用户的所有订单
      * @param userId
      * @return
      */

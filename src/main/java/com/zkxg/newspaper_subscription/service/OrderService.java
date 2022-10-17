@@ -3,6 +3,7 @@ package com.zkxg.newspaper_subscription.service;
 import com.zkxg.newspaper_subscription.model.dto.OrderDto;
 import com.zkxg.newspaper_subscription.model.entity.Order;
 import com.zkxg.newspaper_subscription.model.vo.NewspaperInfo;
+import com.zkxg.newspaper_subscription.model.vo.UserCostInfo;
 import com.zkxg.newspaper_subscription.model.vo.UserInfo;
 
 import java.util.Date;
@@ -30,4 +31,8 @@ public interface OrderService {
     List<UserInfo> getOrderMostUser(int n);
     // 按照阶段内欢迎程度获取报刊信息
     List<NewspaperInfo> getPopularNewspaper(Date start, Date end, int n);
+    // 获取最受欢迎的杂志类型
+    List<String> getMostPopularNewspaperType();
+    // 获取用户在报刊上的花费信息
+    UserCostInfo getUserCostInfoByUserId(Long userId);
 }

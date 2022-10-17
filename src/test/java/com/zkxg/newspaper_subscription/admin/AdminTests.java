@@ -32,6 +32,12 @@ public class AdminTests {
     }
 
     @Test
+    public void getMostPopularNewspaperTypeTest(){
+        userLogin();
+        System.out.println(adminController.getMostPopularNewspaperType().getData());
+    }
+
+    @Test
     public void getPopularNewspaperTest() throws ParseException {
         userLogin();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

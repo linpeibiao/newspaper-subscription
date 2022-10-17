@@ -15,6 +15,7 @@ import com.zkxg.newspaper_subscription.exception.BusinessException;
 import com.zkxg.newspaper_subscription.model.dto.OrderDto;
 import com.zkxg.newspaper_subscription.model.entity.Order;
 import com.zkxg.newspaper_subscription.model.vo.NewspaperInfo;
+import com.zkxg.newspaper_subscription.model.vo.UserCostInfo;
 import com.zkxg.newspaper_subscription.model.vo.UserInfo;
 import com.zkxg.newspaper_subscription.service.OrderService;
 import com.zkxg.newspaper_subscription.util.SnowFlakeGenerateWorker;
@@ -107,6 +108,36 @@ public class OrderServiceImpl implements OrderService {
             BaseDao.closeResource(conn, null, null);
         }
         return newspaperList;
+    }
+
+    @Override
+    public List<String> getMostPopularNewspaperType() {
+        Connection conn = null;
+        List<String> typeList = null;
+        try{
+            conn = BaseDao.getConnection();
+            typeList = orderDao.getMostPopularType(conn);
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally{
+            BaseDao.closeResource(conn, null, null);
+        }
+        return typeList;
+    }
+
+    @Override
+    public UserCostInfo getUserCostInfoByUserId(Long userId) {
+        Connection conn = null;
+        UserCostInfo userCostInfo = null;
+        try{
+            conn = BaseDao.getConnection();
+            userCostInfo = orderDao.getUserCostInfoByUserId(conn, userId);
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally{
+            BaseDao.closeResource(conn, null, null);
+        }
+        return userCostInfo;
     }
 
     @Override

@@ -4,15 +4,15 @@ import com.zkxg.newspaper_subscription.dao.BaseDao;
 import com.zkxg.newspaper_subscription.dao.OrderDao;
 import com.zkxg.newspaper_subscription.model.entity.Order;
 import com.zkxg.newspaper_subscription.model.vo.NewspaperInfo;
+import com.zkxg.newspaper_subscription.model.vo.UserCostInfo;
 import com.zkxg.newspaper_subscription.model.vo.UserInfo;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author xiaohu
@@ -292,5 +292,61 @@ public class OrderDaoImpl implements OrderDao {
         }
         BaseDao.closeResource(null,pstm,rs);
         return newspaperList;
+    }
+
+    // TODO
+    @Override
+    public List<String> getMostPopularType(Connection conn) throws SQLException {
+        List<String> list = new ArrayList<>();
+        list.add("色情");
+        return list;
+    }
+
+    @Override
+    public UserCostInfo getUserCostInfoByUserId(Connection conn, Long userId) throws SQLException {
+        // 1、通过用户id获取到用户的所有订单 getOrderByUserId()
+        // select * from t_order where user_id = ? and is_deleted = 0
+        // 2、拿到订单的花费金额，累加
+        // 3、拿到报刊的id,通过报刊id获取类型，按照类型给报刊id分类，再累加各自的花费金额
+        // select newspaper_id from t_newspaper group by type;
+        // select sum(total_price) as newspaper_id_cost from t_order group by newspaper_id;
+        // select sum(newspaper_id_cost) from t_temp where newspaper_id in (第311行)
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        UserCostInfo userCostInfo = null;
+        BigDecimal sum = null;
+        Map<String, BigDecimal> userCostInfoMap = null;
+        if (conn != null) {
+            userCostInfo = new UserCostInfo();
+            userCostInfoMap = new HashMap<>();
+            sum = new BigDecimal(0);
+            String sql = "SELECT " +
+                    "sum( o.total_price ) AS total_cost," +
+                    "n.type " +
+                    "FROM " +
+                    "t_order AS o," +
+                    "t_newspaper AS n " +
+                    "WHERE " +
+                    "o.is_deleted = 0 " +
+                    "AND o.user_id = ? " +
+                    "AND o.newspaper_id = n.id " +
+                    "GROUP BY " +
+                    "type";
+            Object[] params = new Object[]{
+                    userId
+            };
+            rs = BaseDao.execute(conn, pstm, rs,sql, params);
+            while(rs.next()){
+                String type = rs.getString("type");
+                BigDecimal totalCost = rs.getBigDecimal("total_cost");
+                sum = sum.add(totalCost);
+                userCostInfoMap.put(type,totalCost);
+            }
+            userCostInfo.setUserId(userId);
+            userCostInfo.setTotalCost(sum);
+            userCostInfo.setTypePercentage(userCostInfoMap);
+        }
+
+        return userCostInfo;
     }
 }

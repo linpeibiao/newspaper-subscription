@@ -8,7 +8,6 @@ import com.zkxg.newspaper_subscription.model.vo.NewspaperInfo;
 import com.zkxg.newspaper_subscription.model.vo.UserInfo;
 import com.zkxg.newspaper_subscription.service.OrderService;
 import com.zkxg.newspaper_subscription.service.impl.OrderServiceImpl;
-import org.springframework.beans.factory.annotation.Value;
 
 import java.util.Date;
 import java.util.List;
@@ -25,6 +24,19 @@ public class AdminController {
     public AdminController(){
         orderService = new OrderServiceImpl();
         newspaperController = new NewspaperController();
+    }
+
+    /**
+     * 获取最受欢迎的报刊类型
+     * @return
+     */
+    public BaseResponse<List<String>> getMostPopularNewspaperType(){
+        // 判权
+        if (!newspaperController.isAdmin()){
+            throw new BusinessException(ErrorCode.NO_AUTH);
+        }
+        List<String> typeList = orderService.getMostPopularNewspaperType();
+        return ResultUtils.success(typeList);
     }
 
     /**
