@@ -7,17 +7,10 @@ package com.zkxg.newspaper_subscription.view;
 import java.awt.*;
 import java.awt.event.*;
 import java.math.BigDecimal;
-import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Vector;
 import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
-import com.jgoodies.forms.factories.*;
-import com.jgoodies.forms.layout.*;
-
 //import com.jgoodies.forms.factories.*;
 import com.zkxg.newspaper_subscription.common.BaseResponse;
 import com.zkxg.newspaper_subscription.controller.NewspaperController;
@@ -26,10 +19,10 @@ import com.zkxg.newspaper_subscription.controller.UserController;
 import com.zkxg.newspaper_subscription.model.entity.Newspaper;
 import com.zkxg.newspaper_subscription.model.entity.Order;
 import com.zkxg.newspaper_subscription.model.entity.User;
-import com.zkxg.newspaper_subscription.model.vo.LoginInfo;
-import info.clearthought.layout.*;
 
-/**
+import static com.zkxg.newspaper_subscription.view.modNewspaper.modTarget;
+
+/*
  * @author unknown
  * 管理员登陆成功主界面
  */
@@ -43,7 +36,7 @@ public class subMgt extends JFrame {
     public static int getNewsPage = 1;
     // 待删除的订单的 id
     public static Long deleteOrderId;
-    // 判断字符串是否为纯数字
+    // 当前登录用户
     public static User currentUser;
     // 获取表格选中报刊的Id
     public static Long newspaperId;
@@ -78,6 +71,10 @@ public class subMgt extends JFrame {
         newsNextPageButton = new JButton();
         newsPrePageButton = new JButton();
         detailButton = new JButton();
+        queryNewsList = new JComboBox();
+        queryNewsField = new JTextField();
+        queryNewsButton = new JButton();
+        modNewsButton = new JButton();
         panel5 = new JPanel();
         panel6 = new JPanel();
         queryField = new JTextField();
@@ -130,11 +127,11 @@ public class subMgt extends JFrame {
         {
             panel1.setBackground(new Color(0x4c5052));
             panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing
-            . border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frmDes\u0069gner \u0045valua\u0074ion", javax. swing. border. TitledBorder
-            . CENTER, javax. swing. border. TitledBorder. BOTTOM, new java .awt .Font ("D\u0069alog" ,java .
+            . border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn", javax. swing. border. TitledBorder
+            . CENTER, javax. swing. border. TitledBorder. BOTTOM, new java .awt .Font ("Dia\u006cog" ,java .
             awt .Font .BOLD ,12 ), java. awt. Color. red) ,panel1. getBorder( )) )
             ; panel1. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e
-            ) {if ("\u0062order" .equals (e .getPropertyName () )) throw new RuntimeException( ); }} )
+            ) {if ("\u0062ord\u0065r" .equals (e .getPropertyName () )) throw new RuntimeException( ); }} )
             ;
             panel1.setLayout(null);
 
@@ -168,10 +165,29 @@ public class subMgt extends JFrame {
                     newsPrePageButton.setBounds(670, 415, 94, 40);
 
                     //---- detailButton ----
-                    detailButton.setText("\u62a5\u520a\u8be6\u60c5");
+                    detailButton.setText("\u62a5\u520a\u8ba2\u9605");
                     detailButton.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
                     index.add(detailButton);
-                    detailButton.setBounds(775, 25, detailButton.getPreferredSize().width, 40);
+                    detailButton.setBounds(775, 20, detailButton.getPreferredSize().width, 40);
+                    index.add(queryNewsList);
+                    queryNewsList.setBounds(10, 20, 140, 40);
+
+                    //---- queryNewsField ----
+                    queryNewsField.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+                    index.add(queryNewsField);
+                    queryNewsField.setBounds(175, 20, 200, 40);
+
+                    //---- queryNewsButton ----
+                    queryNewsButton.setText("\u67e5\u8be2");
+                    queryNewsButton.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+                    index.add(queryNewsButton);
+                    queryNewsButton.setBounds(395, 20, 78, 40);
+
+                    //---- modNewsButton ----
+                    modNewsButton.setText("\u4fee\u6539");
+                    modNewsButton.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+                    index.add(modNewsButton);
+                    modNewsButton.setBounds(680, 20, 78, 40);
 
                     {
                         // compute preferred size
@@ -521,6 +537,10 @@ public class subMgt extends JFrame {
     private JButton newsNextPageButton;
     private JButton newsPrePageButton;
     private JButton detailButton;
+    private JComboBox queryNewsList;
+    private JTextField queryNewsField;
+    private JButton queryNewsButton;
+    private JButton modNewsButton;
     private JPanel panel5;
     private JPanel panel6;
     private JTextField queryField;
@@ -581,7 +601,9 @@ public class subMgt extends JFrame {
     public void initQueryView() {
         queryList.addItem("按订单号查询");
         queryList.addItem("按用户id查询");
-
+        queryNewsList.addItem("按报刊名称查询");
+        queryNewsList.addItem("按报刊类型查询");
+        queryNewsField.setToolTipText("请输入查询内容");
     }
     // 初始化订阅首页界面
     public void initIndexView() {
@@ -607,17 +629,28 @@ public class subMgt extends JFrame {
             newsOrderL.setValueAt(newspaper.getPrice(),i,4);
             System.out.println(newspaper);
         }
-//        ImageIcon image = new ImageIcon("src/main/java/com/zkxg/newspaper_subscription/view/avatar.jpg");
-//        image.setImage(image.getImage().getScaledInstance(100,100,Image.SCALE_DEFAULT));
-//        label2.setIcon(image);
-//        label4.setText(label4.getText() + newspaper.getName());
-//        label3.setIcon(image);
-//        label5.setText(label4.getText() + newspaper.getName());
-//        label6.setText(label6.getText() + newspaper.getType());
-//        label7.setText(label7.getText() + newspaper.getType());
     }
     // 监听事件
     public void listerner() {
+        // 修改报刊功能
+        modNewsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("触发修改报刊功能");
+                if (!newspaperController.isAdmin()) {
+                    JOptionPane.showMessageDialog(null,"只有管理员才能对报刊进行修改！");
+                    return;
+                }
+                if(newspaperId == null) {
+                    JOptionPane.showMessageDialog(null,"请选择需要修改的报刊！");
+                    return;
+                }
+                new modNewspaper();
+                if (modTarget == 1) {
+                    System.out.println(6666666);
+                }
+            }
+        });
         // 获取上一页报刊
         newsPrePageButton.addActionListener(
                 new ActionListener() {
@@ -682,13 +715,17 @@ public class subMgt extends JFrame {
                     }
                 }
         );
-        // 查看报刊详情
+        // 查看报刊详情并订阅
         detailButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("触发查看报刊详情按钮");
+                if (newspaperController.isAdmin()) {
+                    JOptionPane.showMessageDialog(null,"管理员无法进行报刊订阅！");
+                    return;
+                }
                 if (newspaperId == null) {
-                    JOptionPane.showMessageDialog(null,"请选择需要查看的报刊！");
+                    JOptionPane.showMessageDialog(null,"请选择需要订阅的报刊！");
                     return;
                 }
                 new newsDetail();
@@ -1028,8 +1065,9 @@ public class subMgt extends JFrame {
                         }
                         // 获取新报刊价格(先将价格从字符串转换成BIgDecimal类型)
                         BigDecimal bd = new BigDecimal(addNewsPriceField.getText());
+                        BigDecimal bd2 = new BigDecimal(0);
                         bd = bd.setScale(3, BigDecimal.ROUND_HALF_UP);
-                        if ( Integer.valueOf(addNewsPriceField.getText()) < 0) {
+                        if (bd.compareTo(bd2) != 1) {
                             JOptionPane.showMessageDialog(null,"价格必须是大于0的数字");
                             return;
                         }

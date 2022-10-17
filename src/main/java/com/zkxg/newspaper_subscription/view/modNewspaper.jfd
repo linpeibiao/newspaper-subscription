@@ -23,7 +23,7 @@ new FormModel {
 					"width": 105
 					"height": 40
 					"x": 320
-					"y": 25
+					"y": 20
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "label3"
@@ -33,7 +33,7 @@ new FormModel {
 					"width": 105
 					"height": 40
 					"x": 320
-					"y": 75
+					"y": 80
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "label4"
@@ -42,8 +42,8 @@ new FormModel {
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"width": 105
 					"height": 40
-					"x": 320
-					"y": 130
+					"x": 315
+					"y": 150
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "label5"
@@ -52,8 +52,8 @@ new FormModel {
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"width": 105
 					"height": 40
-					"x": 320
-					"y": 185
+					"x": 315
+					"y": 225
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "label6"
@@ -63,76 +63,62 @@ new FormModel {
 					"width": 105
 					"height": 40
 					"x": 315
-					"y": 245
-				} )
-				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "detailNameLabel"
-					"text": "仲恺鹿晗"
-					"font": #Font0
-				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-					"height": 40
-					"x": 450
-					"y": 25
-					"width": 200
-				} )
-				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "detailPublishLabel"
-					"text": "仲恺鹿晗"
-					"font": #Font0
-				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-					"height": 40
-					"x": 450
-					"y": 75
-					"width": 200
-				} )
-				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "detailTypeLabel"
-					"text": "仲恺鹿晗"
-					"font": #Font0
-				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-					"height": 40
-					"x": 450
-					"y": 130
-					"width": 200
-				} )
-				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "detailPriceLabel"
-					"text": "仲恺鹿晗"
-					"font": #Font0
-				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-					"height": 40
-					"x": 450
-					"y": 185
-					"width": 200
-				} )
-				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "detailBriefLabel"
-					"text": "仲恺鹿晗"
-					"font": new java.awt.Font( "Microsoft YaHei UI", 0, 18 )
-				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-					"width": 215
-					"height": 95
-					"x": 315
-					"y": 255
+					"y": 290
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "subNewsButton"
-					"text": "订阅"
+					name: "modNewsButton"
+					"text": "修改"
 					"font": new java.awt.Font( "Microsoft YaHei UI", 0, 20 )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-					"width": 240
+					"width": 295
 					"height": 40
 					"x": 315
 					"y": 440
 				} )
 				add( new FormComponent( "javax.swing.JTextField" ) {
-					name: "subNewsCountField"
-					"font": new java.awt.Font( "Microsoft YaHei UI", 0, 20 )
+					name: "modNewsNameField"
+					"font": &Font1 new java.awt.Font( "Microsoft YaHei UI", 0, 20 )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-					"width": 240
+					"width": 175
 					"height": 40
+					"x": 435
+					"y": 20
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "modNewsPriceField"
+					"font": #Font1
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 175
+					"height": 40
+					"x": 435
+					"y": 225
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "modNewsTypeField"
+					"font": #Font1
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 175
+					"height": 40
+					"x": 435
+					"y": 155
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "modNewsPublishField"
+					"font": #Font1
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 175
+					"height": 40
+					"x": 435
+					"y": 85
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "modNewsBriefField"
+					"font": #Font1
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 295
+					"height": 85
 					"x": 315
-					"y": 370
+					"y": 335
 				} )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 5
@@ -141,8 +127,8 @@ new FormModel {
 				"width": 715
 			} )
 		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 0, 0 )
 			"size": new java.awt.Dimension( 730, 575 )
+			"location": new java.awt.Point( 0, 0 )
 		} )
 	}
 }
