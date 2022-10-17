@@ -12,8 +12,7 @@ import com.zkxg.newspaper_subscription.dao.impl.OrderDaoImpl;
 import com.zkxg.newspaper_subscription.exception.BusinessException;
 import com.zkxg.newspaper_subscription.model.dto.OrderDto;
 import com.zkxg.newspaper_subscription.model.entity.Order;
-import com.zkxg.newspaper_subscription.model.entity.User;
-import com.zkxg.newspaper_subscription.model.vo.UserCostInfo;
+import com.zkxg.newspaper_subscription.model.vo.UserInfo;
 import com.zkxg.newspaper_subscription.service.OrderService;
 import com.zkxg.newspaper_subscription.util.SnowFlakeGenerateWorker;
 import org.apache.commons.lang3.StringUtils;
@@ -49,12 +48,27 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<UserCostInfo> getCostMostUser(int n) {
+    public List<UserInfo> getCostMostUser(int n) {
         Connection conn = null;
-        List<UserCostInfo> userList = null;
+        List<UserInfo> userList = null;
         try{
             conn = BaseDao.getConnection();
-            userList = orderDao.getCostMostUser(conn, n);
+            userList = orderDao.getOrderMostUser(conn, n);
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally{
+            BaseDao.closeResource(conn, null, null);
+        }
+        return userList;
+    }
+
+    @Override
+    public List<UserInfo> getOrderMostUser(int n) {
+        Connection conn = null;
+        List<UserInfo> userList = null;
+        try{
+            conn = BaseDao.getConnection();
+            userList = orderDao.getOrderMostUser(conn, n);
         }catch (SQLException e){
             e.printStackTrace();
         }finally{

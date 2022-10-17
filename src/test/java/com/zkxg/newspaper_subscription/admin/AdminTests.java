@@ -28,6 +28,12 @@ public class AdminTests {
     }
 
     @Test
+    public void getOrderMostUserTest(){
+        userLogin();
+        System.out.println(adminController.getOrderMostUser(2).getData());
+    }
+
+    @Test
     public void getCostMostUserTest(){
         userLogin();
         System.out.println(adminController.getCostMostUser(10).getData());

@@ -2,8 +2,7 @@ package com.zkxg.newspaper_subscription.service;
 
 import com.zkxg.newspaper_subscription.model.dto.OrderDto;
 import com.zkxg.newspaper_subscription.model.entity.Order;
-import com.zkxg.newspaper_subscription.model.entity.User;
-import com.zkxg.newspaper_subscription.model.vo.UserCostInfo;
+import com.zkxg.newspaper_subscription.model.vo.UserInfo;
 
 import java.util.List;
 
@@ -24,5 +23,7 @@ public interface OrderService {
     // 通过报刊id统计报刊被订阅的订单数
     int getCountByNewspaperId(Long newspaperId);
     // 获取花钱 前n多的用户
-    List<UserCostInfo> getCostMostUser(int n);
+    List<UserInfo> getCostMostUser(int n);
+    // 获取下订单数量前n多的用户
+    List<UserInfo> getOrderMostUser(int n);
 }

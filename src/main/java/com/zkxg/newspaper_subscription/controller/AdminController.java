@@ -4,7 +4,7 @@ import com.zkxg.newspaper_subscription.common.BaseResponse;
 import com.zkxg.newspaper_subscription.common.ErrorCode;
 import com.zkxg.newspaper_subscription.common.ResultUtils;
 import com.zkxg.newspaper_subscription.exception.BusinessException;
-import com.zkxg.newspaper_subscription.model.vo.UserCostInfo;
+import com.zkxg.newspaper_subscription.model.vo.UserInfo;
 import com.zkxg.newspaper_subscription.service.OrderService;
 import com.zkxg.newspaper_subscription.service.impl.OrderServiceImpl;
 
@@ -25,10 +25,26 @@ public class AdminController {
     }
 
     /**
+     * 获取下订单前n多的用户
+     * @param n
+     * @return
+     */
+    public BaseResponse<List<UserInfo>> getOrderMostUser(int n){
+        if (n <= 0){
+            n = 10; // 默认取前十条
+        }
+        if (!newspaperController.isAdmin()){
+            throw new BusinessException(ErrorCode.NO_AUTH);
+        }
+        List<UserInfo> userList = orderService.getOrderMostUser(n);
+        return ResultUtils.success(userList);
+    }
+
+    /**
      * 获取花钱 前n多的用户
      * @return
      */
-    public BaseResponse<List<UserCostInfo>> getCostMostUser(int n){
+    public BaseResponse<List<UserInfo>> getCostMostUser(int n){
         if (n <= 0){
             n = 10; // 默认取前十
         }
@@ -36,7 +52,7 @@ public class AdminController {
         if (!newspaperController.isAdmin()){
             throw new BusinessException(ErrorCode.NO_AUTH);
         }
-        List<UserCostInfo> userList = orderService.getCostMostUser(n);
+        List<UserInfo> userList = orderService.getCostMostUser(n);
         return ResultUtils.success(userList);
     }
 
