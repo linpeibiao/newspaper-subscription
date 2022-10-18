@@ -66,7 +66,7 @@ new FormModel {
 					"y": 290
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "modNewsButton"
+					name: "modNewsButton1"
 					"text": "修改"
 					"font": new java.awt.Font( "Microsoft YaHei UI", 0, 20 )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {

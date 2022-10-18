@@ -60,6 +60,7 @@ public class newsDetail extends JFrame {
         detailBriefLabel = new JLabel();
         subNewsButton = new JButton();
         subNewsCountField = new JTextField();
+        label7 = new JLabel();
 
         //======== this ========
         Container contentPane = getContentPane();
@@ -67,12 +68,11 @@ public class newsDetail extends JFrame {
 
         //======== panel1 ========
         {
-            panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing.
-            border. EmptyBorder( 0, 0, 0, 0) , "JFor\u006dDesi\u0067ner \u0045valu\u0061tion", javax. swing. border. TitledBorder. CENTER
-            , javax. swing. border. TitledBorder. BOTTOM, new java .awt .Font ("Dia\u006cog" ,java .awt .Font
-            .BOLD ,12 ), java. awt. Color. red) ,panel1. getBorder( )) ); panel1. addPropertyChangeListener (
-            new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("bord\u0065r"
-            .equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
+            panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border. EmptyBorder(
+            0, 0, 0, 0) , "JF\u006frmDes\u0069gner \u0045valua\u0074ion", javax. swing. border. TitledBorder. CENTER, javax. swing. border. TitledBorder
+            . BOTTOM, new java .awt .Font ("D\u0069alog" ,java .awt .Font .BOLD ,12 ), java. awt. Color.
+            red) ,panel1. getBorder( )) ); panel1. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .
+            beans .PropertyChangeEvent e) {if ("\u0062order" .equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
             panel1.setLayout(null);
             panel1.add(imageLabel);
             imageLabel.setBounds(10, 10, 290, 515);
@@ -146,7 +146,13 @@ public class newsDetail extends JFrame {
             //---- subNewsCountField ----
             subNewsCountField.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
             panel1.add(subNewsCountField);
-            subNewsCountField.setBounds(315, 370, 240, 40);
+            subNewsCountField.setBounds(480, 370, 75, 40);
+
+            //---- label7 ----
+            label7.setText("\u8f93\u5165\u8ba2\u9605\u4efd\u6570\uff1a");
+            label7.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+            panel1.add(label7);
+            label7.setBounds(315, 370, label7.getPreferredSize().width, 40);
 
             {
                 // compute preferred size
@@ -201,6 +207,7 @@ public class newsDetail extends JFrame {
     private JLabel detailBriefLabel;
     private JButton subNewsButton;
     private JTextField subNewsCountField;
+    private JLabel label7;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
     public void initView() {
         System.out.println(newspaperId);
@@ -223,6 +230,10 @@ public class newsDetail extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("触发订阅按钮");
+                if (subNewsCountField.getText().length() == 0) {
+                    JOptionPane.showMessageDialog(null,"请输入订阅份数！");
+                    return;
+                }
                 // 订阅单价
                 BigDecimal singlePrice = new BigDecimal(detailPriceLabel.getText());
                 BigDecimal count = new BigDecimal(subNewsCountField.getText());
@@ -232,10 +243,20 @@ public class newsDetail extends JFrame {
                     JOptionPane.showMessageDialog(null,"订阅份数必须是大于0的整数");
                     return;
                 }
-                OrderDto subObj = new OrderDto(currentUser.getId(),currentUser.getNackname(),getNewspaperId,detailNameLabel.getText(),Integer.valueOf(1),Integer.valueOf(subNewsCountField.getText()),singlePrice,subToalPrice,"订阅成功！");
-                BaseResponse<Order> orderBaseResponse = orderController.orderNewspaper(subObj);
-                JOptionPane.showMessageDialog(null,"订阅成功！");
-                dispose();
+                int option = JOptionPane.showConfirmDialog(null,"最终总价为" + subToalPrice + "元，是否确认提交订单？");
+                if (option == JOptionPane.YES_OPTION) {
+                    System.out.println("确认提交订单");
+                    OrderDto subObj = new OrderDto(currentUser.getId(),currentUser.getNackname(),getNewspaperId,detailNameLabel.getText(),Integer.valueOf(1),Integer.valueOf(subNewsCountField.getText()),singlePrice,subToalPrice,"订阅成功！");
+                    BaseResponse<Order> orderBaseResponse = orderController.orderNewspaper(subObj);
+                    JOptionPane.showMessageDialog(null,"订阅成功！");
+                    dispose();
+                }
+                else if (option == JOptionPane.CANCEL_OPTION) {
+                    System.out.println("取消本次订单提交");
+                }
+                else if (option == JOptionPane.CLOSED_OPTION) {
+                    System.out.println("关闭本次对话窗口");
+                }
             }
         });
     }

@@ -15,6 +15,8 @@ import java.math.BigDecimal;
 import java.util.Date;
 import javax.swing.*;
 
+import static com.sun.glass.ui.Cursor.setVisible;
+import static com.zkxg.newspaper_subscription.view.subMgt.modTarget;
 import static com.zkxg.newspaper_subscription.view.subMgt.newspaperId;
 
 /**
@@ -22,7 +24,6 @@ import static com.zkxg.newspaper_subscription.view.subMgt.newspaperId;
  */
 public class modNewspaper extends JFrame {
     private NewspaperController newspaperController;
-    public static int modTarget = 0;
     public modNewspaper() {
         newspaperController = new NewspaperController();
         // 初始化
@@ -48,7 +49,7 @@ public class modNewspaper extends JFrame {
         label4 = new JLabel();
         label5 = new JLabel();
         label6 = new JLabel();
-        modNewsButton = new JButton();
+        modNewsButton1 = new JButton();
         modNewsNameField = new JTextField();
         modNewsPriceField = new JTextField();
         modNewsTypeField = new JTextField();
@@ -61,13 +62,13 @@ public class modNewspaper extends JFrame {
 
         //======== panel1 ========
         {
-            panel1.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax
-            .swing.border.EmptyBorder(0,0,0,0), "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn",javax.swing
-            .border.TitledBorder.CENTER,javax.swing.border.TitledBorder.BOTTOM,new java.awt.
-            Font("Dia\u006cog",java.awt.Font.BOLD,12),java.awt.Color.red
-            ),panel1. getBorder()));panel1. addPropertyChangeListener(new java.beans.PropertyChangeListener(){@Override
-            public void propertyChange(java.beans.PropertyChangeEvent e){if("\u0062ord\u0065r".equals(e.getPropertyName(
-            )))throw new RuntimeException();}});
+            panel1.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new
+            javax.swing.border.EmptyBorder(0,0,0,0), "JF\u006frmDes\u0069gner \u0045valua\u0074ion",javax
+            .swing.border.TitledBorder.CENTER,javax.swing.border.TitledBorder.BOTTOM,new java
+            .awt.Font("D\u0069alog",java.awt.Font.BOLD,12),java.awt
+            .Color.red),panel1. getBorder()));panel1. addPropertyChangeListener(new java.beans.
+            PropertyChangeListener(){@Override public void propertyChange(java.beans.PropertyChangeEvent e){if("\u0062order".
+            equals(e.getPropertyName()))throw new RuntimeException();}});
             panel1.setLayout(null);
             panel1.add(imageLabel);
             imageLabel.setBounds(10, 10, 290, 515);
@@ -102,11 +103,11 @@ public class modNewspaper extends JFrame {
             panel1.add(label6);
             label6.setBounds(315, 290, 105, 40);
 
-            //---- modNewsButton ----
-            modNewsButton.setText("\u4fee\u6539");
-            modNewsButton.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
-            panel1.add(modNewsButton);
-            modNewsButton.setBounds(315, 440, 295, 40);
+            //---- modNewsButton1 ----
+            modNewsButton1.setText("\u4fee\u6539");
+            modNewsButton1.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+            panel1.add(modNewsButton1);
+            modNewsButton1.setBounds(315, 440, 295, 40);
 
             //---- modNewsNameField ----
             modNewsNameField.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
@@ -179,7 +180,7 @@ public class modNewspaper extends JFrame {
     private JLabel label4;
     private JLabel label5;
     private JLabel label6;
-    private JButton modNewsButton;
+    private JButton modNewsButton1;
     private JTextField modNewsNameField;
     private JTextField modNewsPriceField;
     private JTextField modNewsTypeField;
@@ -202,8 +203,8 @@ public class modNewspaper extends JFrame {
         modNewsBriefField.setText(detailNewspaper.getBrief());
     }
     // 监听事件
-    private void listener() {
-        modNewsButton.addActionListener(new ActionListener() {
+    public void listener() {
+        modNewsButton1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("触发了修改报刊按钮！");
@@ -230,7 +231,6 @@ public class modNewspaper extends JFrame {
                 Newspaper modNewspaperObj = new Newspaper(newspaperId,modNewsNameField.getText(),newspaperBaseResponse.getData().getNewspaperNumber(),null,modNewsTypeField.getText(),modNewsBriefField.getText(),modNewsPublishField.getText(),"2022-10-16 00:00:00",singlePrice,null,null,"此报刊已修改",new Date(),new Date(),0);
                 BaseResponse<String> stringBaseResponse = newspaperController.updateNewspaper(modNewspaperObj);
                 JOptionPane.showMessageDialog(null,"修改报刊成功！");
-
                 dispose();
                 modTarget = 1;
             }

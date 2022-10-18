@@ -129,7 +129,16 @@ new FormModel {
 					name: "subNewsCountField"
 					"font": new java.awt.Font( "Microsoft YaHei UI", 0, 20 )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-					"width": 240
+					"width": 75
+					"height": 40
+					"x": 480
+					"y": 370
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label7"
+					"text": "输入订阅份数："
+					"font": #Font0
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"height": 40
 					"x": 315
 					"y": 370
