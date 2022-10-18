@@ -7,6 +7,8 @@ package com.zkxg.newspaper_subscription.view;
 import java.awt.*;
 import java.awt.event.*;
 import java.math.BigDecimal;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.swing.*;
@@ -21,7 +23,9 @@ import com.zkxg.newspaper_subscription.controller.UserController;
 import com.zkxg.newspaper_subscription.model.entity.Newspaper;
 import com.zkxg.newspaper_subscription.model.entity.Order;
 import com.zkxg.newspaper_subscription.model.entity.User;
+import com.zkxg.newspaper_subscription.model.vo.NewspaperInfo;
 import com.zkxg.newspaper_subscription.model.vo.UserInfo;
+import lombok.SneakyThrows;
 
 
 /*
@@ -45,6 +49,8 @@ public class subMgt extends JFrame {
     public static Long newspaperId;
     // 判断对话框的关闭
     public static int modTarget = 0;
+    // 报刊订阅数量
+    public static Integer newsSubCount;
     public subMgt() {
         userController = new UserController();
         newspaperController = new NewspaperController();
@@ -82,10 +88,14 @@ public class subMgt extends JFrame {
         queryNewsField = new JTextField();
         queryNewsButton = new JButton();
         delNewsButton = new JButton();
+        subCountButton = new JButton();
         panel5 = new JPanel();
         getStatsButton = new JButton();
         MostPopularNewspaperLabel = new JLabel();
         getCostMostUserLabel = new JLabel();
+        getOrderMostUserLabel = new JLabel();
+        pNewsTop10List = new JTable();
+        popularNewspaperTOP10 = new JLabel();
         panel6 = new JPanel();
         queryField = new JTextField();
         queryButton = new JButton();
@@ -136,11 +146,13 @@ public class subMgt extends JFrame {
         //======== panel1 ========
         {
             panel1.setBackground(new Color(0x4c5052));
-            panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border. EmptyBorder(
-            0, 0, 0, 0) , "JF\u006frmDes\u0069gner \u0045valua\u0074ion", javax. swing. border. TitledBorder. CENTER, javax. swing. border. TitledBorder
-            . BOTTOM, new java .awt .Font ("D\u0069alog" ,java .awt .Font .BOLD ,12 ), java. awt. Color.
-            red) ,panel1. getBorder( )) ); panel1. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .
-            beans .PropertyChangeEvent e) {if ("\u0062order" .equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
+            panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax.
+            swing. border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frm\u0044es\u0069gn\u0065r \u0045va\u006cua\u0074io\u006e", javax. swing. border
+            . TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM, new java .awt .Font ("D\u0069al\u006fg"
+            ,java .awt .Font .BOLD ,12 ), java. awt. Color. red) ,panel1. getBorder
+            ( )) ); panel1. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java
+            .beans .PropertyChangeEvent e) {if ("\u0062or\u0064er" .equals (e .getPropertyName () )) throw new RuntimeException
+            ( ); }} );
             panel1.setLayout(null);
 
             //---- label1 ----
@@ -203,6 +215,12 @@ public class subMgt extends JFrame {
                     index.add(delNewsButton);
                     delNewsButton.setBounds(580, 25, 78, 40);
 
+                    //---- subCountButton ----
+                    subCountButton.setText("\u8ba2\u9605\u6570\u91cf");
+                    subCountButton.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+                    index.add(subCountButton);
+                    subCountButton.setBounds(775, 70, 115, 40);
+
                     {
                         // compute preferred size
                         Dimension preferredSize = new Dimension();
@@ -232,13 +250,29 @@ public class subMgt extends JFrame {
 
                     //---- MostPopularNewspaperLabel ----
                     MostPopularNewspaperLabel.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+                    MostPopularNewspaperLabel.setText(".\u5e74\u5ea6\u6700\u53d7\u6b22\u8fce\u7684\u62a5\u520a\u7c7b\u578b\u662f\uff1a\u8272\u60c5");
                     panel5.add(MostPopularNewspaperLabel);
                     MostPopularNewspaperLabel.setBounds(15, 80, 335, 27);
 
                     //---- getCostMostUserLabel ----
                     getCostMostUserLabel.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+                    getCostMostUserLabel.setText(".\u6d88\u8d39\u91d1\u989d\u6700\u591a\u7684\u7528\u6237\u662f\uff1a\u6797\u5c0f\u864e\u54e5\u54e5");
                     panel5.add(getCostMostUserLabel);
-                    getCostMostUserLabel.setBounds(15, 130, 335, 27);
+                    getCostMostUserLabel.setBounds(535, 80, 335, 27);
+
+                    //---- getOrderMostUserLabel ----
+                    getOrderMostUserLabel.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+                    getOrderMostUserLabel.setText(".\u6d88\u8d39\u91d1\u989d\u6700\u591a\u7684\u7528\u6237\u662f\uff1a\u6797\u5c0f\u864e\u54e5\u54e5");
+                    panel5.add(getOrderMostUserLabel);
+                    getOrderMostUserLabel.setBounds(15, 125, 335, 27);
+                    panel5.add(pNewsTop10List);
+                    pNewsTop10List.setBounds(15, 230, 880, 270);
+
+                    //---- popularNewspaperTOP10 ----
+                    popularNewspaperTOP10.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+                    popularNewspaperTOP10.setText("\u4e0a\u7ebf\u81f3\u4eca\u6700\u53d7\u6b22\u8fce\u7684\u62a5\u520aTOP10");
+                    panel5.add(popularNewspaperTOP10);
+                    popularNewspaperTOP10.setBounds(15, 190, 335, 27);
 
                     {
                         // compute preferred size
@@ -572,10 +606,14 @@ public class subMgt extends JFrame {
     private JTextField queryNewsField;
     private JButton queryNewsButton;
     private JButton delNewsButton;
+    private JButton subCountButton;
     private JPanel panel5;
     private JButton getStatsButton;
     private JLabel MostPopularNewspaperLabel;
     private JLabel getCostMostUserLabel;
+    private JLabel getOrderMostUserLabel;
+    private JTable pNewsTop10List;
+    private JLabel popularNewspaperTOP10;
     private JPanel panel6;
     private JTextField queryField;
     private JButton queryButton;
@@ -666,6 +704,30 @@ public class subMgt extends JFrame {
     }
     // 监听事件
     public void listerner() {
+        // 分类查询报刊
+        queryNewsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("点击查询按钮！");
+                if (queryNewsField.getText().trim().length() == 0) {
+                    JOptionPane.showMessageDialog(null,"请输入查询内容！");
+                    return;
+                }
+                if (queryNewsList.getSelectedIndex() == 0) {
+                    System.out.println("按报刊名称查询!");
+                    BaseResponse<List<Newspaper>> listBaseResponse = newspaperController.getNewspaperByName(queryNewsField.getText());
+                    List<Newspaper> selectNewspaper1 = listBaseResponse.getData();
+                    if (selectNewspaper1.size() == 0) {
+                        JOptionPane.showMessageDialog(null,"查无此内容!");
+                        return;
+                    }
+                    System.out.println(selectNewspaper1);
+                }
+                if (queryNewsList.getSelectedIndex() == 1) {
+                    System.out.println("按分类称查询！");
+                }
+            }
+        });
         // 修改报刊功能
         modNewsButton.addActionListener(new ActionListener() {
             @Override
@@ -802,21 +864,80 @@ public class subMgt extends JFrame {
         });
         // 获取统计数据
         getStatsButton.addActionListener(new ActionListener() {
+            @SneakyThrows
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("获取数据统计!");
+                if (!(newspaperController.isAdmin())) {
+                    JOptionPane.showMessageDialog(null,"该模块仅供管理员使用！");
+                    return;
+                }
                 // 统计最受欢迎的报刊
                 BaseResponse<List<String>> listBaseResponse = adminController.getMostPopularNewspaperType();
                 List<String> MostPopularNewspaper = listBaseResponse.getData();
                 String mostPopularNews = MostPopularNewspaper.get(0);
                 MostPopularNewspaperLabel.setText("年度最受欢迎的报刊类型是："+ mostPopularNews);
                 // 统计最土豪用户
-                BaseResponse<List<UserInfo>> listBaseResponse1 = adminController.getCostMostUser(1);
+                BaseResponse<List<UserInfo>> listBaseResponse1 = adminController.getCostMostUser(5);
                 List<UserInfo> getCostMostUserList = listBaseResponse1.getData();
-                UserInfo getCostMostUserListName = getCostMostUserList.get(0);
-                getCostMostUserLabel.setText("消费金额最多的用户是：" + getCostMostUserListName.getNackname());
+                for (int i = 1; i < getCostMostUserList.size(); i++) {
+                    UserInfo getCostMostUserListName = getCostMostUserList.get(i-1);
+                    System.out.println("统计最土豪用户___"+getCostMostUserListName.getNackname());
+                }
+//                getCostMostUserLabel.setText("消费金额最多的用户是：" + getCostMostUserListName.getNackname());
+                // 统计订单最多的用户
+                BaseResponse<List<UserInfo>> listBaseResponse2 = adminController.getOrderMostUser(5);
+                List<UserInfo> getOrderMostUserList = listBaseResponse2.getData();
+                for (int i = 1; i < getCostMostUserList.size(); i++) {
+                    UserInfo getOrderMostUserListName = getCostMostUserList.get(i-1);
+                    System.out.println("最多订单___"+getOrderMostUserListName.getNackname());
+                }
+//                getOrderMostUserLabel.setText("下单最多的用户是：" + getOrderMostUserListName.getNackname());
+                // 获取报刊信息按照某阶段内受欢迎程度
+                DefaultTableModel pNewsList = (DefaultTableModel)pNewsTop10List.getModel();
+                Object[] pNewsRowName = {"排名","报刊编号","报刊名称","报刊类型","出版社","订阅用户数量"};
+                pNewsList.setRowCount(11);
+                pNewsList.setColumnCount(pNewsRowName.length);
+                for (int i = 0; i < pNewsRowName.length; i++) {
+                    pNewsList.setValueAt(pNewsRowName[i],0,i);
+                }
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                // 起始时间
+                Date start = formatter.parse("2022-10-15 00:00:00");
+                // 最新时间
+                Date currentTime = new Date();
+                String dateString = formatter.format(currentTime);
+                ParsePosition pos = new ParsePosition(8);
+                Date end = formatter.parse(dateString,pos);
+                BaseResponse<List<NewspaperInfo>> listBaseResponse3 = adminController.getPopularNewspaper(start,end,11);
+                List<NewspaperInfo> newspaperInfoList = listBaseResponse3.getData();
+                for (int i = 1; i < newspaperInfoList.size(); i++) {
+                    NewspaperInfo newspaperInfo = newspaperInfoList.get(i-1);
+                    pNewsList.setValueAt(i,i,0);
+                    pNewsList.setValueAt(newspaperInfo.getNewspaperId(),i,1);
+                    pNewsList.setValueAt(newspaperInfo.getNewspaperName(),i,2);
+                    pNewsList.setValueAt(newspaperInfo.getType(),i,3);
+                    pNewsList.setValueAt(newspaperInfo.getPublisher(),i,4);
+                    pNewsList.setValueAt(newspaperInfo.getOrderQuantity(),i,5);
+                    System.out.println(newspaperInfo);
+                }
+            }
+        });
+        // 查看订阅数量
+        subCountButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (newspaperId == null) {
+                    JOptionPane.showMessageDialog(null,"请选择需要查看的报刊！");
+                    return;
+                }
                 // 通过报刊id获取该报刊被订阅的总数量
-
+                BaseResponse<Integer> integerBaseResponse = adminController.getCountByNewspaperId(newspaperId);
+                Integer subCount = integerBaseResponse.getData();
+                System.out.println("订阅数量："+ subCount);
+                newspaperId = null;
+                newsSubCount = subCount;
+                new subCount();
             }
         });
         // 触发修改账号信息事件
@@ -1147,8 +1268,13 @@ public class subMgt extends JFrame {
                             JOptionPane.showMessageDialog(null,"价格必须是大于0的数字");
                             return;
                         }
+                        Date currentTime = new Date();
+                        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                        String dateString = formatter.format(currentTime);
+                        ParsePosition pos = new ParsePosition(8);
+                        Date currentTime2 = formatter.parse(dateString, pos);
                         // 将获取的新报刊数据存入即将提交给接口进行修改的对象中
-                        Newspaper addNewspaper = new Newspaper(0L,addNewspaperName, "2022-10-16 00:01:01",null,addNewspaperType,addNewspaperBrief,addNewspaperPublisher,"2022-10-16 00:00:00",bd,null,null,"好书",new Date(),new Date(),0);
+                        Newspaper addNewspaper = new Newspaper(0L,addNewspaperName, "2022-10-16",null,addNewspaperType,addNewspaperBrief,addNewspaperPublisher,"2022-10-15 00:00:00",bd,null,null,"好书",currentTime2,currentTime2,0);
                         BaseResponse<String> addNewsBaseResponse = newspaperController.add(addNewspaper);
                         JOptionPane.showMessageDialog(null, "添加新报刊成功");
                         addNewsNameField.setText("");
@@ -1156,6 +1282,7 @@ public class subMgt extends JFrame {
                         addNewsBriefField.setText("");
                         addNewsPublisherField.setText("");
                         addNewsPriceField.setText("");
+                        initIndexView();
                     }
                 }
         );

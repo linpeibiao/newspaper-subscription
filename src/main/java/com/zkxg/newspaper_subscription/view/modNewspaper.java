@@ -15,7 +15,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 import javax.swing.*;
 
-import static com.sun.glass.ui.Cursor.setVisible;
+
 import static com.zkxg.newspaper_subscription.view.subMgt.modTarget;
 import static com.zkxg.newspaper_subscription.view.subMgt.newspaperId;
 
