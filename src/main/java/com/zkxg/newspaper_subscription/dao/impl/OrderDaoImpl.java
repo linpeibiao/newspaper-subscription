@@ -185,7 +185,7 @@ public class OrderDaoImpl implements OrderDao {
             userList = new ArrayList<>();
             String sql = "select u.*, cost.total_cost from t_user as u," +
                     " (select user_id, sum(total_price) as total_cost from t_order " +
-                    "where is_deleted = 0 group by user_id ORDER BY total_cost desc limit 1,?) " +
+                    "where is_deleted = 0 group by user_id ORDER BY total_cost desc limit 0,?) " +
                     "as cost " +
                     "where cost.user_id = u.id;";
             Object[] params = new Object[]{n};
@@ -221,7 +221,7 @@ public class OrderDaoImpl implements OrderDao {
                     "( SELECT user_id, count( * ) AS total_order_quantity FROM t_order " +
                     "WHERE is_deleted = 0 " +
                     "GROUP BY user_id " +
-                    "ORDER BY total_order_quantity DESC LIMIT 1, ? ) AS order_quantity " +
+                    "ORDER BY total_order_quantity DESC LIMIT 0, ? ) AS order_quantity " +
                     "WHERE " +
                     "order_quantity.user_id = u.id";
             Object[] params = new Object[]{n};

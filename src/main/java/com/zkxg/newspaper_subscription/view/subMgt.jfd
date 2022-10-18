@@ -129,56 +129,42 @@ new FormModel {
 							"font": #Font0
 						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 							"height": 40
-							"x": 10
-							"y": 20
+							"x": 225
+							"y": 25
 						} )
 						add( new FormComponent( "javax.swing.JLabel" ) {
 							name: "MostPopularNewspaperLabel"
 							"font": &Font2 new java.awt.Font( "Microsoft YaHei UI", 0, 20 )
-							"text": ".年度最受欢迎的报刊类型是：色情"
 						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 							"height": 27
-							"x": 15
-							"y": 80
+							"x": 20
+							"y": 110
 							"width": 335
-						} )
-						add( new FormComponent( "javax.swing.JLabel" ) {
-							name: "getCostMostUserLabel"
-							"font": #Font2
-							"text": ".消费金额最多的用户是：林小虎哥哥"
-						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-							"width": 335
-							"height": 27
-							"x": 535
-							"y": 80
-						} )
-						add( new FormComponent( "javax.swing.JLabel" ) {
-							name: "getOrderMostUserLabel"
-							"font": #Font2
-							"text": ".消费金额最多的用户是：林小虎哥哥"
-						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-							"width": 335
-							"height": 27
-							"x": 15
-							"y": 125
 						} )
 						add( new FormComponent( "javax.swing.JTable" ) {
 							name: "pNewsTop10List"
 						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 							"width": 880
-							"height": 270
-							"x": 15
-							"y": 230
+							"height": 185
+							"x": 20
+							"y": 205
 						} )
 						add( new FormComponent( "javax.swing.JLabel" ) {
-							name: "popularNewspaperTOP10"
+							name: "statsLabelTOP10"
 							"font": #Font2
-							"text": "上线至今最受欢迎的报刊TOP10"
 						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 							"width": 335
 							"height": 27
-							"x": 15
-							"y": 190
+							"x": 20
+							"y": 160
+						} )
+						add( new FormComponent( "javax.swing.JComboBox" ) {
+							name: "statsQueryList"
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+							"width": 180
+							"height": 40
+							"x": 20
+							"y": 25
 						} )
 					}, new FormLayoutConstraints( null ) {
 						"title": "订阅统计"
