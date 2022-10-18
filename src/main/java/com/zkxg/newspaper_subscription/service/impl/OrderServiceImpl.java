@@ -57,7 +57,7 @@ public class OrderServiceImpl implements OrderService {
         List<UserInfo> userList = null;
         try{
             conn = BaseDao.getConnection();
-            userList = orderDao.getOrderMostUser(conn, n);
+            userList = orderDao.getCostMostUser(conn, n);
         }catch (SQLException e){
             e.printStackTrace();
         }finally{
