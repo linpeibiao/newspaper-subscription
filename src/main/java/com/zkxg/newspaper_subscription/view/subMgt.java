@@ -13,6 +13,7 @@ import java.util.Date;
 import java.util.List;
 import javax.swing.*;
 import javax.swing.plaf.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 //import com.jgoodies.forms.factories.*;
@@ -65,6 +66,9 @@ public class subMgt extends JFrame {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         // 窗口可见
         setVisible(true);
+        // 窗口标题
+        setTitle("报刊订阅管理系统");
+        setResizable(false);
         // 绑定事件
         listerner();
         // 初始化用户信息
@@ -140,9 +144,9 @@ public class subMgt extends JFrame {
         addNewsButton = new JButton();
         logoutButton = new JButton();
         chargeUserLabel = new JLabel();
+        iconLabel = new JLabel();
 
         //======== this ========
-        setMinimumSize(new Dimension(920, 650));
         setForeground(new Color(0x3c3f41));
         Container contentPane = getContentPane();
         contentPane.setLayout(null);
@@ -150,21 +154,21 @@ public class subMgt extends JFrame {
         //======== panel1 ========
         {
             panel1.setBackground(new Color(0x4c5052));
-            panel1.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax
-            .swing.border.EmptyBorder(0,0,0,0), "JF\u006frm\u0044es\u0069gn\u0065r \u0045va\u006cua\u0074io\u006e",javax.swing
-            .border.TitledBorder.CENTER,javax.swing.border.TitledBorder.BOTTOM,new java.awt.
-            Font("D\u0069al\u006fg",java.awt.Font.BOLD,12),java.awt.Color.red
-            ),panel1. getBorder()));panel1. addPropertyChangeListener(new java.beans.PropertyChangeListener(){@Override
-            public void propertyChange(java.beans.PropertyChangeEvent e){if("\u0062or\u0064er".equals(e.getPropertyName(
-            )))throw new RuntimeException();}});
+            panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new
+            javax. swing. border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frmDes\u0069gner \u0045valua\u0074ion", javax
+            . swing. border. TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM, new java
+            .awt .Font ("D\u0069alog" ,java .awt .Font .BOLD ,12 ), java. awt
+            . Color. red) ,panel1. getBorder( )) ); panel1. addPropertyChangeListener (new java. beans.
+            PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062order" .
+            equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
             panel1.setLayout(null);
 
             //---- label1 ----
-            label1.setText("\u6b22\u8fce\u4f7f\u7528\u62a5\u520a\u8ba2\u9605\u7ba1\u7406\u7cfb\u7edf\uff01");
+            label1.setText("\u6b22\u8fce\u4f7f\u7528\u62a5\u520a\u8ba2\u9605\u7cfb\u7edf");
             label1.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 30));
             label1.setForeground(new Color(0xf2f2f2));
             panel1.add(label1);
-            label1.setBounds(new Rectangle(new Point(15, 10), label1.getPreferredSize()));
+            label1.setBounds(80, 15, 375, label1.getPreferredSize().height);
 
             //======== tabbedPane1 ========
             {
@@ -260,14 +264,14 @@ public class subMgt extends JFrame {
                     //---- MostPopularNewspaperLabel ----
                     MostPopularNewspaperLabel.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
                     panel5.add(MostPopularNewspaperLabel);
-                    MostPopularNewspaperLabel.setBounds(20, 110, 335, 27);
+                    MostPopularNewspaperLabel.setBounds(20, 80, 335, 27);
                     panel5.add(pNewsTop10List);
-                    pNewsTop10List.setBounds(20, 205, 880, 185);
+                    pNewsTop10List.setBounds(20, 170, 880, 328);
 
                     //---- statsLabelTOP10 ----
                     statsLabelTOP10.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
                     panel5.add(statsLabelTOP10);
-                    statsLabelTOP10.setBounds(20, 160, 335, 27);
+                    statsLabelTOP10.setBounds(20, 130, 335, 27);
                     panel5.add(statsQueryList);
                     statsQueryList.setBounds(20, 25, 180, 40);
 
@@ -378,7 +382,7 @@ public class subMgt extends JFrame {
                         scrollPane2.setViewportView(userList);
                     }
                     panel7.add(scrollPane2);
-                    scrollPane2.setBounds(20, 70, 880, 263);
+                    scrollPane2.setBounds(20, 70, 880, 375);
 
                     //---- queryUserButton ----
                     queryUserButton.setText("\u83b7\u53d6\u7528\u6237\u5217\u8868");
@@ -390,13 +394,13 @@ public class subMgt extends JFrame {
                     prePageButton.setText("\u4e0a\u4e00\u9875");
                     prePageButton.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
                     panel7.add(prePageButton);
-                    prePageButton.setBounds(690, 360, prePageButton.getPreferredSize().width, 40);
+                    prePageButton.setBounds(690, 455, prePageButton.getPreferredSize().width, 40);
 
                     //---- nextPageButton ----
                     nextPageButton.setText("\u4e0b\u4e00\u9875");
                     nextPageButton.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
                     panel7.add(nextPageButton);
-                    nextPageButton.setBounds(805, 360, nextPageButton.getPreferredSize().width, 40);
+                    nextPageButton.setBounds(805, 455, nextPageButton.getPreferredSize().width, 40);
 
                     {
                         // compute preferred size
@@ -542,20 +546,22 @@ public class subMgt extends JFrame {
                 tabbedPane1.addTab("\u6dfb\u52a0\u62a5\u520a", panel2);
             }
             panel1.add(tabbedPane1);
-            tabbedPane1.setBounds(0, 70, 935, 565);
+            tabbedPane1.setBounds(10, 70, 925, 565);
 
             //---- logoutButton ----
             logoutButton.setText("\u9000\u51fa\u767b\u5f55");
             logoutButton.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
             panel1.add(logoutButton);
-            logoutButton.setBounds(new Rectangle(new Point(780, 35), logoutButton.getPreferredSize()));
+            logoutButton.setBounds(new Rectangle(new Point(795, 15), logoutButton.getPreferredSize()));
 
             //---- chargeUserLabel ----
             chargeUserLabel.setText("\u5f53\u524d\u7528\u6237\u8eab\u4efd\uff1a\u7ba1\u7406\u5458");
             chargeUserLabel.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
             chargeUserLabel.setForeground(new Color(0xeeeeee));
             panel1.add(chargeUserLabel);
-            chargeUserLabel.setBounds(415, 20, 255, 27);
+            chargeUserLabel.setBounds(525, 17, 255, 27);
+            panel1.add(iconLabel);
+            iconLabel.setBounds(15, 10, 45, 45);
 
             {
                 // compute preferred size
@@ -573,7 +579,7 @@ public class subMgt extends JFrame {
             }
         }
         contentPane.add(panel1);
-        panel1.setBounds(0, 0, 925, 635);
+        panel1.setBounds(0, 0, 925, 640);
 
         {
             // compute preferred size
@@ -659,6 +665,7 @@ public class subMgt extends JFrame {
     private JButton addNewsButton;
     private JButton logoutButton;
     private JLabel chargeUserLabel;
+    private JLabel iconLabel;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
     // 初始化用户信息
     public void initUserInfo() {
@@ -679,6 +686,8 @@ public class subMgt extends JFrame {
         else {
             chargeUserLabel.setText("当前用户身份：普通用户");
         }
+        getContentPane().setBackground(new Color(76, 80, 82));
+        label1.setText("欢迎您，"+ user.getNackname());
     }
     // 初始化查询界面
     public void initQueryView() {
@@ -689,6 +698,9 @@ public class subMgt extends JFrame {
         statsQueryList.addItem("上线至今最受欢迎报刊TOP10");
         statsQueryList.addItem("消费金额最多用户TOP10");
         statsQueryList.addItem("下单最多用户TOP10");
+        ImageIcon image = new ImageIcon("src/main/java/com/zkxg/newspaper_subscription/view/icon.png");
+        image.setImage(image.getImage().getScaledInstance(45,45,Image.SCALE_DEFAULT));
+        iconLabel.setIcon(image);
     }
     // 初始化订阅首页界面
     public void initIndexView() {
@@ -696,10 +708,15 @@ public class subMgt extends JFrame {
         newsNextPageButton.setVisible(true);
         // 报刊表
         getNewsPage = 1;
-        DefaultTableModel newsOrderL = (DefaultTableModel) newsOrderList.getModel(); 
+        DefaultTableModel newsOrderL = (DefaultTableModel) newsOrderList.getModel();
         Object[] newsRowName = {"报刊编号","报刊名称","出版社","报刊类型","报刊单价"};
         newsOrderL.setRowCount(19);
         newsOrderL.setColumnCount(newsRowName.length);
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+        tcr.setHorizontalAlignment(JLabel.CENTER);
+        newsOrderList.setDefaultRenderer(Object.class,tcr);
+        newsOrderList.setFont(new Font("微软雅黑",Font.PLAIN,16));
+        newsOrderList.setRowHeight(30);
         // 设置表头名
         for (int i =0; i< newsRowName.length; i++) {
             newsOrderL.setValueAt(newsRowName[i],0,i);
@@ -842,6 +859,9 @@ public class subMgt extends JFrame {
                         Object[] newsRowName = {"报刊编号","报刊名称","出版社","报刊类型","报刊单价"};
                         newsOrderL.setRowCount(19);
                         newsOrderL.setColumnCount(newsRowName.length);
+                        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+                        tcr.setHorizontalAlignment(JLabel.CENTER);
+                        newsOrderList.setDefaultRenderer(Object.class,tcr);
                         for (int i =0; i< newsRowName.length; i++) {
                             newsOrderL.setValueAt(newsRowName[i],0,i);
                         }
@@ -874,6 +894,9 @@ public class subMgt extends JFrame {
                         Object[] newsRowName = {"报刊编号","报刊名称","出版社","报刊类型","报刊单价"};
                         newsOrderL.setRowCount(19);
                         newsOrderL.setColumnCount(newsRowName.length);
+                        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+                        tcr.setHorizontalAlignment(JLabel.CENTER);
+                        newsOrderList.setDefaultRenderer(Object.class,tcr);
                         for (int i =0; i< newsRowName.length; i++) {
                             newsOrderL.setValueAt(newsRowName[i],0,i);
                         }
@@ -933,6 +956,11 @@ public class subMgt extends JFrame {
                 pNewsList.getDataVector().clear(); // 清除表格数据
                 pNewsList.fireTableDataChanged(); // 通知模型更新
                 pNewsTop10List.updateUI(); // 更新表格
+                DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+                tcr.setHorizontalAlignment(JLabel.CENTER);
+                pNewsTop10List.setDefaultRenderer(Object.class,tcr);
+                pNewsTop10List.setFont(new Font("微软雅黑",Font.PLAIN,16));
+                pNewsTop10List.setRowHeight(30);
                 if (!(newspaperController.isAdmin())) {
                     JOptionPane.showMessageDialog(null,"该模块仅供管理员使用！");
                     return;
@@ -1103,6 +1131,11 @@ public class subMgt extends JFrame {
                         queryT.getDataVector().clear(); // 清除表格数据
                         queryT.fireTableDataChanged(); // 通知模型更新
                         queryTable.updateUI(); // 更新表格
+                        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+                        tcr.setHorizontalAlignment(JLabel.CENTER);
+                        queryTable.setDefaultRenderer(Object.class,tcr);
+                        queryTable.setFont(new Font("微软雅黑",Font.PLAIN,16));
+                        queryTable.setRowHeight(30);
                         // 表单预验证
                         if (queryField.getText().length() == 0) {
                             JOptionPane.showMessageDialog(null, "查询内容不能为空");
@@ -1186,6 +1219,11 @@ public class subMgt extends JFrame {
                         DefaultTableModel queryT2 = (DefaultTableModel) queryTable2.getModel();
                         // 设置订单列表表头名
                         Object[] orderRowName = {"订单编号","订单Id","报刊名称","用户昵称","订阅份数","订单总金额"};
+                        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+                        tcr.setHorizontalAlignment(JLabel.CENTER);
+                        queryTable2.setDefaultRenderer(Object.class,tcr);
+                        queryTable2.setFont(new Font("微软雅黑",Font.PLAIN,16));
+                        queryTable2.setRowHeight(30);
                         if (currentUser.getId() == null) {
                             JOptionPane.showMessageDialog(null,"登录后才能查看用户订单！");
                             return;
@@ -1246,6 +1284,11 @@ public class subMgt extends JFrame {
                         for (int i = 0; i < userRowName.length; i++) {
                             userL.setValueAt(userRowName[i],0,i);
                         }
+                        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+                        tcr.setHorizontalAlignment(JLabel.CENTER);
+                        userList.setDefaultRenderer(Object.class,tcr);
+                        userList.setFont(new Font("微软雅黑",Font.PLAIN,16));
+                        userList.setRowHeight(30);
                         // 请求接口获取用户列表
                         getPage = 1;
                         BaseResponse<List<User>> userListBaseResponse = userController.getUserPage(getPage,15);

@@ -5,6 +5,7 @@
 package com.zkxg.newspaper_subscription.view;
 
 import com.zkxg.newspaper_subscription.common.BaseResponse;
+import com.zkxg.newspaper_subscription.controller.NewspaperController;
 import com.zkxg.newspaper_subscription.controller.UserController;
 import com.zkxg.newspaper_subscription.model.entity.User;
 import com.zkxg.newspaper_subscription.model.vo.LoginInfo;
@@ -19,16 +20,22 @@ import javax.swing.*;
  */
 public class Login extends JFrame {
     private UserController userController;
+    private NewspaperController newspaperController;
     public Login() {
+        newspaperController = new NewspaperController();
+        userController = new UserController();
         // 初始化
         initComponents();
         // 设置关闭按钮结束程序
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         // 窗口可见
         setVisible(true);
+        // 窗口标题
+        setTitle("报刊订阅系统");
+        setResizable(false);
         // 监听事件
         listerner();
-        userController = new UserController();
+        initView();
     }
 
     private void initComponents() {
@@ -46,19 +53,20 @@ public class Login extends JFrame {
         //======== this ========
         setFont(new Font(Font.DIALOG, Font.PLAIN, 16));
         setMinimumSize(new Dimension(555, 470));
+        setBackground(new Color(0x45494a));
+        setForeground(SystemColor.windowText);
         Container contentPane = getContentPane();
         contentPane.setLayout(null);
 
         //======== panel1 ========
         {
             panel1.setBackground(new Color(0x45494a));
-            panel1.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax
-            .swing.border.EmptyBorder(0,0,0,0), "JF\u006frmDes\u0069gner \u0045valua\u0074ion",javax.swing
-            .border.TitledBorder.CENTER,javax.swing.border.TitledBorder.BOTTOM,new java.awt.
-            Font("D\u0069alog",java.awt.Font.BOLD,12),java.awt.Color.red
-            ),panel1. getBorder()));panel1. addPropertyChangeListener(new java.beans.PropertyChangeListener(){@Override
-            public void propertyChange(java.beans.PropertyChangeEvent e){if("\u0062order".equals(e.getPropertyName(
-            )))throw new RuntimeException();}});
+            panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border. EmptyBorder
+            ( 0, 0, 0, 0) , "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn", javax. swing. border. TitledBorder. CENTER, javax. swing. border
+            . TitledBorder. BOTTOM, new java .awt .Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 ), java. awt
+            . Color. red) ,panel1. getBorder( )) ); panel1. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void
+            propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062ord\u0065r" .equals (e .getPropertyName () )) throw new RuntimeException( )
+            ; }} );
             panel1.setLayout(null);
 
             //---- systemTitle ----
@@ -89,13 +97,13 @@ public class Login extends JFrame {
 
             //---- loginButton ----
             loginButton.setText("\u767b\u5f55");
-            loginButton.setFont(loginButton.getFont().deriveFont(loginButton.getFont().getSize() + 3f));
+            loginButton.setFont(new Font("\u9ed1\u4f53", loginButton.getFont().getStyle(), loginButton.getFont().getSize() + 7));
             panel1.add(loginButton);
             loginButton.setBounds(165, 295, 90, 40);
 
             //---- registerButton ----
             registerButton.setText("\u6ce8\u518c");
-            registerButton.setFont(registerButton.getFont().deriveFont(registerButton.getFont().getSize() + 3f));
+            registerButton.setFont(new Font("\u9ed1\u4f53", registerButton.getFont().getStyle(), registerButton.getFont().getSize() + 7));
             panel1.add(registerButton);
             registerButton.setBounds(340, 295, 90, 40);
 
@@ -120,7 +128,7 @@ public class Login extends JFrame {
             }
         }
         contentPane.add(panel1);
-        panel1.setBounds(0, 0, 560, 440);
+        panel1.setBounds(0, 0, 555, 430);
 
         {
             // compute preferred size
@@ -139,6 +147,9 @@ public class Login extends JFrame {
         pack();
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents  @formatter:on
+    }
+    public void initView() {
+        getContentPane().setBackground(new Color(69, 73, 74));
     }
     public void listerner() {
         // 触发登录事件
@@ -180,7 +191,12 @@ public class Login extends JFrame {
                             // 登录成功，关闭登录界面，进入主界面
                             dispose();
                             // 判断是管理员登录还是普通用户登录
-                            new subMgt();
+                            if (newspaperController.isAdmin()) {
+                                new subMgt();
+                            }
+                            else {
+                                new subUserMgt();
+                            }
                         } else {
                             JOptionPane.showMessageDialog(null,"该账号不存在或密码错误，请重新输入！");
                             // 清空文本框内容

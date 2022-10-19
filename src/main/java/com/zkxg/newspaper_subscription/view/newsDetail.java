@@ -19,6 +19,7 @@ import javax.swing.*;
 
 import static com.zkxg.newspaper_subscription.view.subMgt.currentUser;
 import static com.zkxg.newspaper_subscription.view.subMgt.newspaperId;
+import static com.zkxg.newspaper_subscription.view.subUserMgt.currentUser2;
 
 /**
  * @author unknown
@@ -68,12 +69,12 @@ public class newsDetail extends JFrame {
 
         //======== panel1 ========
         {
-            panel1.setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax . swing. border .EmptyBorder
-            ( 0, 0 ,0 , 0) ,  "JF\u006frm\u0044es\u0069gn\u0065r \u0045va\u006cua\u0074io\u006e" , javax. swing .border . TitledBorder. CENTER ,javax . swing. border
-            .TitledBorder . BOTTOM, new java. awt .Font ( "D\u0069al\u006fg", java .awt . Font. BOLD ,12 ) ,java . awt
-            . Color .red ) ,panel1. getBorder () ) ); panel1. addPropertyChangeListener( new java. beans .PropertyChangeListener ( ){ @Override public void
-            propertyChange (java . beans. PropertyChangeEvent e) { if( "\u0062or\u0064er" .equals ( e. getPropertyName () ) )throw new RuntimeException( )
-            ;} } );
+            panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border
+            . EmptyBorder( 0, 0, 0, 0) , "JF\u006frm\u0044es\u0069gn\u0065r \u0045va\u006cua\u0074io\u006e", javax. swing. border. TitledBorder. CENTER, javax
+            . swing. border. TitledBorder. BOTTOM, new java .awt .Font ("D\u0069al\u006fg" ,java .awt .Font .BOLD ,
+            12 ), java. awt. Color. red) ,panel1. getBorder( )) ); panel1. addPropertyChangeListener (new java. beans
+            . PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062or\u0064er" .equals (e .
+            getPropertyName () )) throw new RuntimeException( ); }} );
             panel1.setLayout(null);
             panel1.add(imageLabel);
             imageLabel.setBounds(10, 10, 290, 515);
@@ -247,8 +248,14 @@ public class newsDetail extends JFrame {
                 int option = JOptionPane.showConfirmDialog(null,"最终总价为" + subToalPrice + "元，是否确认提交订单？");
                 if (option == JOptionPane.YES_OPTION) {
                     System.out.println("确认提交订单");
-                    OrderDto subObj = new OrderDto(currentUser.getId(),currentUser.getNackname(),getNewspaperId,detailNameLabel.getText(),Integer.valueOf(1),Integer.valueOf(subNewsCountField.getText()),singlePrice,subToalPrice,"订阅成功！");
-                    BaseResponse<Order> orderBaseResponse = orderController.orderNewspaper(subObj);
+                    if (newspaperController.isAdmin()) {
+                        OrderDto subObj = new OrderDto(currentUser.getId(),currentUser.getNackname(),getNewspaperId,detailNameLabel.getText(),Integer.valueOf(1),Integer.valueOf(subNewsCountField.getText()),singlePrice,subToalPrice,"订阅成功！");
+                        BaseResponse<Order> orderBaseResponse = orderController.orderNewspaper(subObj);
+                    }
+                    else {
+                        OrderDto subObj = new OrderDto(currentUser2.getId(),currentUser2.getNackname(),getNewspaperId,detailNameLabel.getText(),Integer.valueOf(1),Integer.valueOf(subNewsCountField.getText()),singlePrice,subToalPrice,"订阅成功！");
+                        BaseResponse<Order> orderBaseResponse = orderController.orderNewspaper(subObj);
+                    }
                     JOptionPane.showMessageDialog(null,"订阅成功！");
                     dispose();
                 }
