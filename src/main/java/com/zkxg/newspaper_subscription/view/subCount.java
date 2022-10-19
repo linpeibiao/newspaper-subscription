@@ -44,19 +44,18 @@ public class subCount extends JFrame {
 
         //======== panel1 ========
         {
-            panel1.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.swing.border.
-            EmptyBorder(0,0,0,0), "",javax.swing.border.TitledBorder.CENTER,javax.swing
-            .border.TitledBorder.BOTTOM,new java.awt.Font("Dialo\u0067",java.awt.Font.BOLD,12),
-            java.awt.Color.red),panel1. getBorder()));panel1. addPropertyChangeListener(new java.beans.PropertyChangeListener()
-            {@Override public void propertyChange(java.beans.PropertyChangeEvent e){if("borde\u0072".equals(e.getPropertyName()))
-            throw new RuntimeException();}});
+            panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border. EmptyBorder( 0
+            , 0, 0, 0) , "", javax. swing. border. TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM
+            , new java .awt .Font ("D\u0069alog" ,java .awt .Font .BOLD ,12 ), java. awt. Color. red) ,
+            panel1. getBorder( )) ); panel1. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e
+            ) {if ("\u0062order" .equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
             panel1.setLayout(null);
 
             //---- subCountLabel ----
             subCountLabel.setText("\u8ba2\u9605\u6570\u91cf\uff1a22\u4efd");
-            subCountLabel.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+            subCountLabel.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
             panel1.add(subCountLabel);
-            subCountLabel.setBounds(95, 30, 190, 100);
+            subCountLabel.setBounds(100, 30, 190, 100);
 
             {
                 // compute preferred size

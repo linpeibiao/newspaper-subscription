@@ -27,16 +27,18 @@ public class Register extends JFrame {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         // 窗口可见
         setVisible(true);
+        setTitle("报刊订阅管理系统");
+        setResizable(false);
         // 事件监听
         listerner();
         userController = new UserController();
+        initView();
     }
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
         // Generated using JFormDesigner Evaluation license - unknown
         panel1 = new JPanel();
-        registerTitle = new JLabel();
         newAccount = new JLabel();
         newAccountField = new JTextField();
         newPassword = new JLabel();
@@ -46,6 +48,8 @@ public class Register extends JFrame {
         newUser = new JLabel();
         newUserField = new JTextField();
         panel2 = new JPanel();
+        registerTitle = new JLabel();
+        iconLabel = new JLabel();
 
         //======== this ========
         setMinimumSize(new Dimension(555, 470));
@@ -55,66 +59,67 @@ public class Register extends JFrame {
         //======== panel1 ========
         {
             panel1.setBackground(new Color(0x4c5052));
-            panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (
-            new javax. swing. border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn"
-            , javax. swing. border. TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM
-            , new java .awt .Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 )
-            , java. awt. Color. red) ,panel1. getBorder( )) ); panel1. addPropertyChangeListener (
-            new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e
-            ) {if ("\u0062ord\u0065r" .equals (e .getPropertyName () )) throw new RuntimeException( )
-            ; }} );
+            panel1.setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax .
+            swing. border .EmptyBorder ( 0, 0 ,0 , 0) ,  "" , javax. swing .border
+            . TitledBorder. CENTER ,javax . swing. border .TitledBorder . BOTTOM, new java. awt .Font ( "Dialo\u0067"
+            , java .awt . Font. BOLD ,12 ) ,java . awt. Color .red ) ,panel1. getBorder
+            () ) ); panel1. addPropertyChangeListener( new java. beans .PropertyChangeListener ( ){ @Override public void propertyChange (java
+            . beans. PropertyChangeEvent e) { if( "borde\u0072" .equals ( e. getPropertyName () ) )throw new RuntimeException
+            ( ) ;} } );
             panel1.setLayout(null);
-
-            //---- registerTitle ----
-            registerTitle.setText("\u6ce8\u518c\u65b0\u8d26\u53f7");
-            registerTitle.setFont(registerTitle.getFont().deriveFont(registerTitle.getFont().getSize() + 9f));
-            registerTitle.setForeground(new Color(0xf9f9f9));
-            panel1.add(registerTitle);
-            registerTitle.setBounds(225, 15, registerTitle.getPreferredSize().width, 28);
 
             //---- newAccount ----
             newAccount.setText("\u65b0\u8d26\u53f7");
-            newAccount.setFont(newAccount.getFont().deriveFont(newAccount.getFont().getSize() + 6f));
+            newAccount.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", newAccount.getFont().getStyle() | Font.BOLD, newAccount.getFont().getSize() + 6));
             newAccount.setForeground(new Color(0xf9f9f9));
             panel1.add(newAccount);
             newAccount.setBounds(new Rectangle(new Point(85, 185), newAccount.getPreferredSize()));
             panel1.add(newAccountField);
-            newAccountField.setBounds(150, 180, 270, 30);
+            newAccountField.setBounds(150, 180, 280, 30);
 
             //---- newPassword ----
             newPassword.setText("\u65b0\u5bc6\u7801");
-            newPassword.setFont(newPassword.getFont().deriveFont(newPassword.getFont().getSize() + 6f));
+            newPassword.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", newPassword.getFont().getStyle() | Font.BOLD, newPassword.getFont().getSize() + 6));
             newPassword.setForeground(new Color(0xf9f9f9));
             panel1.add(newPassword);
             newPassword.setBounds(85, 250, newPassword.getPreferredSize().width, 24);
 
             //---- registerButton ----
             registerButton.setText("\u6ce8\u518c\u8d26\u53f7");
-            registerButton.setFont(registerButton.getFont().deriveFont(registerButton.getFont().getSize() + 3f));
+            registerButton.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", registerButton.getFont().getStyle() | Font.BOLD, registerButton.getFont().getSize() + 6));
             panel1.add(registerButton);
             registerButton.setBounds(150, 310, registerButton.getPreferredSize().width, 40);
 
             //---- backLoginButton ----
             backLoginButton.setText("\u8fd4\u56de\u767b\u5f55");
-            backLoginButton.setFont(backLoginButton.getFont().deriveFont(backLoginButton.getFont().getSize() + 3f));
+            backLoginButton.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", backLoginButton.getFont().getStyle() | Font.BOLD, backLoginButton.getFont().getSize() + 6));
             panel1.add(backLoginButton);
             backLoginButton.setBounds(325, 310, backLoginButton.getPreferredSize().width, 40);
             panel1.add(newPasswordField);
-            newPasswordField.setBounds(150, 245, 270, 30);
+            newPasswordField.setBounds(150, 245, 280, 30);
 
             //---- newUser ----
             newUser.setText("\u7528\u6237\u540d");
-            newUser.setFont(newUser.getFont().deriveFont(newUser.getFont().getSize() + 6f));
+            newUser.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", newUser.getFont().getStyle() | Font.BOLD, newUser.getFont().getSize() + 6));
             newUser.setForeground(new Color(0xf9f9f9));
             panel1.add(newUser);
             newUser.setBounds(85, 125, newUser.getPreferredSize().width, 24);
             panel1.add(newUserField);
-            newUserField.setBounds(150, 120, 270, 30);
+            newUserField.setBounds(150, 120, 280, 30);
 
             //======== panel2 ========
             {
                 panel2.setBackground(new Color(0x4c5052));
                 panel2.setLayout(null);
+
+                //---- registerTitle ----
+                registerTitle.setText("\u6ce8\u518c\u65b0\u8d26\u53f7");
+                registerTitle.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", registerTitle.getFont().getStyle() | Font.BOLD, registerTitle.getFont().getSize() + 15));
+                registerTitle.setForeground(new Color(0xf9f9f9));
+                panel2.add(registerTitle);
+                registerTitle.setBounds(215, 40, registerTitle.getPreferredSize().width, 30);
+                panel2.add(iconLabel);
+                iconLabel.setBounds(145, 35, 45, 45);
 
                 {
                     // compute preferred size
@@ -169,6 +174,12 @@ public class Register extends JFrame {
         pack();
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents  @formatter:on
+    }
+    public void initView() {
+        getContentPane().setBackground(new Color(69, 73, 74));
+        ImageIcon image = new ImageIcon("src/main/java/com/zkxg/newspaper_subscription/view/icon.png");
+        image.setImage(image.getImage().getScaledInstance(45,45,Image.SCALE_DEFAULT));
+        iconLabel.setIcon(image);
     }
     public void listerner() {
         // 触发返回登录界面事件
@@ -230,7 +241,6 @@ public class Register extends JFrame {
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off
     // Generated using JFormDesigner Evaluation license - unknown
     private JPanel panel1;
-    private JLabel registerTitle;
     private JLabel newAccount;
     private JTextField newAccountField;
     private JLabel newPassword;
@@ -240,5 +250,7 @@ public class Register extends JFrame {
     private JLabel newUser;
     private JTextField newUserField;
     private JPanel panel2;
+    private JLabel registerTitle;
+    private JLabel iconLabel;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }

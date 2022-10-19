@@ -60,75 +60,75 @@ public class modNewspaper extends JFrame {
 
         //======== panel1 ========
         {
-            panel1.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new
-            javax.swing.border.EmptyBorder(0,0,0,0), "JF\u006frmDes\u0069gner \u0045valua\u0074ion",javax
-            .swing.border.TitledBorder.CENTER,javax.swing.border.TitledBorder.BOTTOM,new java
-            .awt.Font("D\u0069alog",java.awt.Font.BOLD,12),java.awt
-            .Color.red),panel1. getBorder()));panel1. addPropertyChangeListener(new java.beans.
-            PropertyChangeListener(){@Override public void propertyChange(java.beans.PropertyChangeEvent e){if("\u0062order".
-            equals(e.getPropertyName()))throw new RuntimeException();}});
+            panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing
+            . border. EmptyBorder( 0, 0, 0, 0) , "", javax. swing. border. TitledBorder
+            . CENTER, javax. swing. border. TitledBorder. BOTTOM, new java .awt .Font ("D\u0069al\u006fg" ,java .
+            awt .Font .BOLD ,12 ), java. awt. Color. red) ,panel1. getBorder( )) )
+            ; panel1. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e
+            ) {if ("\u0062or\u0064er" .equals (e .getPropertyName () )) throw new RuntimeException( ); }} )
+            ;
             panel1.setLayout(null);
             panel1.add(imageLabel);
             imageLabel.setBounds(10, 10, 290, 515);
 
             //---- label2 ----
             label2.setText("\u62a5\u520a\u540d\u79f0\uff1a");
-            label2.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+            label2.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
             panel1.add(label2);
             label2.setBounds(320, 20, 105, 40);
 
             //---- label3 ----
             label3.setText("\u51fa\u7248\u62a5\u793e\uff1a");
-            label3.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+            label3.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
             panel1.add(label3);
             label3.setBounds(320, 80, 105, 40);
 
             //---- label4 ----
             label4.setText("\u62a5\u520a\u7c7b\u578b\uff1a");
-            label4.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+            label4.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
             panel1.add(label4);
             label4.setBounds(315, 150, 105, 40);
 
             //---- label5 ----
             label5.setText("\u62a5\u520a\u5355\u4ef7\uff1a");
-            label5.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+            label5.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
             panel1.add(label5);
             label5.setBounds(315, 225, 105, 40);
 
             //---- label6 ----
             label6.setText("\u5185\u5bb9\u4ecb\u7ecd\uff1a");
-            label6.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+            label6.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
             panel1.add(label6);
             label6.setBounds(315, 290, 105, 40);
 
             //---- modNewsButton1 ----
             modNewsButton1.setText("\u4fee\u6539");
-            modNewsButton1.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+            modNewsButton1.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
             panel1.add(modNewsButton1);
             modNewsButton1.setBounds(315, 440, 295, 40);
 
             //---- modNewsNameField ----
-            modNewsNameField.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+            modNewsNameField.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
             panel1.add(modNewsNameField);
             modNewsNameField.setBounds(435, 20, 175, 40);
 
             //---- modNewsPriceField ----
-            modNewsPriceField.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+            modNewsPriceField.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
             panel1.add(modNewsPriceField);
             modNewsPriceField.setBounds(435, 225, 175, 40);
 
             //---- modNewsTypeField ----
-            modNewsTypeField.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+            modNewsTypeField.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
             panel1.add(modNewsTypeField);
             modNewsTypeField.setBounds(435, 155, 175, 40);
 
             //---- modNewsPublishField ----
-            modNewsPublishField.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+            modNewsPublishField.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
             panel1.add(modNewsPublishField);
             modNewsPublishField.setBounds(435, 85, 175, 40);
 
             //---- modNewsBriefField ----
-            modNewsBriefField.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+            modNewsBriefField.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
             panel1.add(modNewsBriefField);
             modNewsBriefField.setBounds(315, 335, 295, 85);
 

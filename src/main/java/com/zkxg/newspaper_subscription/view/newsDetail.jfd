@@ -18,7 +18,7 @@ new FormModel {
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "label2"
 					"text": "报刊名称："
-					"font": &Font0 new java.awt.Font( "Microsoft YaHei UI", 0, 20 )
+					"font": &Font0 new java.awt.Font( "微軟正黑體", 1, 20 )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"width": 105
 					"height": 40
@@ -108,7 +108,7 @@ new FormModel {
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "detailBriefLabel"
 					"text": "仲恺鹿晗"
-					"font": new java.awt.Font( "Microsoft YaHei UI", 0, 18 )
+					"font": new java.awt.Font( "微軟正黑體", 0, 18 )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"width": 215
 					"height": 95
@@ -118,7 +118,7 @@ new FormModel {
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "subNewsButton"
 					"text": "订阅"
-					"font": new java.awt.Font( "Microsoft YaHei UI", 0, 20 )
+					"font": #Font0
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"width": 240
 					"height": 40
@@ -127,7 +127,7 @@ new FormModel {
 				} )
 				add( new FormComponent( "javax.swing.JTextField" ) {
 					name: "subNewsCountField"
-					"font": new java.awt.Font( "Microsoft YaHei UI", 0, 20 )
+					"font": #Font0
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"width": 75
 					"height": 40

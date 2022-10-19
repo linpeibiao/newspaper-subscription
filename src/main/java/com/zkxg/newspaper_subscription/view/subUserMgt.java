@@ -127,12 +127,12 @@ public class subUserMgt extends JFrame {
         //======== panel1 ========
         {
             panel1.setBackground(new Color(0x4c5052));
-            panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border. EmptyBorder
-            ( 0, 0, 0, 0) , "JF\u006frmDes\u0069gner \u0045valua\u0074ion", javax. swing. border. TitledBorder. CENTER, javax. swing. border
-            . TitledBorder. BOTTOM, new java .awt .Font ("D\u0069alog" ,java .awt .Font .BOLD ,12 ), java. awt
-            . Color. red) ,panel1. getBorder( )) ); panel1. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void
-            propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062order" .equals (e .getPropertyName () )) throw new RuntimeException( )
-            ; }} );
+            panel1.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.swing.
+            border.EmptyBorder(0,0,0,0), "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn",javax.swing.border.TitledBorder.CENTER
+            ,javax.swing.border.TitledBorder.BOTTOM,new java.awt.Font("Dia\u006cog",java.awt.Font
+            .BOLD,12),java.awt.Color.red),panel1. getBorder()));panel1. addPropertyChangeListener(
+            new java.beans.PropertyChangeListener(){@Override public void propertyChange(java.beans.PropertyChangeEvent e){if("\u0062ord\u0065r"
+            .equals(e.getPropertyName()))throw new RuntimeException();}});
             panel1.setLayout(null);
 
             //---- label1 ----
@@ -144,7 +144,7 @@ public class subUserMgt extends JFrame {
 
             //======== tabbedPane1 ========
             {
-                tabbedPane1.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+                tabbedPane1.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
 
                 //======== index ========
                 {
@@ -159,34 +159,37 @@ public class subUserMgt extends JFrame {
 
                     //---- newsNextPageButton ----
                     newsNextPageButton.setText("\u4e0b\u4e00\u9875");
-                    newsNextPageButton.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+                    newsNextPageButton.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
                     index.add(newsNextPageButton);
-                    newsNextPageButton.setBounds(800, 460, 94, 40);
+                    newsNextPageButton.setBounds(795, 460, 94, 40);
 
                     //---- newsPrePageButton ----
                     newsPrePageButton.setText("\u4e0a\u4e00\u9875");
-                    newsPrePageButton.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+                    newsPrePageButton.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
                     index.add(newsPrePageButton);
-                    newsPrePageButton.setBounds(685, 460, 94, 40);
+                    newsPrePageButton.setBounds(680, 460, 94, 40);
 
                     //---- detailButton ----
                     detailButton.setText("\u62a5\u520a\u8ba2\u9605");
-                    detailButton.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+                    detailButton.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
                     index.add(detailButton);
                     detailButton.setBounds(775, 25, detailButton.getPreferredSize().width, 40);
+
+                    //---- queryNewsList ----
+                    queryNewsList.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.PLAIN, 16));
                     index.add(queryNewsList);
-                    queryNewsList.setBounds(10, 25, 135, 40);
+                    queryNewsList.setBounds(10, 25, 165, 40);
 
                     //---- queryNewsField ----
-                    queryNewsField.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+                    queryNewsField.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
                     index.add(queryNewsField);
-                    queryNewsField.setBounds(165, 25, 200, 40);
+                    queryNewsField.setBounds(200, 25, 200, 40);
 
                     //---- queryNewsButton ----
                     queryNewsButton.setText("\u67e5\u8be2");
-                    queryNewsButton.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+                    queryNewsButton.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
                     index.add(queryNewsButton);
-                    queryNewsButton.setBounds(380, 25, 78, 40);
+                    queryNewsButton.setBounds(415, 25, 78, 40);
 
                     {
                         // compute preferred size
@@ -210,18 +213,21 @@ public class subUserMgt extends JFrame {
                     panel6.setLayout(null);
 
                     //---- queryField ----
-                    queryField.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+                    queryField.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
                     panel6.add(queryField);
                     queryField.setBounds(165, 20, 200, 40);
 
                     //---- queryButton ----
                     queryButton.setText("\u67e5\u8be2");
-                    queryButton.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+                    queryButton.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
                     panel6.add(queryButton);
                     queryButton.setBounds(380, 20, queryButton.getPreferredSize().width, 40);
 
                     //======== scrollPane1 ========
                     {
+
+                        //---- queryTable ----
+                        queryTable.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
                         scrollPane1.setViewportView(queryTable);
                     }
                     panel6.add(scrollPane1);
@@ -229,13 +235,13 @@ public class subUserMgt extends JFrame {
 
                     //---- deleteOrderButton ----
                     deleteOrderButton.setText("\u5220\u9664\u8ba2\u5355");
-                    deleteOrderButton.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+                    deleteOrderButton.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
                     panel6.add(deleteOrderButton);
                     deleteOrderButton.setBounds(785, 25, deleteOrderButton.getPreferredSize().width, 40);
 
                     //---- changUser2 ----
                     changUser2.setText("\u8f93\u5165\u8ba2\u5355\u7f16\u53f7\uff1a");
-                    changUser2.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+                    changUser2.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
                     panel6.add(changUser2);
                     changUser2.setBounds(20, 25, 140, 27);
 
@@ -261,13 +267,16 @@ public class subUserMgt extends JFrame {
                     panel4.setLayout(null);
 
                     //---- currentOrderButton ----
-                    currentOrderButton.setText("\u83b7\u53d6\u5f53\u524d\u7528\u6237\u8ba2\u9605\u4fe1\u606f");
-                    currentOrderButton.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+                    currentOrderButton.setText("\u83b7\u53d6\u7528\u6237\u8ba2\u9605\u4fe1\u606f");
+                    currentOrderButton.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
                     panel4.add(currentOrderButton);
                     currentOrderButton.setBounds(25, 20, currentOrderButton.getPreferredSize().width, 40);
 
                     //======== scrollPane3 ========
                     {
+
+                        //---- queryTable2 ----
+                        queryTable2.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
                         scrollPane3.setViewportView(queryTable2);
                     }
                     panel4.add(scrollPane3);
@@ -296,41 +305,53 @@ public class subUserMgt extends JFrame {
 
                     //---- changUser ----
                     changUser.setText("\u7528\u6237\u540d");
-                    changUser.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+                    changUser.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
                     panel3.add(changUser);
                     changUser.setBounds(new Rectangle(new Point(170, 110), changUser.getPreferredSize()));
 
                     //---- changeSex ----
                     changeSex.setText("\u6027\u522b");
-                    changeSex.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+                    changeSex.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
                     panel3.add(changeSex);
                     changeSex.setBounds(175, 175, 60, 27);
 
                     //---- changeEmail ----
                     changeEmail.setText("\u90ae\u7bb1");
-                    changeEmail.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+                    changeEmail.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
                     panel3.add(changeEmail);
                     changeEmail.setBounds(175, 245, 60, 27);
 
                     //---- changePhone ----
                     changePhone.setText("\u7535\u8bdd");
-                    changePhone.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+                    changePhone.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
                     panel3.add(changePhone);
                     changePhone.setBounds(175, 305, 60, 27);
+
+                    //---- changeUserField ----
+                    changeUserField.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
                     panel3.add(changeUserField);
-                    changeUserField.setBounds(260, 110, 205, 35);
+                    changeUserField.setBounds(260, 110, 255, 35);
+
+                    //---- changEmailField ----
+                    changEmailField.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
                     panel3.add(changEmailField);
-                    changEmailField.setBounds(260, 245, 205, 35);
+                    changEmailField.setBounds(260, 245, 255, 35);
+
+                    //---- changePhoneField ----
+                    changePhoneField.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
                     panel3.add(changePhoneField);
-                    changePhoneField.setBounds(260, 305, 205, 35);
+                    changePhoneField.setBounds(260, 305, 255, 35);
 
                     //---- changeButton ----
                     changeButton.setText("\u786e\u8ba4\u4fee\u6539");
-                    changeButton.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+                    changeButton.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
                     panel3.add(changeButton);
-                    changeButton.setBounds(175, 410, 295, 45);
+                    changeButton.setBounds(175, 390, 335, 45);
+
+                    //---- changeSexList ----
+                    changeSexList.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
                     panel3.add(changeSexList);
-                    changeSexList.setBounds(260, 175, 205, 40);
+                    changeSexList.setBounds(260, 175, 255, 40);
 
                     {
                         // compute preferred size
@@ -354,13 +375,13 @@ public class subUserMgt extends JFrame {
 
             //---- logoutButton ----
             logoutButton.setText("\u9000\u51fa\u767b\u5f55");
-            logoutButton.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+            logoutButton.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
             panel1.add(logoutButton);
             logoutButton.setBounds(new Rectangle(new Point(795, 15), logoutButton.getPreferredSize()));
 
             //---- chargeUserLabel ----
             chargeUserLabel.setText("\u5f53\u524d\u7528\u6237\u8eab\u4efd\uff1a\u7ba1\u7406\u5458");
-            chargeUserLabel.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+            chargeUserLabel.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
             chargeUserLabel.setForeground(new Color(0xeeeeee));
             panel1.add(chargeUserLabel);
             chargeUserLabel.setBounds(525, 17, 255, 27);
@@ -464,7 +485,7 @@ public class subUserMgt extends JFrame {
             chargeUserLabel.setText("当前用户身份：普通用户");
         }
         getContentPane().setBackground(new Color(76, 80, 82));
-        label1.setText("欢迎您，"+ user.getNackname());
+        label1.setText("欢迎您—"+ user.getNackname());
     }
     // 初始化查询界面
     public void initQueryView() {

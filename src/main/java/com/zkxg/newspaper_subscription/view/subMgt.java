@@ -90,7 +90,6 @@ public class subMgt extends JFrame {
         newsOrderList = new JTable();
         newsNextPageButton = new JButton();
         newsPrePageButton = new JButton();
-        detailButton = new JButton();
         modNewsButton = new JButton();
         queryNewsList = new JComboBox();
         queryNewsField = new JTextField();
@@ -106,14 +105,9 @@ public class subMgt extends JFrame {
         panel6 = new JPanel();
         queryField = new JTextField();
         queryButton = new JButton();
-        queryList = new JComboBox();
         scrollPane1 = new JScrollPane();
         queryTable = new JTable();
-        deleteOrderButton = new JButton();
-        panel4 = new JPanel();
-        currentOrderButton = new JButton();
-        scrollPane3 = new JScrollPane();
-        queryTable2 = new JTable();
+        changUser2 = new JLabel();
         panel7 = new JPanel();
         scrollPane2 = new JScrollPane();
         userList = new JTable();
@@ -154,25 +148,24 @@ public class subMgt extends JFrame {
         //======== panel1 ========
         {
             panel1.setBackground(new Color(0x4c5052));
-            panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new
-            javax. swing. border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frmDes\u0069gner \u0045valua\u0074ion", javax
-            . swing. border. TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM, new java
-            .awt .Font ("D\u0069alog" ,java .awt .Font .BOLD ,12 ), java. awt
-            . Color. red) ,panel1. getBorder( )) ); panel1. addPropertyChangeListener (new java. beans.
-            PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062order" .
-            equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
+            panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border.
+            EmptyBorder( 0, 0, 0, 0) , "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn", javax. swing. border. TitledBorder. CENTER, javax. swing
+            . border. TitledBorder. BOTTOM, new java .awt .Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 ),
+            java. awt. Color. red) ,panel1. getBorder( )) ); panel1. addPropertyChangeListener (new java. beans. PropertyChangeListener( )
+            { @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062ord\u0065r" .equals (e .getPropertyName () ))
+            throw new RuntimeException( ); }} );
             panel1.setLayout(null);
 
             //---- label1 ----
             label1.setText("\u6b22\u8fce\u4f7f\u7528\u62a5\u520a\u8ba2\u9605\u7cfb\u7edf");
-            label1.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 30));
+            label1.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 30));
             label1.setForeground(new Color(0xf2f2f2));
             panel1.add(label1);
             label1.setBounds(80, 15, 375, label1.getPreferredSize().height);
 
             //======== tabbedPane1 ========
             {
-                tabbedPane1.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+                tabbedPane1.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
 
                 //======== index ========
                 {
@@ -180,6 +173,9 @@ public class subMgt extends JFrame {
 
                     //======== scrollPane4 ========
                     {
+
+                        //---- newsOrderList ----
+                        newsOrderList.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 12));
                         scrollPane4.setViewportView(newsOrderList);
                     }
                     index.add(scrollPane4);
@@ -187,52 +183,49 @@ public class subMgt extends JFrame {
 
                     //---- newsNextPageButton ----
                     newsNextPageButton.setText("\u4e0b\u4e00\u9875");
-                    newsNextPageButton.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+                    newsNextPageButton.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
                     index.add(newsNextPageButton);
-                    newsNextPageButton.setBounds(800, 460, 94, 40);
+                    newsNextPageButton.setBounds(795, 460, 94, 40);
 
                     //---- newsPrePageButton ----
                     newsPrePageButton.setText("\u4e0a\u4e00\u9875");
-                    newsPrePageButton.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+                    newsPrePageButton.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
                     index.add(newsPrePageButton);
-                    newsPrePageButton.setBounds(685, 460, 94, 40);
-
-                    //---- detailButton ----
-                    detailButton.setText("\u62a5\u520a\u8ba2\u9605");
-                    detailButton.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
-                    index.add(detailButton);
-                    detailButton.setBounds(775, 25, detailButton.getPreferredSize().width, 40);
+                    newsPrePageButton.setBounds(680, 460, 94, 40);
 
                     //---- modNewsButton ----
                     modNewsButton.setText("\u4fee\u6539");
-                    modNewsButton.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+                    modNewsButton.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
                     index.add(modNewsButton);
                     modNewsButton.setBounds(680, 25, 78, 40);
+
+                    //---- queryNewsList ----
+                    queryNewsList.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.PLAIN, 16));
                     index.add(queryNewsList);
-                    queryNewsList.setBounds(10, 25, 135, 40);
+                    queryNewsList.setBounds(10, 25, 155, 40);
 
                     //---- queryNewsField ----
-                    queryNewsField.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+                    queryNewsField.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
                     index.add(queryNewsField);
-                    queryNewsField.setBounds(165, 25, 200, 40);
+                    queryNewsField.setBounds(180, 25, 200, 40);
 
                     //---- queryNewsButton ----
                     queryNewsButton.setText("\u67e5\u8be2");
-                    queryNewsButton.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+                    queryNewsButton.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
                     index.add(queryNewsButton);
-                    queryNewsButton.setBounds(380, 25, 78, 40);
+                    queryNewsButton.setBounds(395, 25, 78, 40);
 
                     //---- delNewsButton ----
                     delNewsButton.setText("\u5220\u9664");
-                    delNewsButton.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+                    delNewsButton.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
                     index.add(delNewsButton);
-                    delNewsButton.setBounds(580, 25, 78, 40);
+                    delNewsButton.setBounds(585, 25, 78, 40);
 
                     //---- subCountButton ----
                     subCountButton.setText("\u8ba2\u9605\u6570\u91cf");
-                    subCountButton.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+                    subCountButton.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
                     index.add(subCountButton);
-                    subCountButton.setBounds(775, 70, 115, 40);
+                    subCountButton.setBounds(775, 25, 115, 40);
 
                     {
                         // compute preferred size
@@ -257,23 +250,29 @@ public class subMgt extends JFrame {
 
                     //---- getStatsButton ----
                     getStatsButton.setText("\u83b7\u53d6\u6570\u636e\u7edf\u8ba1");
-                    getStatsButton.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+                    getStatsButton.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
                     panel5.add(getStatsButton);
-                    getStatsButton.setBounds(225, 25, getStatsButton.getPreferredSize().width, 40);
+                    getStatsButton.setBounds(305, 25, getStatsButton.getPreferredSize().width, 40);
 
                     //---- MostPopularNewspaperLabel ----
-                    MostPopularNewspaperLabel.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+                    MostPopularNewspaperLabel.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
                     panel5.add(MostPopularNewspaperLabel);
                     MostPopularNewspaperLabel.setBounds(20, 80, 335, 27);
+
+                    //---- pNewsTop10List ----
+                    pNewsTop10List.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 12));
                     panel5.add(pNewsTop10List);
                     pNewsTop10List.setBounds(20, 170, 880, 328);
 
                     //---- statsLabelTOP10 ----
-                    statsLabelTOP10.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+                    statsLabelTOP10.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
                     panel5.add(statsLabelTOP10);
                     statsLabelTOP10.setBounds(20, 130, 335, 27);
+
+                    //---- statsQueryList ----
+                    statsQueryList.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.PLAIN, 16));
                     panel5.add(statsQueryList);
-                    statsQueryList.setBounds(20, 25, 180, 40);
+                    statsQueryList.setBounds(20, 25, 240, 40);
 
                     {
                         // compute preferred size
@@ -297,30 +296,31 @@ public class subMgt extends JFrame {
                     panel6.setLayout(null);
 
                     //---- queryField ----
-                    queryField.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+                    queryField.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
                     panel6.add(queryField);
-                    queryField.setBounds(145, 25, 200, 40);
+                    queryField.setBounds(175, 25, 200, 40);
 
                     //---- queryButton ----
                     queryButton.setText("\u67e5\u8be2");
-                    queryButton.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+                    queryButton.setFont(new Font("\u5fae\u8f6f\u96c5\u9ed1", Font.BOLD, 20));
                     panel6.add(queryButton);
-                    queryButton.setBounds(365, 25, queryButton.getPreferredSize().width, 40);
-                    panel6.add(queryList);
-                    queryList.setBounds(20, 25, 110, 40);
+                    queryButton.setBounds(390, 25, queryButton.getPreferredSize().width, 40);
 
                     //======== scrollPane1 ========
                     {
+
+                        //---- queryTable ----
+                        queryTable.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 12));
                         scrollPane1.setViewportView(queryTable);
                     }
                     panel6.add(scrollPane1);
                     scrollPane1.setBounds(15, 80, 885, 430);
 
-                    //---- deleteOrderButton ----
-                    deleteOrderButton.setText("\u5220\u9664\u8ba2\u5355");
-                    deleteOrderButton.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
-                    panel6.add(deleteOrderButton);
-                    deleteOrderButton.setBounds(790, 25, deleteOrderButton.getPreferredSize().width, 40);
+                    //---- changUser2 ----
+                    changUser2.setText("\u8f93\u5165\u8ba2\u5355\u7f16\u53f7\uff1a");
+                    changUser2.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
+                    panel6.add(changUser2);
+                    changUser2.setBounds(20, 30, 140, 27);
 
                     {
                         // compute preferred size
@@ -339,46 +339,15 @@ public class subMgt extends JFrame {
                 }
                 tabbedPane1.addTab("\u8ba2\u5355\u67e5\u8be2", panel6);
 
-                //======== panel4 ========
-                {
-                    panel4.setLayout(null);
-
-                    //---- currentOrderButton ----
-                    currentOrderButton.setText("\u83b7\u53d6\u5f53\u524d\u7528\u6237\u8ba2\u5355");
-                    currentOrderButton.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
-                    panel4.add(currentOrderButton);
-                    currentOrderButton.setBounds(25, 20, 194, 40);
-
-                    //======== scrollPane3 ========
-                    {
-                        scrollPane3.setViewportView(queryTable2);
-                    }
-                    panel4.add(scrollPane3);
-                    scrollPane3.setBounds(25, 85, 860, 410);
-
-                    {
-                        // compute preferred size
-                        Dimension preferredSize = new Dimension();
-                        for(int i = 0; i < panel4.getComponentCount(); i++) {
-                            Rectangle bounds = panel4.getComponent(i).getBounds();
-                            preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
-                            preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
-                        }
-                        Insets insets = panel4.getInsets();
-                        preferredSize.width += insets.right;
-                        preferredSize.height += insets.bottom;
-                        panel4.setMinimumSize(preferredSize);
-                        panel4.setPreferredSize(preferredSize);
-                    }
-                }
-                tabbedPane1.addTab("\u6211\u7684\u8ba2\u5355", panel4);
-
                 //======== panel7 ========
                 {
                     panel7.setLayout(null);
 
                     //======== scrollPane2 ========
                     {
+
+                        //---- userList ----
+                        userList.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 12));
                         scrollPane2.setViewportView(userList);
                     }
                     panel7.add(scrollPane2);
@@ -386,19 +355,19 @@ public class subMgt extends JFrame {
 
                     //---- queryUserButton ----
                     queryUserButton.setText("\u83b7\u53d6\u7528\u6237\u5217\u8868");
-                    queryUserButton.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+                    queryUserButton.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
                     panel7.add(queryUserButton);
                     queryUserButton.setBounds(20, 15, queryUserButton.getPreferredSize().width, 40);
 
                     //---- prePageButton ----
                     prePageButton.setText("\u4e0a\u4e00\u9875");
-                    prePageButton.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+                    prePageButton.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
                     panel7.add(prePageButton);
                     prePageButton.setBounds(690, 455, prePageButton.getPreferredSize().width, 40);
 
                     //---- nextPageButton ----
                     nextPageButton.setText("\u4e0b\u4e00\u9875");
-                    nextPageButton.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+                    nextPageButton.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
                     panel7.add(nextPageButton);
                     nextPageButton.setBounds(805, 455, nextPageButton.getPreferredSize().width, 40);
 
@@ -425,41 +394,53 @@ public class subMgt extends JFrame {
 
                     //---- changUser ----
                     changUser.setText("\u7528\u6237\u540d");
-                    changUser.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+                    changUser.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
                     panel3.add(changUser);
                     changUser.setBounds(new Rectangle(new Point(170, 110), changUser.getPreferredSize()));
 
                     //---- changeSex ----
                     changeSex.setText("\u6027\u522b");
-                    changeSex.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+                    changeSex.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
                     panel3.add(changeSex);
                     changeSex.setBounds(175, 175, 60, 27);
 
                     //---- changeEmail ----
                     changeEmail.setText("\u90ae\u7bb1");
-                    changeEmail.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+                    changeEmail.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
                     panel3.add(changeEmail);
                     changeEmail.setBounds(175, 245, 60, 27);
 
                     //---- changePhone ----
                     changePhone.setText("\u7535\u8bdd");
-                    changePhone.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+                    changePhone.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
                     panel3.add(changePhone);
                     changePhone.setBounds(175, 305, 60, 27);
+
+                    //---- changeUserField ----
+                    changeUserField.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
                     panel3.add(changeUserField);
-                    changeUserField.setBounds(260, 110, 205, 35);
+                    changeUserField.setBounds(260, 110, 255, 35);
+
+                    //---- changEmailField ----
+                    changEmailField.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
                     panel3.add(changEmailField);
-                    changEmailField.setBounds(260, 245, 205, 35);
+                    changEmailField.setBounds(260, 245, 255, 35);
+
+                    //---- changePhoneField ----
+                    changePhoneField.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
                     panel3.add(changePhoneField);
-                    changePhoneField.setBounds(260, 305, 205, 35);
+                    changePhoneField.setBounds(260, 305, 255, 35);
 
                     //---- changeButton ----
                     changeButton.setText("\u786e\u8ba4\u4fee\u6539");
-                    changeButton.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+                    changeButton.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
                     panel3.add(changeButton);
-                    changeButton.setBounds(175, 410, 295, 45);
+                    changeButton.setBounds(175, 410, 340, 45);
+
+                    //---- changeSexList ----
+                    changeSexList.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
                     panel3.add(changeSexList);
-                    changeSexList.setBounds(260, 175, 205, 40);
+                    changeSexList.setBounds(260, 175, 255, 40);
 
                     {
                         // compute preferred size
@@ -480,51 +461,67 @@ public class subMgt extends JFrame {
 
                 //======== panel2 ========
                 {
+                    panel2.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
                     panel2.setLayout(null);
+
+                    //---- addNewsNameField ----
+                    addNewsNameField.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
                     panel2.add(addNewsNameField);
                     addNewsNameField.setBounds(265, 85, 205, 35);
 
                     //---- addNewsName ----
                     addNewsName.setText("\u62a5\u520a\u540d");
-                    addNewsName.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+                    addNewsName.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
                     panel2.add(addNewsName);
                     addNewsName.setBounds(180, 85, 60, 27);
+
+                    //---- addNewsTypeFiled ----
+                    addNewsTypeFiled.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
                     panel2.add(addNewsTypeFiled);
                     addNewsTypeFiled.setBounds(265, 145, 205, 35);
 
                     //---- addNewsType ----
                     addNewsType.setText("\u62a5\u520a\u7c7b\u578b");
-                    addNewsType.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+                    addNewsType.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
                     panel2.add(addNewsType);
                     addNewsType.setBounds(170, 145, addNewsType.getPreferredSize().width, 27);
+
+                    //---- addNewsBriefField ----
+                    addNewsBriefField.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
                     panel2.add(addNewsBriefField);
                     addNewsBriefField.setBounds(265, 205, 205, 35);
 
                     //---- addNewsBrief ----
                     addNewsBrief.setText("\u62a5\u520a\u7b80\u4ecb");
-                    addNewsBrief.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+                    addNewsBrief.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
                     panel2.add(addNewsBrief);
                     addNewsBrief.setBounds(170, 205, addNewsBrief.getPreferredSize().width, 27);
+
+                    //---- addNewsPublisherField ----
+                    addNewsPublisherField.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
                     panel2.add(addNewsPublisherField);
                     addNewsPublisherField.setBounds(265, 270, 205, 35);
 
                     //---- addNewsPublisher ----
                     addNewsPublisher.setText("\u51fa\u7248\u793e");
-                    addNewsPublisher.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+                    addNewsPublisher.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
                     panel2.add(addNewsPublisher);
                     addNewsPublisher.setBounds(180, 270, 60, 27);
+
+                    //---- addNewsPriceField ----
+                    addNewsPriceField.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
                     panel2.add(addNewsPriceField);
                     addNewsPriceField.setBounds(265, 330, 205, 35);
 
                     //---- addNewsPrice ----
                     addNewsPrice.setText("\u4ef7\u683c");
-                    addNewsPrice.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+                    addNewsPrice.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
                     panel2.add(addNewsPrice);
                     addNewsPrice.setBounds(185, 335, 60, 27);
 
                     //---- addNewsButton ----
                     addNewsButton.setText("\u6dfb\u52a0\u65b0\u62a5\u520a");
-                    addNewsButton.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+                    addNewsButton.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
                     panel2.add(addNewsButton);
                     addNewsButton.setBounds(175, 405, 295, 45);
 
@@ -550,13 +547,13 @@ public class subMgt extends JFrame {
 
             //---- logoutButton ----
             logoutButton.setText("\u9000\u51fa\u767b\u5f55");
-            logoutButton.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+            logoutButton.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
             panel1.add(logoutButton);
             logoutButton.setBounds(new Rectangle(new Point(795, 15), logoutButton.getPreferredSize()));
 
             //---- chargeUserLabel ----
             chargeUserLabel.setText("\u5f53\u524d\u7528\u6237\u8eab\u4efd\uff1a\u7ba1\u7406\u5458");
-            chargeUserLabel.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+            chargeUserLabel.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
             chargeUserLabel.setForeground(new Color(0xeeeeee));
             panel1.add(chargeUserLabel);
             chargeUserLabel.setBounds(525, 17, 255, 27);
@@ -611,7 +608,6 @@ public class subMgt extends JFrame {
     private JTable newsOrderList;
     private JButton newsNextPageButton;
     private JButton newsPrePageButton;
-    private JButton detailButton;
     private JButton modNewsButton;
     private JComboBox queryNewsList;
     private JTextField queryNewsField;
@@ -627,14 +623,9 @@ public class subMgt extends JFrame {
     private JPanel panel6;
     private JTextField queryField;
     private JButton queryButton;
-    private JComboBox queryList;
     private JScrollPane scrollPane1;
     private JTable queryTable;
-    private JButton deleteOrderButton;
-    private JPanel panel4;
-    private JButton currentOrderButton;
-    private JScrollPane scrollPane3;
-    private JTable queryTable2;
+    private JLabel changUser2;
     private JPanel panel7;
     private JScrollPane scrollPane2;
     private JTable userList;
@@ -687,12 +678,10 @@ public class subMgt extends JFrame {
             chargeUserLabel.setText("当前用户身份：普通用户");
         }
         getContentPane().setBackground(new Color(76, 80, 82));
-        label1.setText("欢迎您，"+ user.getNackname());
+        label1.setText("欢迎您—"+ user.getNackname());
     }
     // 初始化查询界面
     public void initQueryView() {
-        queryList.addItem("按订单号查询");
-        queryList.addItem("按用户id查询");
         queryNewsList.addItem("按报刊名称查询");
         queryNewsList.addItem("按报刊类型查询");
         statsQueryList.addItem("上线至今最受欢迎报刊TOP10");
@@ -741,6 +730,7 @@ public class subMgt extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("点击查询按钮！");
+                initIndexView();
                 if (queryNewsField.getText().trim().length() == 0) {
                     JOptionPane.showMessageDialog(null,"请输入查询内容！");
                     return;
@@ -918,23 +908,6 @@ public class subMgt extends JFrame {
                     }
                 }
         );
-        // 查看报刊详情并订阅
-        detailButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("触发查看报刊详情按钮");
-                if (newspaperController.isAdmin()) {
-                    JOptionPane.showMessageDialog(null,"管理员无法进行报刊订阅！");
-                    return;
-                }
-                if (newspaperId == null) {
-                    JOptionPane.showMessageDialog(null,"请选择需要订阅的报刊！");
-                    return;
-                }
-                new newsDetail();
-                newspaperId = null;
-            }
-        });
         // 点击获取报刊Id
         newsOrderList.addMouseListener(new MouseAdapter() {
             @Override
@@ -994,7 +967,7 @@ public class subMgt extends JFrame {
                if (statsQueryList.getSelectedIndex() == 2) {
                    // 统计订单最多的用户TOP10
                    statsLabelTOP10.setText("下单最多用户TOP10");
-                   Object[] pNewsRowName = {"排名","用户id","用户账号","用户名","当前用户订单总数"};
+                   Object[] pNewsRowName = {"排名","用户id","用户账号","用户名","用户订单总数"};
                    pNewsList.setRowCount(11);
                    pNewsList.setColumnCount(pNewsRowName.length);
                    for (int i = 0; i < pNewsRowName.length; i++) {
@@ -1145,7 +1118,6 @@ public class subMgt extends JFrame {
                             return;
                         }
                         // 按订单号分类查
-                        if (queryList.getSelectedIndex() == 0) {
                             System.out.println("按订单号查");
                             BaseResponse<Order> orderBaseResponse = orderController.getOrderInfoByOrderNumber(queryField.getText());
                             Order order = orderBaseResponse.getData();
@@ -1165,11 +1137,6 @@ public class subMgt extends JFrame {
                                 queryT.setValueAt(orderRowName[i],0,i);
                                 queryT.setValueAt(orderList[i],1,i);
                             }
-                        }
-                        // 按用户id分类查
-                        else if (queryList.getSelectedIndex() == 1) {
-                            System.out.println("按用户id查");
-                        }
                     }
                 }
 
@@ -1186,85 +1153,6 @@ public class subMgt extends JFrame {
                     }
                 }
         );
-        // 删除选中的订单
-        deleteOrderButton.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        // 管理员无法删除订单
-                        if (newspaperController.isAdmin()) {
-                            JOptionPane.showMessageDialog(null,"管理员无法删除订单！");
-                            return;
-                        }
-                        if (deleteOrderId == null) {
-                            JOptionPane.showMessageDialog(null,"请选择需要删除的订单!");
-                            return;
-                        }
-                        BaseResponse<String> deleteOrderBaseResponse = orderController.deleteOrder(deleteOrderId);
-                        queryField.setText("");
-                        deleteOrderId = null;
-                        JOptionPane.showMessageDialog(null,"删除订单成功!");
-                        // 建空表代替原表
-                        DefaultTableModel queryT = (DefaultTableModel) queryTable.getModel();
-                        queryT.getDataVector().clear(); // 清除表格数据
-                        queryT.fireTableDataChanged(); // 通知模型更新
-                        queryTable.updateUI(); // 更新表格
-                    }
-                }
-        );
-        // 获取当前用户订单
-        currentOrderButton.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        // 查询表
-                        DefaultTableModel queryT2 = (DefaultTableModel) queryTable2.getModel();
-                        // 设置订单列表表头名
-                        Object[] orderRowName = {"订单编号","订单Id","报刊名称","用户昵称","订阅份数","订单总金额"};
-                        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
-                        tcr.setHorizontalAlignment(JLabel.CENTER);
-                        queryTable2.setDefaultRenderer(Object.class,tcr);
-                        queryTable2.setFont(new Font("微软雅黑",Font.PLAIN,16));
-                        queryTable2.setRowHeight(30);
-                        if (currentUser.getId() == null) {
-                            JOptionPane.showMessageDialog(null,"登录后才能查看用户订单！");
-                            return;
-                        }
-                        if(newspaperController.isAdmin()) {
-                            JOptionPane.showMessageDialog(null,"该模块仅对普通用户开放！");
-                            return;
-                        }
-                        queryT2.getDataVector().clear(); // 清除表格数据
-                        queryT2.fireTableDataChanged(); // 通知模型更新
-                        queryTable.updateUI(); // 更新表格
-                        BaseResponse<List<Order>> orderBaseResponse = orderController.getOrderByUserId(Long.valueOf(currentUser.getId()));
-                        List<Order> order = orderBaseResponse.getData();
-                        // 设置行与列
-                        queryT2.setRowCount(order.size()+1);
-                        queryT2.setColumnCount(orderRowName.length);
-                        if(order == null) {
-                            JOptionPane.showMessageDialog(null, "暂无订单！");
-                            queryT2.getDataVector().clear(); // 清除表格数据
-                            queryT2.fireTableDataChanged(); // 通知模型更新
-                            queryTable.updateUI(); // 更新表格
-                            return;
-                        }
-                        for (int i = 0; i < orderRowName.length; i++) {
-                            queryT2.setValueAt(orderRowName[i],0,i);
-                        }
-                        for (int i = 0; i < order.size(); i++) {
-                            Order orderL = order.get(i);
-                            queryT2.setValueAt(orderL.getOrderNumber(),i+1,0);
-                            queryT2.setValueAt(orderL.getId(),i+1,1);
-                            queryT2.setValueAt(orderL.getNewspaperName(),i+1,2);
-                            queryT2.setValueAt(orderL.getUserName(),i+1,3);
-                            queryT2.setValueAt(orderL.getCount(),i+1,4);
-                            queryT2.setValueAt(orderL.getTotalPrice(),i+1,5);
-
-                        }
-                        System.out.println(order);
-                    }
-                }
-        );
-
         // 管理员对用户列表进行查询
         queryUserButton.addActionListener(new ActionListener() {
                     @Override

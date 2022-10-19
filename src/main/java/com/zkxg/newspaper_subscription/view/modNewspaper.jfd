@@ -18,7 +18,7 @@ new FormModel {
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "label2"
 					"text": "报刊名称："
-					"font": &Font0 new java.awt.Font( "Microsoft YaHei UI", 0, 20 )
+					"font": &Font0 new java.awt.Font( "微軟正黑體", 1, 20 )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"width": 105
 					"height": 40
@@ -68,7 +68,7 @@ new FormModel {
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "modNewsButton1"
 					"text": "修改"
-					"font": new java.awt.Font( "Microsoft YaHei UI", 0, 20 )
+					"font": #Font0
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"width": 295
 					"height": 40
@@ -77,7 +77,7 @@ new FormModel {
 				} )
 				add( new FormComponent( "javax.swing.JTextField" ) {
 					name: "modNewsNameField"
-					"font": &Font1 new java.awt.Font( "Microsoft YaHei UI", 0, 20 )
+					"font": #Font0
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"width": 175
 					"height": 40
@@ -86,7 +86,7 @@ new FormModel {
 				} )
 				add( new FormComponent( "javax.swing.JTextField" ) {
 					name: "modNewsPriceField"
-					"font": #Font1
+					"font": #Font0
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"width": 175
 					"height": 40
@@ -95,7 +95,7 @@ new FormModel {
 				} )
 				add( new FormComponent( "javax.swing.JTextField" ) {
 					name: "modNewsTypeField"
-					"font": #Font1
+					"font": #Font0
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"width": 175
 					"height": 40
@@ -104,7 +104,7 @@ new FormModel {
 				} )
 				add( new FormComponent( "javax.swing.JTextField" ) {
 					name: "modNewsPublishField"
-					"font": #Font1
+					"font": #Font0
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"width": 175
 					"height": 40
@@ -113,7 +113,7 @@ new FormModel {
 				} )
 				add( new FormComponent( "javax.swing.JTextField" ) {
 					name: "modNewsBriefField"
-					"font": #Font1
+					"font": new java.awt.Font( "微軟正黑體", 1, 20 )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"width": 295
 					"height": 85

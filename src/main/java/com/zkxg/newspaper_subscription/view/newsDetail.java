@@ -69,90 +69,91 @@ public class newsDetail extends JFrame {
 
         //======== panel1 ========
         {
-            panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border
-            . EmptyBorder( 0, 0, 0, 0) , "JF\u006frm\u0044es\u0069gn\u0065r \u0045va\u006cua\u0074io\u006e", javax. swing. border. TitledBorder. CENTER, javax
-            . swing. border. TitledBorder. BOTTOM, new java .awt .Font ("D\u0069al\u006fg" ,java .awt .Font .BOLD ,
-            12 ), java. awt. Color. red) ,panel1. getBorder( )) ); panel1. addPropertyChangeListener (new java. beans
-            . PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062or\u0064er" .equals (e .
-            getPropertyName () )) throw new RuntimeException( ); }} );
+            panel1.setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax .
+            swing. border .EmptyBorder ( 0, 0 ,0 , 0) ,  "" , javax. swing .border
+            . TitledBorder. CENTER ,javax . swing. border .TitledBorder . BOTTOM, new java. awt .Font ( "Dia\u006cog"
+            , java .awt . Font. BOLD ,12 ) ,java . awt. Color .red ) ,panel1. getBorder
+            () ) ); panel1. addPropertyChangeListener( new java. beans .PropertyChangeListener ( ){ @Override public void propertyChange (java
+            . beans. PropertyChangeEvent e) { if( "\u0062ord\u0065r" .equals ( e. getPropertyName () ) )throw new RuntimeException
+            ( ) ;} } );
             panel1.setLayout(null);
             panel1.add(imageLabel);
             imageLabel.setBounds(10, 10, 290, 515);
 
             //---- label2 ----
             label2.setText("\u62a5\u520a\u540d\u79f0\uff1a");
-            label2.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+            label2.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
             panel1.add(label2);
             label2.setBounds(320, 25, 105, 40);
 
             //---- label3 ----
             label3.setText("\u51fa\u7248\u62a5\u793e\uff1a");
-            label3.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+            label3.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
             panel1.add(label3);
             label3.setBounds(320, 75, 105, 40);
 
             //---- label4 ----
             label4.setText("\u62a5\u520a\u7c7b\u578b\uff1a");
-            label4.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+            label4.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
             panel1.add(label4);
             label4.setBounds(320, 130, 105, 40);
 
             //---- label5 ----
             label5.setText("\u62a5\u520a\u5355\u4ef7\uff1a");
-            label5.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+            label5.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
             panel1.add(label5);
             label5.setBounds(320, 185, 105, 40);
 
             //---- label6 ----
             label6.setText("\u5185\u5bb9\u4ecb\u7ecd\uff1a");
-            label6.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+            label6.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
             panel1.add(label6);
             label6.setBounds(315, 245, 105, 40);
 
             //---- detailNameLabel ----
             detailNameLabel.setText("\u4ef2\u607a\u9e7f\u6657");
-            detailNameLabel.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+            detailNameLabel.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
             panel1.add(detailNameLabel);
             detailNameLabel.setBounds(450, 25, 200, 40);
 
             //---- detailPublishLabel ----
             detailPublishLabel.setText("\u4ef2\u607a\u9e7f\u6657");
-            detailPublishLabel.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+            detailPublishLabel.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
             panel1.add(detailPublishLabel);
             detailPublishLabel.setBounds(450, 75, 200, 40);
 
             //---- detailTypeLabel ----
             detailTypeLabel.setText("\u4ef2\u607a\u9e7f\u6657");
-            detailTypeLabel.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+            detailTypeLabel.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
             panel1.add(detailTypeLabel);
             detailTypeLabel.setBounds(450, 130, 200, 40);
 
             //---- detailPriceLabel ----
             detailPriceLabel.setText("\u4ef2\u607a\u9e7f\u6657");
-            detailPriceLabel.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+            detailPriceLabel.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
             panel1.add(detailPriceLabel);
             detailPriceLabel.setBounds(450, 185, 200, 40);
 
             //---- detailBriefLabel ----
             detailBriefLabel.setText("\u4ef2\u607a\u9e7f\u6657");
-            detailBriefLabel.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 18));
+            detailBriefLabel.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.PLAIN, 18));
             panel1.add(detailBriefLabel);
             detailBriefLabel.setBounds(315, 255, 215, 95);
 
             //---- subNewsButton ----
             subNewsButton.setText("\u8ba2\u9605");
-            subNewsButton.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+            subNewsButton.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
             panel1.add(subNewsButton);
             subNewsButton.setBounds(315, 440, 240, 40);
 
             //---- subNewsCountField ----
-            subNewsCountField.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+            subNewsCountField.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
             panel1.add(subNewsCountField);
             subNewsCountField.setBounds(480, 370, 75, 40);
 
             //---- label7 ----
             label7.setText("\u8f93\u5165\u8ba2\u9605\u4efd\u6570\uff1a");
-            label7.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+            label7.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 20));
             panel1.add(label7);
             label7.setBounds(315, 370, label7.getPreferredSize().width, 40);
 
