@@ -5,6 +5,7 @@
 package com.zkxg.newspaper_subscription.view;
 
 import com.zkxg.newspaper_subscription.common.BaseResponse;
+import com.zkxg.newspaper_subscription.common.ErrorCode;
 import com.zkxg.newspaper_subscription.controller.NewspaperController;
 import com.zkxg.newspaper_subscription.controller.UserController;
 import com.zkxg.newspaper_subscription.model.entity.User;
@@ -204,7 +205,7 @@ public class Login extends JFrame {
                                 new subUserMgt();
                             }
                         } else {
-                            JOptionPane.showMessageDialog(null,"该账号不存在或密码错误，请重新输入！");
+                            JOptionPane.showMessageDialog(null,"该账号不存在或密码，请重新输入！");
                             // 清空文本框内容
                             accountField.setText("");
                             passwordField.setText("");

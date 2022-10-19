@@ -979,7 +979,7 @@ public class subMgt extends JFrame {
                        UserInfo getOrderMostUserListName = getOrderMostUserList.get(i-1);
                        pNewsList.setValueAt(i,i,0);
                        pNewsList.setValueAt(getOrderMostUserListName.getUserId(),i,1);
-                       pNewsList.setValueAt(getOrderMostUserListName.getUserId(),i,2);
+                       pNewsList.setValueAt(getOrderMostUserListName.getAccount(),i,2);
                        pNewsList.setValueAt(getOrderMostUserListName.getNackname(),i,3);
                        pNewsList.setValueAt(getOrderMostUserListName.getOrderQuantity(),i,4);
                    }

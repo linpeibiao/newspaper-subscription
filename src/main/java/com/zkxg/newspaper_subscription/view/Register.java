@@ -7,6 +7,7 @@ package com.zkxg.newspaper_subscription.view;
 import com.zkxg.newspaper_subscription.common.BaseResponse;
 import com.zkxg.newspaper_subscription.controller.UserController;
 import com.zkxg.newspaper_subscription.model.entity.User;
+import com.zkxg.newspaper_subscription.service.impl.UserServiceImpl;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -20,7 +21,9 @@ import javax.swing.*;
  */
 public class Register extends JFrame {
     private UserController userController;
+    private UserServiceImpl userService;
     public Register() {
+        userService = new UserServiceImpl();
         // 初始化
         initComponents();
         // 设置关闭按钮结束程序
@@ -224,6 +227,11 @@ public class Register extends JFrame {
                         }
                         else if (newPassword.length() < 8 || newPassword.length() > 16) {
                             JOptionPane.showMessageDialog(null, "  用户密码长度应为8-16位！");
+                            return;
+                        }
+                        // 判断账号是否已经存在
+                        if (userService.checkAccountExist(newAccount)) {
+                            JOptionPane.showMessageDialog(null,"该账号已存在，请重新输入！");
                             return;
                         }
                         BaseResponse<String> userBaseResponse = userController.userRegister(registerInfo);
