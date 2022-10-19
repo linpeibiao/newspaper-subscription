@@ -1,0 +1,134 @@
+JFDML JFormDesigner: "8.0.0.0.194" Java: "11.0.7" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
+			name: "this"
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
+				name: "panel1"
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "imageLabel"
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 290
+					"height": 515
+					"x": 10
+					"y": 10
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label2"
+					"text": "报刊名称："
+					"font": &Font0 new java.awt.Font( "微軟正黑體", 1, 20 )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 105
+					"height": 40
+					"x": 320
+					"y": 20
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label3"
+					"text": "出版报社："
+					"font": #Font0
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 105
+					"height": 40
+					"x": 320
+					"y": 80
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label4"
+					"text": "报刊类型："
+					"font": #Font0
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 105
+					"height": 40
+					"x": 315
+					"y": 150
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label5"
+					"text": "报刊单价："
+					"font": #Font0
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 105
+					"height": 40
+					"x": 315
+					"y": 225
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label6"
+					"text": "内容介绍："
+					"font": #Font0
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 105
+					"height": 40
+					"x": 315
+					"y": 290
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "modNewsButton1"
+					"text": "修改"
+					"font": #Font0
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 295
+					"height": 40
+					"x": 315
+					"y": 440
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "modNewsNameField"
+					"font": #Font0
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 175
+					"height": 40
+					"x": 435
+					"y": 20
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "modNewsPriceField"
+					"font": #Font0
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 175
+					"height": 40
+					"x": 435
+					"y": 225
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "modNewsTypeField"
+					"font": #Font0
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 175
+					"height": 40
+					"x": 435
+					"y": 155
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "modNewsPublishField"
+					"font": #Font0
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 175
+					"height": 40
+					"x": 435
+					"y": 85
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "modNewsBriefField"
+					"font": new java.awt.Font( "微軟正黑體", 1, 20 )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 295
+					"height": 85
+					"x": 315
+					"y": 335
+				} )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 5
+				"y": 5
+				"height": 535
+				"width": 715
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"size": new java.awt.Dimension( 730, 575 )
+			"location": new java.awt.Point( 0, 0 )
+		} )
+	}
+}

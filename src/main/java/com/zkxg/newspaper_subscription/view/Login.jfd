@@ -7,22 +7,26 @@ new FormModel {
 			name: "this"
 			"font": new java.awt.Font( "Dialog", 0, 16 )
 			"minimumSize": new java.awt.Dimension( 555, 470 )
+			"background": new java.awt.Color( 69, 73, 74, 255 )
+			"foreground": sfield java.awt.SystemColor windowText
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
 				name: "panel1"
 				"background": new java.awt.Color( 69, 73, 74, 255 )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "systemTitle"
 					"text": "报刊订阅系统"
-					"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 9, false )
+					"font": new com.jformdesigner.model.SwingDerivedFont( "幼圆", 0, 15, false )
 					"foreground": new java.awt.Color( 250, 250, 250, 255 )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-					"x": 215
-					"y": 25
+					"x": 205
+					"y": 30
+					"width": 245
+					"height": 55
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "accountLabel"
 					"text": "账号"
-					"font": &SwingDerivedFont0 new com.jformdesigner.model.SwingDerivedFont( null, 0, 6, false )
+					"font": new com.jformdesigner.model.SwingDerivedFont( "幼圆", 0, 8, false )
 					"foreground": new java.awt.Color( 250, 250, 250, 255 )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"x": 100
@@ -40,16 +44,16 @@ new FormModel {
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "passLabel"
 					"text": "密码"
-					"font": #SwingDerivedFont0
+					"font": new com.jformdesigner.model.SwingDerivedFont( "幼圆", 0, 8, false )
 					"foreground": new java.awt.Color( 250, 250, 250, 255 )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"x": 100
-					"y": 200
+					"y": 205
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "loginButton"
 					"text": "登录"
-					"font": &SwingDerivedFont1 new com.jformdesigner.model.SwingDerivedFont( null, 0, 3, false )
+					"font": new com.jformdesigner.model.SwingDerivedFont( "幼圆", 0, 7, false )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"x": 165
 					"y": 295
@@ -59,7 +63,7 @@ new FormModel {
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "registerButton"
 					"text": "注册"
-					"font": #SwingDerivedFont1
+					"font": new com.jformdesigner.model.SwingDerivedFont( "幼圆", 0, 7, false )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"width": 90
 					"height": 40
@@ -75,11 +79,19 @@ new FormModel {
 					"x": 165
 					"y": 200
 				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "iconLabel"
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 45
+					"height": 45
+					"x": 120
+					"y": 35
+				} )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 0
 				"y": 0
-				"height": 440
-				"width": 560
+				"height": 430
+				"width": 555
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"size": new java.awt.Dimension( 555, 445 )

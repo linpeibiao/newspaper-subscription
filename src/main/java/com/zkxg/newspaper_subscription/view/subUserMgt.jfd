@@ -11,8 +11,8 @@ new FormModel {
 				"background": new java.awt.Color( 76, 80, 82, 255 )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "label1"
-					"text": "欢迎使用报刊订阅系统"
-					"font": new java.awt.Font( "微軟正黑體", 1, 30 )
+					"text": "欢迎使用报刊订阅系统-user"
+					"font": new java.awt.Font( "Microsoft YaHei UI", 0, 30 )
 					"foreground": new java.awt.Color( 242, 242, 242, 255 )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"x": 80
@@ -28,7 +28,6 @@ new FormModel {
 							name: "scrollPane4"
 							add( new FormComponent( "javax.swing.JTable" ) {
 								name: "newsOrderList"
-								"font": new java.awt.Font( "微軟正黑體", 1, 12 )
 							} )
 						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 							"x": 10
@@ -57,13 +56,12 @@ new FormModel {
 							"y": 460
 						} )
 						add( new FormComponent( "javax.swing.JButton" ) {
-							name: "modNewsButton"
-							"text": "修改"
-							"font": new java.awt.Font( "微軟正黑體", 1, 20 )
+							name: "detailButton"
+							"text": "报刊订阅"
+							"font": &Font1 new java.awt.Font( "微軟正黑體", 1, 20 )
 						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-							"width": 78
 							"height": 40
-							"x": 680
+							"x": 775
 							"y": 25
 						} )
 						add( new FormComponent( "javax.swing.JComboBox" ) {
@@ -73,125 +71,55 @@ new FormModel {
 							"height": 40
 							"x": 10
 							"y": 25
-							"width": 155
+							"width": 165
 						} )
 						add( new FormComponent( "javax.swing.JTextField" ) {
 							name: "queryNewsField"
-							"font": new java.awt.Font( "微軟正黑體", 1, 20 )
+							"font": &Font2 new java.awt.Font( "微軟正黑體", 1, 20 )
 						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 							"width": 200
 							"height": 40
-							"x": 180
+							"x": 200
 							"y": 25
 						} )
 						add( new FormComponent( "javax.swing.JButton" ) {
 							name: "queryNewsButton"
 							"text": "查询"
-							"font": new java.awt.Font( "微軟正黑體", 1, 20 )
+							"font": #Font2
 						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 							"width": 78
 							"height": 40
-							"x": 395
-							"y": 25
-						} )
-						add( new FormComponent( "javax.swing.JButton" ) {
-							name: "delNewsButton"
-							"text": "删除"
-							"font": new java.awt.Font( "微軟正黑體", 1, 20 )
-						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-							"width": 78
-							"height": 40
-							"x": 585
-							"y": 25
-						} )
-						add( new FormComponent( "javax.swing.JButton" ) {
-							name: "subCountButton"
-							"text": "订阅数量"
-							"font": new java.awt.Font( "微軟正黑體", 1, 20 )
-						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-							"width": 115
-							"height": 40
-							"x": 775
+							"x": 415
 							"y": 25
 						} )
 					}, new FormLayoutConstraints( null ) {
 						"title": "首页"
 					} )
 					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
-						name: "panel5"
-						add( new FormComponent( "javax.swing.JButton" ) {
-							name: "getStatsButton"
-							"text": "获取数据统计"
-							"font": new java.awt.Font( "微軟正黑體", 1, 20 )
-						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-							"height": 40
-							"x": 305
-							"y": 25
-						} )
-						add( new FormComponent( "javax.swing.JLabel" ) {
-							name: "MostPopularNewspaperLabel"
-							"font": new java.awt.Font( "微軟正黑體", 1, 20 )
-						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-							"height": 27
-							"x": 20
-							"y": 80
-							"width": 335
-						} )
-						add( new FormComponent( "javax.swing.JTable" ) {
-							name: "pNewsTop10List"
-							"font": new java.awt.Font( "微軟正黑體", 1, 12 )
-						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-							"width": 880
-							"height": 328
-							"x": 20
-							"y": 170
-						} )
-						add( new FormComponent( "javax.swing.JLabel" ) {
-							name: "statsLabelTOP10"
-							"font": new java.awt.Font( "微軟正黑體", 1, 20 )
-						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-							"width": 335
-							"height": 27
-							"x": 20
-							"y": 130
-						} )
-						add( new FormComponent( "javax.swing.JComboBox" ) {
-							name: "statsQueryList"
-							"font": new java.awt.Font( "微軟正黑體", 0, 16 )
-						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-							"width": 240
-							"height": 40
-							"x": 20
-							"y": 25
-						} )
-					}, new FormLayoutConstraints( null ) {
-						"title": "订阅统计"
-					} )
-					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
 						name: "panel6"
 						add( new FormComponent( "javax.swing.JTextField" ) {
 							name: "queryField"
-							"font": new java.awt.Font( "微軟正黑體", 1, 20 )
+							"font": &Font3 new java.awt.Font( "微軟正黑體", 1, 20 )
 						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-							"x": 175
-							"y": 25
+							"x": 165
+							"y": 20
 							"width": 200
 							"height": 40
 						} )
 						add( new FormComponent( "javax.swing.JButton" ) {
 							name: "queryButton"
 							"text": "查询"
-							"font": new java.awt.Font( "微软雅黑", 1, 20 )
+							"font": #Font3
 						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-							"x": 390
-							"y": 25
+							"x": 380
+							"y": 20
 							"height": 40
 						} )
 						add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
 							name: "scrollPane1"
 							add( new FormComponent( "javax.swing.JTable" ) {
 								name: "queryTable"
-								"font": new java.awt.Font( "微軟正黑體", 1, 12 )
+								"font": #Font3
 							} )
 						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 							"x": 15
@@ -199,69 +127,60 @@ new FormModel {
 							"height": 430
 							"width": 885
 						} )
+						add( new FormComponent( "javax.swing.JButton" ) {
+							name: "deleteOrderButton"
+							"text": "删除订单"
+							"font": #Font3
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+							"height": 40
+							"x": 785
+							"y": 25
+						} )
 						add( new FormComponent( "javax.swing.JLabel" ) {
 							name: "changUser2"
 							"text": "输入订单编号："
-							"font": new java.awt.Font( "微軟正黑體", 1, 20 )
+							"font": #Font3
 						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 							"width": 140
 							"height": 27
 							"x": 20
-							"y": 30
+							"y": 25
 						} )
 					}, new FormLayoutConstraints( null ) {
-						"title": "订单查询"
+						"title": "订单管理"
 					} )
 					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
-						name: "panel7"
+						name: "panel4"
+						add( new FormComponent( "javax.swing.JButton" ) {
+							name: "currentOrderButton"
+							"text": "获取用户订阅信息"
+							"font": &Font4 new java.awt.Font( "微軟正黑體", 1, 20 )
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+							"height": 40
+							"x": 25
+							"y": 20
+						} )
 						add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
-							name: "scrollPane2"
+							name: "scrollPane3"
 							add( new FormComponent( "javax.swing.JTable" ) {
-								name: "userList"
-								"font": new java.awt.Font( "微軟正黑體", 1, 12 )
+								name: "queryTable2"
+								"font": #Font4
 							} )
 						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-							"x": 20
-							"y": 70
-							"width": 880
-							"height": 375
-						} )
-						add( new FormComponent( "javax.swing.JButton" ) {
-							name: "queryUserButton"
-							"text": "获取用户列表"
-							"font": new java.awt.Font( "微軟正黑體", 1, 20 )
-						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-							"height": 40
-							"x": 20
-							"y": 15
-						} )
-						add( new FormComponent( "javax.swing.JButton" ) {
-							name: "prePageButton"
-							"text": "上一页"
-							"font": &Font1 new java.awt.Font( "微軟正黑體", 1, 20 )
-						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-							"height": 40
-							"x": 690
-							"y": 455
-						} )
-						add( new FormComponent( "javax.swing.JButton" ) {
-							name: "nextPageButton"
-							"text": "下一页"
-							"font": #Font1
-						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-							"height": 40
-							"x": 805
-							"y": 455
+							"x": 25
+							"y": 85
+							"width": 860
+							"height": 410
 						} )
 					}, new FormLayoutConstraints( null ) {
-						"title": "用户列表"
+						"title": "我的订阅"
 					} )
 					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
 						name: "panel3"
 						add( new FormComponent( "javax.swing.JLabel" ) {
 							name: "changUser"
 							"text": "用户名"
-							"font": &Font2 new java.awt.Font( "微軟正黑體", 1, 20 )
+							"font": &Font5 new java.awt.Font( "微軟正黑體", 1, 20 )
 						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 							"x": 170
 							"y": 110
@@ -269,7 +188,7 @@ new FormModel {
 						add( new FormComponent( "javax.swing.JLabel" ) {
 							name: "changeSex"
 							"text": "性别"
-							"font": #Font2
+							"font": #Font5
 						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 							"width": 60
 							"height": 27
@@ -279,7 +198,7 @@ new FormModel {
 						add( new FormComponent( "javax.swing.JLabel" ) {
 							name: "changeEmail"
 							"text": "邮箱"
-							"font": #Font2
+							"font": #Font5
 						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 							"width": 60
 							"height": 27
@@ -289,7 +208,7 @@ new FormModel {
 						add( new FormComponent( "javax.swing.JLabel" ) {
 							name: "changePhone"
 							"text": "电话"
-							"font": #Font2
+							"font": #Font5
 						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 							"width": 60
 							"height": 27
@@ -298,7 +217,7 @@ new FormModel {
 						} )
 						add( new FormComponent( "javax.swing.JTextField" ) {
 							name: "changeUserField"
-							"font": &Font3 new java.awt.Font( "微軟正黑體", 1, 20 )
+							"font": #Font5
 						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 							"x": 260
 							"y": 110
@@ -307,7 +226,7 @@ new FormModel {
 						} )
 						add( new FormComponent( "javax.swing.JTextField" ) {
 							name: "changEmailField"
-							"font": #Font3
+							"font": #Font5
 						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 							"width": 255
 							"height": 35
@@ -316,7 +235,7 @@ new FormModel {
 						} )
 						add( new FormComponent( "javax.swing.JTextField" ) {
 							name: "changePhoneField"
-							"font": #Font3
+							"font": #Font5
 						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 							"width": 255
 							"height": 35
@@ -326,16 +245,16 @@ new FormModel {
 						add( new FormComponent( "javax.swing.JButton" ) {
 							name: "changeButton"
 							"text": "确认修改"
-							"font": new java.awt.Font( "微軟正黑體", 1, 20 )
+							"font": #Font5
 						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 							"x": 175
-							"y": 410
-							"width": 340
+							"y": 390
+							"width": 335
 							"height": 45
 						} )
 						add( new FormComponent( "javax.swing.JComboBox" ) {
 							name: "changeSexList"
-							"font": #Font3
+							"font": #Font5
 						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 							"x": 260
 							"y": 175
@@ -344,115 +263,6 @@ new FormModel {
 						} )
 					}, new FormLayoutConstraints( null ) {
 						"title": "个人信息修改"
-					} )
-					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
-						name: "panel2"
-						"font": &Font4 new java.awt.Font( "微軟正黑體", 1, 20 )
-						add( new FormComponent( "javax.swing.JTextField" ) {
-							name: "addNewsNameField"
-							"font": &Font5 new java.awt.Font( "微軟正黑體", 1, 20 )
-						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-							"width": 205
-							"height": 35
-							"x": 265
-							"y": 85
-						} )
-						add( new FormComponent( "javax.swing.JLabel" ) {
-							name: "addNewsName"
-							"text": "报刊名"
-							"font": #Font4
-						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-							"width": 60
-							"height": 27
-							"x": 180
-							"y": 85
-						} )
-						add( new FormComponent( "javax.swing.JTextField" ) {
-							name: "addNewsTypeFiled"
-							"font": #Font5
-						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-							"width": 205
-							"height": 35
-							"x": 265
-							"y": 145
-						} )
-						add( new FormComponent( "javax.swing.JLabel" ) {
-							name: "addNewsType"
-							"text": "报刊类型"
-							"font": #Font4
-						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-							"height": 27
-							"x": 170
-							"y": 145
-						} )
-						add( new FormComponent( "javax.swing.JTextField" ) {
-							name: "addNewsBriefField"
-							"font": #Font5
-						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-							"width": 205
-							"height": 35
-							"x": 265
-							"y": 205
-						} )
-						add( new FormComponent( "javax.swing.JLabel" ) {
-							name: "addNewsBrief"
-							"text": "报刊简介"
-							"font": #Font4
-						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-							"height": 27
-							"x": 170
-							"y": 205
-						} )
-						add( new FormComponent( "javax.swing.JTextField" ) {
-							name: "addNewsPublisherField"
-							"font": #Font5
-						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-							"width": 205
-							"height": 35
-							"x": 265
-							"y": 270
-						} )
-						add( new FormComponent( "javax.swing.JLabel" ) {
-							name: "addNewsPublisher"
-							"text": "出版社"
-							"font": &Font6 new java.awt.Font( "微軟正黑體", 1, 20 )
-						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-							"width": 60
-							"height": 27
-							"x": 180
-							"y": 270
-						} )
-						add( new FormComponent( "javax.swing.JTextField" ) {
-							name: "addNewsPriceField"
-							"font": #Font5
-						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-							"width": 205
-							"height": 35
-							"x": 265
-							"y": 330
-						} )
-						add( new FormComponent( "javax.swing.JLabel" ) {
-							name: "addNewsPrice"
-							"text": "价格"
-							"font": #Font6
-						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-							"width": 60
-							"height": 27
-							"x": 185
-							"y": 335
-						} )
-						add( new FormComponent( "javax.swing.JButton" ) {
-							name: "addNewsButton"
-							"text": "添加新报刊"
-							"font": new java.awt.Font( "微軟正黑體", 1, 20 )
-						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-							"width": 295
-							"height": 45
-							"x": 175
-							"y": 405
-						} )
-					}, new FormLayoutConstraints( null ) {
-						"title": "添加报刊"
 					} )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"x": 10
@@ -463,7 +273,7 @@ new FormModel {
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "logoutButton"
 					"text": "退出登录"
-					"font": new java.awt.Font( "微軟正黑體", 1, 20 )
+					"font": #Font1
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"x": 795
 					"y": 15
@@ -471,7 +281,7 @@ new FormModel {
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "chargeUserLabel"
 					"text": "当前用户身份：管理员"
-					"font": new java.awt.Font( "微軟正黑體", 1, 20 )
+					"font": #Font1
 					"foreground": new javax.swing.plaf.ColorUIResource( 238, 238, 238 )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"height": 27
