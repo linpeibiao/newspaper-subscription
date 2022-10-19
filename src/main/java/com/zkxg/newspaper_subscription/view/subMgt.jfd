@@ -24,13 +24,16 @@ new FormModel {
 					"font": new java.awt.Font( "Microsoft YaHei UI", 0, 20 )
 					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
 						name: "index"
-						add( new FormComponent( "javax.swing.JTable" ) {
-							name: "newsOrderList"
+						add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+							name: "scrollPane4"
+							add( new FormComponent( "javax.swing.JTable" ) {
+								name: "newsOrderList"
+							} )
 						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-							"width": 875
-							"height": 305
 							"x": 10
-							"y": 130
+							"y": 115
+							"width": 880
+							"height": 328
 						} )
 						add( new FormComponent( "javax.swing.JButton" ) {
 							name: "newsNextPageButton"
@@ -39,8 +42,8 @@ new FormModel {
 						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 							"width": 94
 							"height": 40
-							"x": 795
-							"y": 450
+							"x": 800
+							"y": 460
 						} )
 						add( new FormComponent( "javax.swing.JButton" ) {
 							name: "newsPrePageButton"
@@ -49,8 +52,8 @@ new FormModel {
 						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 							"width": 94
 							"height": 40
-							"x": 675
-							"y": 450
+							"x": 685
+							"y": 460
 						} )
 						add( new FormComponent( "javax.swing.JButton" ) {
 							name: "detailButton"
@@ -257,7 +260,7 @@ new FormModel {
 							"x": 20
 							"y": 70
 							"width": 880
-							"height": 275
+							"height": 263
 						} )
 						add( new FormComponent( "javax.swing.JButton" ) {
 							name: "queryUserButton"
@@ -488,8 +491,19 @@ new FormModel {
 					"text": "退出登录"
 					"font": new java.awt.Font( "Microsoft YaHei UI", 0, 20 )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-					"x": 775
+					"x": 780
 					"y": 35
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "chargeUserLabel"
+					"text": "当前用户身份：管理员"
+					"font": #Font2
+					"foreground": new javax.swing.plaf.ColorUIResource( 238, 238, 238 )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"height": 27
+					"x": 415
+					"y": 20
+					"width": 255
 				} )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 0

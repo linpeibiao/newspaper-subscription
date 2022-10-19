@@ -12,6 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.swing.*;
+import javax.swing.plaf.*;
 import javax.swing.table.DefaultTableModel;
 
 //import com.jgoodies.forms.factories.*;
@@ -51,6 +52,8 @@ public class subMgt extends JFrame {
     public static int modTarget = 0;
     // 报刊订阅数量
     public static Integer newsSubCount;
+    // 判断是否为分类查询
+    private static int chargeQueryType = 0;
     public subMgt() {
         userController = new UserController();
         newspaperController = new NewspaperController();
@@ -79,6 +82,7 @@ public class subMgt extends JFrame {
         label1 = new JLabel();
         tabbedPane1 = new JTabbedPane();
         index = new JPanel();
+        scrollPane4 = new JScrollPane();
         newsOrderList = new JTable();
         newsNextPageButton = new JButton();
         newsPrePageButton = new JButton();
@@ -135,6 +139,7 @@ public class subMgt extends JFrame {
         addNewsPrice = new JLabel();
         addNewsButton = new JButton();
         logoutButton = new JButton();
+        chargeUserLabel = new JLabel();
 
         //======== this ========
         setMinimumSize(new Dimension(920, 650));
@@ -145,12 +150,13 @@ public class subMgt extends JFrame {
         //======== panel1 ========
         {
             panel1.setBackground(new Color(0x4c5052));
-            panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border
-            . EmptyBorder( 0, 0, 0, 0) , "JF\u006frmDes\u0069gner \u0045valua\u0074ion", javax. swing. border. TitledBorder. CENTER, javax
-            . swing. border. TitledBorder. BOTTOM, new java .awt .Font ("D\u0069alog" ,java .awt .Font .BOLD ,
-            12 ), java. awt. Color. red) ,panel1. getBorder( )) ); panel1. addPropertyChangeListener (new java. beans
-            . PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062order" .equals (e .
-            getPropertyName () )) throw new RuntimeException( ); }} );
+            panel1.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax
+            .swing.border.EmptyBorder(0,0,0,0), "JF\u006frm\u0044es\u0069gn\u0065r \u0045va\u006cua\u0074io\u006e",javax.swing
+            .border.TitledBorder.CENTER,javax.swing.border.TitledBorder.BOTTOM,new java.awt.
+            Font("D\u0069al\u006fg",java.awt.Font.BOLD,12),java.awt.Color.red
+            ),panel1. getBorder()));panel1. addPropertyChangeListener(new java.beans.PropertyChangeListener(){@Override
+            public void propertyChange(java.beans.PropertyChangeEvent e){if("\u0062or\u0064er".equals(e.getPropertyName(
+            )))throw new RuntimeException();}});
             panel1.setLayout(null);
 
             //---- label1 ----
@@ -167,20 +173,25 @@ public class subMgt extends JFrame {
                 //======== index ========
                 {
                     index.setLayout(null);
-                    index.add(newsOrderList);
-                    newsOrderList.setBounds(10, 130, 875, 305);
+
+                    //======== scrollPane4 ========
+                    {
+                        scrollPane4.setViewportView(newsOrderList);
+                    }
+                    index.add(scrollPane4);
+                    scrollPane4.setBounds(10, 115, 880, 328);
 
                     //---- newsNextPageButton ----
                     newsNextPageButton.setText("\u4e0b\u4e00\u9875");
                     newsNextPageButton.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
                     index.add(newsNextPageButton);
-                    newsNextPageButton.setBounds(795, 450, 94, 40);
+                    newsNextPageButton.setBounds(800, 460, 94, 40);
 
                     //---- newsPrePageButton ----
                     newsPrePageButton.setText("\u4e0a\u4e00\u9875");
                     newsPrePageButton.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
                     index.add(newsPrePageButton);
-                    newsPrePageButton.setBounds(675, 450, 94, 40);
+                    newsPrePageButton.setBounds(685, 460, 94, 40);
 
                     //---- detailButton ----
                     detailButton.setText("\u62a5\u520a\u8ba2\u9605");
@@ -367,7 +378,7 @@ public class subMgt extends JFrame {
                         scrollPane2.setViewportView(userList);
                     }
                     panel7.add(scrollPane2);
-                    scrollPane2.setBounds(20, 70, 880, 275);
+                    scrollPane2.setBounds(20, 70, 880, 263);
 
                     //---- queryUserButton ----
                     queryUserButton.setText("\u83b7\u53d6\u7528\u6237\u5217\u8868");
@@ -537,7 +548,14 @@ public class subMgt extends JFrame {
             logoutButton.setText("\u9000\u51fa\u767b\u5f55");
             logoutButton.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
             panel1.add(logoutButton);
-            logoutButton.setBounds(new Rectangle(new Point(775, 35), logoutButton.getPreferredSize()));
+            logoutButton.setBounds(new Rectangle(new Point(780, 35), logoutButton.getPreferredSize()));
+
+            //---- chargeUserLabel ----
+            chargeUserLabel.setText("\u5f53\u524d\u7528\u6237\u8eab\u4efd\uff1a\u7ba1\u7406\u5458");
+            chargeUserLabel.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+            chargeUserLabel.setForeground(new Color(0xeeeeee));
+            panel1.add(chargeUserLabel);
+            chargeUserLabel.setBounds(415, 20, 255, 27);
 
             {
                 // compute preferred size
@@ -583,6 +601,7 @@ public class subMgt extends JFrame {
     private JLabel label1;
     private JTabbedPane tabbedPane1;
     private JPanel index;
+    private JScrollPane scrollPane4;
     private JTable newsOrderList;
     private JButton newsNextPageButton;
     private JButton newsPrePageButton;
@@ -639,6 +658,7 @@ public class subMgt extends JFrame {
     private JLabel addNewsPrice;
     private JButton addNewsButton;
     private JButton logoutButton;
+    private JLabel chargeUserLabel;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
     // 初始化用户信息
     public void initUserInfo() {
@@ -653,6 +673,12 @@ public class subMgt extends JFrame {
         changeSexList.addItem("男");
         changeSexList.addItem("女");
         changeSexList.setSelectedIndex(user.getGender());
+        if (newspaperController.isAdmin()) {
+            chargeUserLabel.setText("当前用户身份：管理员");
+        }
+        else {
+            chargeUserLabel.setText("当前用户身份：普通用户");
+        }
     }
     // 初始化查询界面
     public void initQueryView() {
@@ -666,18 +692,20 @@ public class subMgt extends JFrame {
     }
     // 初始化订阅首页界面
     public void initIndexView() {
+        newsPrePageButton.setVisible(true);
+        newsNextPageButton.setVisible(true);
         // 报刊表
         getNewsPage = 1;
         DefaultTableModel newsOrderL = (DefaultTableModel) newsOrderList.getModel(); 
         Object[] newsRowName = {"报刊编号","报刊名称","出版社","报刊类型","报刊单价"};
-        newsOrderL.setRowCount(20);
+        newsOrderL.setRowCount(19);
         newsOrderL.setColumnCount(newsRowName.length);
         // 设置表头名
         for (int i =0; i< newsRowName.length; i++) {
             newsOrderL.setValueAt(newsRowName[i],0,i);
         }
         // 请求接口获取报刊信息
-        BaseResponse<List<Newspaper>> newsBaseResponse = newspaperController.getNewspaperPage(getNewsPage,20);
+        BaseResponse<List<Newspaper>> newsBaseResponse = newspaperController.getNewspaperPage(getNewsPage,19);
         List<Newspaper> newsList = newsBaseResponse.getData();
         for (int i = 1; i < newsList.size(); i++) {
             Newspaper newspaper = newsList.get(i-1);
@@ -700,18 +728,64 @@ public class subMgt extends JFrame {
                     JOptionPane.showMessageDialog(null,"请输入查询内容！");
                     return;
                 }
+                newsPrePageButton.setVisible(false);
+                newsNextPageButton.setVisible(false);
+                DefaultTableModel newsOrderL = (DefaultTableModel)newsOrderList.getModel();
+                // 清除所有表格
+                newsOrderL.getDataVector().clear();
+                newsOrderL.fireTableDataChanged();
+                newsOrderList.updateUI();
+                Object[] newsRowName = {"报刊编号","报刊名称","出版社","报刊类型","报刊单价"};
+                newsOrderL.setRowCount(20);
+                newsOrderL.setColumnCount(newsRowName.length);
+                // 设置表头名
+                for (int i =0; i< newsRowName.length; i++) {
+                    newsOrderL.setValueAt(newsRowName[i],0,i);
+                }
                 if (queryNewsList.getSelectedIndex() == 0) {
                     System.out.println("按报刊名称查询!");
                     BaseResponse<List<Newspaper>> listBaseResponse = newspaperController.getNewspaperByName(queryNewsField.getText());
                     List<Newspaper> selectNewspaper1 = listBaseResponse.getData();
+                    newsOrderL.setRowCount(selectNewspaper1.size() + 1);
                     if (selectNewspaper1.size() == 0) {
                         JOptionPane.showMessageDialog(null,"查无此内容!");
+                        initIndexView();
+                        chargeQueryType = 0;
                         return;
                     }
-                    System.out.println(selectNewspaper1);
+                    for (int i = 0; i <selectNewspaper1.size(); i++) {
+                        Newspaper newspaper = selectNewspaper1.get(i);
+                        newsOrderL.setValueAt(newspaper.getId(),i+1,0);
+                        newsOrderL.setValueAt(newspaper.getName(),i+1,1);
+                        newsOrderL.setValueAt(newspaper.getPublisher(),i+1,2);
+                        newsOrderL.setValueAt(newspaper.getType(),i+1,3);
+                        newsOrderL.setValueAt(newspaper.getPrice(),i+1,4);
+                        System.out.println(newspaper);
+                    }
+                    chargeQueryType = 0;
                 }
                 if (queryNewsList.getSelectedIndex() == 1) {
                     System.out.println("按分类称查询！");
+                    BaseResponse<List<Newspaper>> listBaseResponse = newspaperController.getNewspaperByType(queryNewsField.getText());
+                    List<Newspaper> selectNewspaper2 = listBaseResponse.getData();
+                    newsOrderL.setRowCount(selectNewspaper2.size() + 1);
+                    System.out.println(selectNewspaper2.size());
+                    if (selectNewspaper2.size() == 0) {
+                        JOptionPane.showMessageDialog(null,"查无此内容!");
+                        initIndexView();
+                        chargeQueryType = 0;
+                        return;
+                    }
+                    for (int i = 0; i <selectNewspaper2.size(); i++) {
+                        Newspaper newspaper = selectNewspaper2.get(i);
+                        newsOrderL.setValueAt(newspaper.getId(),i+1,0);
+                        newsOrderL.setValueAt(newspaper.getName(),i+1,1);
+                        newsOrderL.setValueAt(newspaper.getPublisher(),i+1,2);
+                        newsOrderL.setValueAt(newspaper.getType(),i+1,3);
+                        newsOrderL.setValueAt(newspaper.getPrice(),i+1,4);
+                        System.out.println(newspaper);
+                    }
+                    chargeQueryType = 0;
                 }
             }
         });
@@ -766,7 +840,7 @@ public class subMgt extends JFrame {
                         // 重新渲染表格
                         DefaultTableModel newsOrderL = (DefaultTableModel) newsOrderList.getModel();
                         Object[] newsRowName = {"报刊编号","报刊名称","出版社","报刊类型","报刊单价"};
-                        newsOrderL.setRowCount(20);
+                        newsOrderL.setRowCount(19);
                         newsOrderL.setColumnCount(newsRowName.length);
                         for (int i =0; i< newsRowName.length; i++) {
                             newsOrderL.setValueAt(newsRowName[i],0,i);
@@ -776,7 +850,7 @@ public class subMgt extends JFrame {
                             return;
                         }
                         // 请求接口获取报刊信息
-                        BaseResponse<List<Newspaper>> newsBaseResponse = newspaperController.getNewspaperPage(getNewsPage-=17,20);
+                        BaseResponse<List<Newspaper>> newsBaseResponse = newspaperController.getNewspaperPage(getNewsPage-=17,19);
                         List<Newspaper> newsList = newsBaseResponse.getData();
                         for (int i = 1; i < newsList.size(); i++) {
                             Newspaper newspaper = newsList.get(i-1);
@@ -798,13 +872,13 @@ public class subMgt extends JFrame {
                         // 重新渲染表格
                         DefaultTableModel newsOrderL = (DefaultTableModel) newsOrderList.getModel();
                         Object[] newsRowName = {"报刊编号","报刊名称","出版社","报刊类型","报刊单价"};
-                        newsOrderL.setRowCount(20);
+                        newsOrderL.setRowCount(19);
                         newsOrderL.setColumnCount(newsRowName.length);
                         for (int i =0; i< newsRowName.length; i++) {
                             newsOrderL.setValueAt(newsRowName[i],0,i);
                         }
                         // 请求接口获取报刊信息
-                        BaseResponse<List<Newspaper>> newsBaseResponse = newspaperController.getNewspaperPage(getNewsPage+=17,20);
+                        BaseResponse<List<Newspaper>> newsBaseResponse = newspaperController.getNewspaperPage(getNewsPage+=17,19);
                         List<Newspaper> newsList = newsBaseResponse.getData();
                         if (newsList.size() == 0) {
                             JOptionPane.showMessageDialog(null,"已经到最后一页啦！");
