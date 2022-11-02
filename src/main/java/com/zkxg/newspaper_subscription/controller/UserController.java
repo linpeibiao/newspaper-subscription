@@ -22,7 +22,7 @@ public class UserController {
     //
     private UserService userService;
     // 用于保存用户登录态
-    public static ThreadLocal<Map<String, User>> tl = new ThreadLocal<>();;
+    public static ThreadLocal<Map<String, User>> tl = new ThreadLocal<>();
     public UserController(){
         userService = new UserServiceImpl();
     }
