@@ -43,7 +43,7 @@ public class UserController {
      */
     public BaseResponse<User> getCurrentLoginUser(){
         User user = null;
-        Map<String, User> userMap = this.tl.get();
+        Map<String, User> userMap = tl.get();
         if (userMap == null){
             throw new BusinessException(ErrorCode.NOT_LOGIN);
         }
@@ -171,7 +171,7 @@ public class UserController {
      */
     public boolean authUserCheck(String account){
         // 判断登录状态
-        Map<String, User> loginUserMap = this.tl.get();
+        Map<String, User> loginUserMap = tl.get();
         // 没有用户登录，直接返回未登录
         if (loginUserMap == null || loginUserMap.size() <= 0){
             throw new BusinessException(ErrorCode.NOT_LOGIN);
